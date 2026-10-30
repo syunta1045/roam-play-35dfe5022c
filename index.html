@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head><meta name="robots" content="noindex,nofollow">
+<head>
+<meta name="robots" content="noindex,nofollow">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ROAM — 歩いて旅する</title>
-<script src="https://cdn.jsdelivr.net/npm/lucide@1.60.0/dist/umd/lucide.min.js"></script>
 <style>html,body{margin:0;background:#111}</style>
 </head>
 <body>
@@ -105,7 +105,7 @@
   <header class="ob-top"><button class="ob-back cursor-interaction" type="button" data-ob-back="welcome" aria-label="ひとつ前に戻る"><i data-lucide="arrow-left" aria-hidden="true"></i></button><span class="ob-count">1 / 3</span></header>
   <div class="ob-body"><small class="ob-kicker">YOUR TRAVELLER</small><h2>旅人の名前</h2>
    <div class="ob-pass" aria-hidden="true"><div class="ob-pass-top"><small>BOARDING PASS</small><span>ROAM AIR</span></div><div class="ob-pass-main"><span><small>搭乗者</small><b class="ob-pass-name">あなた</b></span><span><small>座席</small><b>12A</b></span></div></div>
-   <label class="ob-field"><span class="rr-sr-only">旅人の名前</span><input class="ob-name-input" type="text" maxlength="12" autocomplete="off" enterkeyhint="next"></label></div>
+   <label class="ob-field"><span class="rr-sr-only">旅人の名前</span><input class="ob-name-input" type="text" maxlength="12" autocomplete="off" enterkeyhint="next" placeholder="あとで変えられます"></label></div>
   <div class="ob-footer"><button class="ob-primary ob-name-next cursor-interaction" type="button">見た目を決める<i data-lucide="arrow-right" aria-hidden="true"></i></button></div>
  </div>
  <div class="ob-step ob-city" data-ob="city" hidden>
@@ -570,6 +570,118 @@
 #rome-immersive .rr-destination .rr-next{padding:6px 12px 2px;border-radius:14px;background:#101b1552;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
 /* iPad: the app fills the screen; text panels stay a readable column in the middle. */
 @media(min-width:640px){#rome-immersive :is(.rr-onboard,.rr-journal,.rr-avatar){padding-left:calc((100% - 600px)/2);padding-right:calc((100% - 600px)/2)}}
+</style><style>/* The welcome gift and the ticket ceremony. */
+#rome-immersive .rg-gift{position:absolute;inset:0;z-index:60;display:flex;flex-direction:column;box-sizing:border-box;padding:calc(env(safe-area-inset-top) + 20px) 24px calc(env(safe-area-inset-bottom) + 24px);overflow:hidden;background:radial-gradient(120% 70% at 50% 46%,#3d5645 0,#233229 58%,#1a251f 100%);color:#fbf5e6;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans",sans-serif}
+#rome-immersive .rg-gift[hidden]{display:none}
+#rome-immersive .rg-glow{position:absolute;left:50%;top:52%;width:150vmin;height:150vmin;transform:translate(-50%,-50%) scale(.6);border-radius:50%;background:radial-gradient(closest-side,#ffe9b344,#ffe9b300);opacity:0;transition:opacity .6s,transform 1.2s cubic-bezier(.2,.8,.2,1);pointer-events:none}
+#rome-immersive .rg-gift:not([data-stage=closed]) .rg-glow{opacity:1;transform:translate(-50%,-50%) scale(1)}
+#rome-immersive .rg-skip{position:absolute;z-index:3;top:calc(env(safe-area-inset-top) + 12px);right:12px;min-width:64px;min-height:44px;padding:0 14px;border:0;border-radius:22px;background:#ffffff1c;color:#fbf5e6;font-size:15px;font-weight:600}
+#rome-immersive .rg-head{position:relative;z-index:2;margin-top:44px;text-align:center}
+#rome-immersive .rg-from{display:block;min-height:20px;font-size:15px;letter-spacing:.04em;opacity:.8}
+#rome-immersive .rg-gift h2{margin:8px 0 8px;font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Hiragino Mincho ProN","Yu Mincho",serif;font-size:29px;font-weight:600;line-height:1.3}
+#rome-immersive .rg-lead{min-height:48px;margin:0;font-size:17px;line-height:1.45;opacity:.92}
+#rome-immersive .rg-stage{position:relative;flex:1;min-height:0;display:flex;align-items:center;justify-content:center}
+#rome-immersive .rg-envelope{position:relative;display:block;width:min(78vw,340px,48vh);aspect-ratio:1;padding:0;border:0;background:none;touch-action:manipulation;transition:transform .7s cubic-bezier(.3,.9,.3,1),opacity .4s}
+#rome-immersive .rg-envelope img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 14px 22px #0006)}
+#rome-immersive .rg-open{opacity:0}
+#rome-immersive .rg-gift[data-stage=closed] .rg-envelope{animation:rg-bob 2.6s ease-in-out infinite}
+#rome-immersive .rg-gift:not([data-stage=closed]) .rg-closed{opacity:0;transition:opacity .16s}
+#rome-immersive .rg-gift:not([data-stage=closed]) .rg-open{opacity:1}
+#rome-immersive .rg-gift[data-stage=tickets] .rg-envelope{transform:translateY(34%) scale(.7);opacity:.35}
+#rome-immersive .rg-gift[data-stage=stow] .rg-envelope{opacity:0}
+@keyframes rg-bob{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-8px) rotate(1deg)}}
+#rome-immersive .rg-tickets{position:absolute;left:50%;top:50%;width:min(88vw,380px);height:0;transform:translateX(-50%);pointer-events:none}
+#rome-immersive .rg-ticket{position:relative;width:100%;aspect-ratio:2.42;filter:drop-shadow(0 10px 16px #0007)}
+#rome-immersive .rg-ticket img{display:block;width:100%;height:100%;object-fit:contain}
+#rome-immersive .rg-ticket-name{position:absolute;left:8.5%;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:2px;color:#4a2c1c;text-align:left}
+#rome-immersive .rg-ticket-name b{font-family:"Hiragino Mincho ProN","Yu Mincho",Georgia,serif;font-size:clamp(20px,6vw,27px);font-weight:600;white-space:nowrap}
+#rome-immersive .rg-ticket-name small{font-size:12px;letter-spacing:.1em;opacity:.75}
+#rome-immersive .rg-tickets .rg-ticket{position:absolute;left:0;top:0;opacity:0;transform:translateY(60px) scale(.5)}
+#rome-immersive .rg-gift[data-stage=tickets] .rg-ticket:nth-child(1){opacity:1;transform:translateY(-150px) rotate(-4deg);transition:transform .7s cubic-bezier(.2,1.25,.4,1),opacity .2s}
+#rome-immersive .rg-gift[data-stage=tickets] .rg-ticket:nth-child(2){opacity:1;transform:translateY(0) rotate(3deg);transition:transform .7s .16s cubic-bezier(.2,1.25,.4,1),opacity .2s .16s}
+#rome-immersive .rg-gift[data-stage=tickets] .rg-ticket::after{content:"";position:absolute;inset:7% 3%;background:linear-gradient(105deg,#fff0 42%,#ffffffa8 50%,#fff0 58%) no-repeat;background-size:260% 100%;background-position:120% 0;animation:rg-shine 1.5s .7s 2}
+@keyframes rg-shine{to{background-position:-60% 0}}
+#rome-immersive .rg-gift[data-stage=stow] .rg-ticket{opacity:0;transform:translate(36vw,-40vh) scale(.1) rotate(14deg);transition:transform .55s cubic-bezier(.5,0,.8,.4),opacity .15s .4s}
+#rome-immersive .rg-gift[data-stage=stow] .rg-ticket:nth-child(2){transition-delay:.1s,.5s}
+#rome-immersive .rg-sparks{position:absolute;left:50%;top:50%;pointer-events:none}
+#rome-immersive .rg-sparks i{position:absolute;width:9px;height:9px;opacity:0;background:#ffe7ad;clip-path:polygon(50% 0,60% 40%,100% 50%,60% 60%,50% 100%,40% 60%,0 50%,40% 40%)}
+#rome-immersive .rg-gift[data-stage=open] .rg-sparks i,#rome-immersive .rg-gift[data-stage=tickets] .rg-sparks i{animation:rg-spark 1.1s ease-out both}
+@keyframes rg-spark{0%{opacity:0;transform:scale(.3)}25%{opacity:1}100%{opacity:0;transform:translate(var(--x),var(--y)) scale(1.3) rotate(80deg)}}
+#rome-immersive .rg-foot{position:relative;z-index:2;min-height:58px}
+#rome-immersive .rg-next{width:100%;min-height:58px;border:0;border-radius:16px;background:#fbf5e6;color:#21382c;font-size:18px;font-weight:700}
+#rome-immersive .rg-next[hidden]{display:none}
+#rome-immersive .rg-purse{position:absolute;z-index:3;top:calc(env(safe-area-inset-top) + 14px);left:16px;display:flex;align-items:center;gap:6px;min-height:40px;padding:0 12px;border-radius:20px;background:#ffffff1c;font-size:16px;opacity:0;transition:opacity .25s}
+#rome-immersive .rg-purse svg{width:20px;height:20px}
+#rome-immersive .rg-gift[data-stage=stow] .rg-purse{opacity:1}
+#rome-immersive .rg-purse.is-bumped{animation:rg-bump .4s}
+@keyframes rg-bump{40%{transform:scale(1.22)}}
+/* Ceremony */
+#rome-immersive .rtc{position:absolute;inset:0;z-index:40;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:18px;box-sizing:border-box;padding:calc(env(safe-area-inset-top) + 34px) 22px 26px;overflow:hidden;background:radial-gradient(120% 70% at 50% 40%,#3d5645 0,#233229 58%,#1a251f 100%);color:#fbf5e6;animation:rtc-in .22s both}
+@keyframes rtc-in{from{opacity:0}}
+#rome-immersive .rtc-tap{position:absolute;inset:0;z-index:5;border:0;background:none}
+#rome-immersive .rtc-slot{position:relative;z-index:3;width:min(92vw,400px);height:30px;border-radius:10px;background:linear-gradient(#3f4a42,#2a332d);box-shadow:0 5px 12px #0007,inset 0 -6px 0 #151b17;text-align:center;font-size:12px;line-height:22px;letter-spacing:.24em;color:#d9d2bd}
+#rome-immersive .rtc-paper{position:relative;z-index:2;width:min(88vw,380px);margin-top:-26px;transform:translateY(-105%);animation:rtc-print .72s .08s steps(7,end) forwards}
+@keyframes rtc-print{to{transform:translateY(8px)}}
+#rome-immersive .rtc[data-step=fly] .rtc-paper{transition:transform .5s ease;transform:translateY(8px) scale(.82) rotate(-2deg);animation:none}
+#rome-immersive .rtc-stamp{position:absolute;right:3.5%;top:50%;margin:0;opacity:0;transform:translateY(-50%) scale(2.1) rotate(-14deg);transform-origin:center}
+#rome-immersive .rtc[data-step=stamp] .rtc-stamp,#rome-immersive .rtc[data-step=fly] .rtc-stamp{opacity:1;transform:translateY(-50%) scale(1) rotate(-14deg);transition:transform .16s cubic-bezier(.5,0,1,.6),opacity .08s}
+#rome-immersive .rtc[data-step=stamp] .rtc-paper{animation:rtc-print .72s .08s steps(7,end) forwards,rtc-thump .22s .14s}
+@keyframes rtc-thump{50%{margin-top:-22px}}
+#rome-immersive .rtc-map{flex:1;min-height:0;width:100%;border-radius:18px;background:#bcd0cd2e;opacity:0;transition:opacity .4s}
+#rome-immersive .rtc[data-step=fly] .rtc-map{opacity:1}
+#rome-immersive .rtc-map path:not(.rtc-route):not(.rtc-plane){fill:#e9e1cd55}
+#rome-immersive .rtc-route{stroke:#ffd9a0;stroke-linecap:round}
+#rome-immersive .rtc-plane{fill:#ff8a5c}
+#rome-immersive .rtc-line{margin:0;font-size:19px;font-weight:600;text-align:center}
+#rome-immersive .rtc-shower{justify-content:center}
+#rome-immersive .rtc-fan{position:relative;width:min(70vw,300px);aspect-ratio:2.42}
+#rome-immersive .rtc-fan .rg-ticket{position:absolute;inset:0;animation:rtc-fan 1.5s both cubic-bezier(.3,1.1,.4,1)}
+@keyframes rtc-fan{0%{opacity:0;transform:translateY(40vh) scale(.6)}35%,70%{opacity:1;transform:translate(calc(var(--k)*30px),calc(var(--k)*var(--k)*5px)) rotate(calc(var(--k)*7deg))}100%{opacity:0;transform:translate(34vw,-40vh) scale(.12)}}
+@media (prefers-reduced-motion:reduce){#rome-immersive .rg-gift *,#rome-immersive .rtc,#rome-immersive .rtc *{animation:none!important;transition:none!important}#rome-immersive .rtc-paper{transform:translateY(8px)}#rome-immersive .rtc-fan .rg-ticket{opacity:1}#rome-immersive .rg-sparks{display:none}}
+@media (max-height:620px){#rome-immersive .rg-gift h2{font-size:24px}#rome-immersive .rg-head{margin-top:36px}#rome-immersive .rg-gift[data-stage=tickets] .rg-ticket:nth-child(1){transform:translateY(-110px) rotate(-4deg)}#rome-immersive .rg-gift[data-stage=tickets] .rg-ticket:nth-child(2){transform:translateY(-6px) rotate(3deg)}}
+/* Review fixes: the first-walk hint stays clear of the stick and the bottom button. */
+#rome-immersive .rr-game .rr-tutorial-hint{bottom:calc(env(safe-area-inset-bottom) + 176px);max-width:calc(100% - 32px)}
+#rome-immersive .rr-photo-shade{background:linear-gradient(180deg,#0000 30%,#0b100db3 62%,#0b100df0 100%)!important}
+</style><style>/* City requests, the bench, street cats, the ticket row and the text-size setting. */
+#rome-immersive .rq-card{position:absolute;left:16px;right:16px;top:calc(env(safe-area-inset-top) + 118px);z-index:5;box-sizing:border-box;padding:14px 16px;border-radius:16px;background:#fffaf0f5;color:#2c352c;box-shadow:0 10px 30px #17211740;animation:rq-in .28s both cubic-bezier(.2,.9,.3,1)}
+#rome-immersive .rq-card[hidden],#rome-immersive .rq-toast[hidden],#rome-immersive .rq-fade[hidden]{display:none}
+@keyframes rq-in{from{opacity:0;transform:translateY(-8px)}}
+#rome-immersive .rq-who{display:block;font-size:13px;color:#6d6a5c}
+#rome-immersive .rq-line{margin:6px 0 12px;font-size:17px;line-height:1.5}
+#rome-immersive .rq-actions{display:flex;gap:10px}
+#rome-immersive .rq-actions button{flex:1;min-height:48px;border-radius:13px;border:0;font-size:16px;font-weight:700}
+#rome-immersive .rq-yes{background:#2f4a3b;color:#fbf5e6}
+#rome-immersive .rq-no{background:#ebe5d6;color:#30382f}
+#rome-immersive .rq-toast{position:absolute;left:50%;top:calc(env(safe-area-inset-top) + 118px);z-index:6;transform:translateX(-50%);width:max-content;max-width:calc(100% - 40px);display:flex;flex-direction:column;gap:3px;padding:11px 18px;border-radius:15px;background:#21382cf2;color:#fbf5e6;text-align:center;box-shadow:0 8px 22px #0005;animation:rq-fade .3s both}
+@keyframes rq-fade{from{opacity:0}}
+#rome-immersive .rq-toast b{font-size:16px}#rome-immersive .rq-toast span{font-size:14px;opacity:.9}
+#rome-immersive .rq-fade{position:absolute;inset:0;z-index:7;display:flex;align-items:flex-end;justify-content:center;padding-bottom:calc(env(safe-area-inset-bottom) + 96px);background:#141b1f center/cover no-repeat;color:#fbf5e6;font-size:20px;font-weight:600;text-shadow:0 1px 8px #000b;opacity:0;pointer-events:none}
+#rome-immersive .rq-fade.is-in{opacity:1;transition:opacity 1s}#rome-immersive .rq-fade.is-out{opacity:0;transition:opacity 1s}
+#rome-immersive .rq-section{padding:18px 0 4px;border-top:1px solid #30382f1c;margin-top:14px;color:#30382f}
+#rome-immersive .rq-section h3{margin:14px 0 4px;font-size:17px}#rome-immersive .rq-section h3:first-child{margin-top:0}#rome-immersive .rq-section h3[hidden],#rome-immersive .rq-section p[hidden],#rome-immersive .rq-cats[hidden]{display:none}
+#rome-immersive .rq-rank{margin:0 0 8px;font-size:14px;color:#6d6a5c}
+#rome-immersive .rq-note{margin:0 0 8px;font-size:16px;line-height:1.5}
+#rome-immersive .rq-go{display:block;width:100%;min-height:46px;margin:0 0 8px;border:0;border-radius:12px;background:#2f4a3b;color:#fbf5e6;font-size:15px;font-weight:700}
+#rome-immersive .rq-wait{display:flex;align-items:center;gap:8px;margin-top:6px;font-size:15px}#rome-immersive .rq-wait span{flex:1}
+#rome-immersive .rq-time{min-width:58px;min-height:44px;border:1px solid #30382f33;border-radius:12px;background:none;color:inherit;font-size:15px}
+#rome-immersive .rq-time[aria-pressed=true]{background:#2f4a3b;color:#fbf5e6;border-color:transparent}
+#rome-immersive .rq-cats-note{margin:0 0 8px;font-size:14px;color:#6d6a5c}
+#rome-immersive .rq-cats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+#rome-immersive .rq-cat{display:flex;flex-direction:column;align-items:center;gap:3px;text-align:center}
+#rome-immersive .rq-cat i{width:72px;height:72px;background-size:300% 200%;background-repeat:no-repeat;filter:brightness(0) opacity(.16)}
+#rome-immersive .rq-cat.is-met i{filter:none}
+#rome-immersive .rq-cat small{font-size:12px;line-height:1.3;color:#6d6a5c}
+#rome-immersive .rq-tickets{display:flex;gap:10px;overflow-x:auto;padding:4px 0 8px;-webkit-overflow-scrolling:touch}
+#rome-immersive .rq-ticket{flex:0 0 210px;padding:0;border:0;background:none;color:inherit;text-align:left}
+#rome-immersive .rq-ticket .rg-ticket-name b{font-size:16px}#rome-immersive .rq-ticket .rg-ticket-name small{font-size:9px}
+#rome-immersive .ra-textsize{display:flex;align-items:center;gap:8px;margin:0 0 12px}#rome-immersive .ra-textsize span{flex:1;font-size:15px}
+#rome-immersive .ra-textsize button{min-width:68px;min-height:44px;border:1px solid #30382f33;border-radius:12px;background:none;color:inherit;font-size:15px}
+#rome-immersive .ra-textsize button[aria-pressed=true]{background:#2f4a3b;color:#fbf5e6;border-color:transparent}
+@media (prefers-reduced-motion:reduce){#rome-immersive .rq-card,#rome-immersive .rq-toast{animation:none}}
+#rome-immersive .rq-face{float:right;width:64px;height:64px;margin:0 0 4px 10px;border-radius:50%;background-size:400% 200%;background-repeat:no-repeat;box-shadow:0 0 0 2px #fff,0 3px 8px #0003}
+#rome-immersive .rq-face[hidden]{display:none}
+#rome-immersive .rs-face{float:right;width:52px;height:52px;margin:0 0 2px 8px;border-radius:50%;background-size:200% 200%;background-repeat:no-repeat;box-shadow:0 0 0 2px #fff,0 2px 6px #0003}
+#rome-immersive .rs-face[hidden]{display:none}
 </style>
 <style>/* Screens outside the streets: first launch, traveller & settings, travel and tickets.
    One paper-and-ink system: serif titles, one green for every main button, 44px targets. */
@@ -1281,6 +1393,9 @@ window.ROAM_EN={
  '航空券1枚でロンドンへ':'Go to London · 1 ticket','飛行機で':'By plane','ローマとパリは無料':'Rome and Paris are free','航空券を1枚使う':'Uses 1 ticket'
 };
 </script>
+<script>// Generated by tools/make_icons.mjs from Lucide 1.60.0 (ISC licence). The icons the game uses, bundled so it works offline.
+window.lucide={createIcons(){const NS='http://www.w3.org/2000/svg',I={"armchair":[["path",{"d":"M19 9V6a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v3"}],["path",{"d":"M3 16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V11a2 2 0 0 0-4 0z"}],["path",{"d":"M5 18v2"}],["path",{"d":"M19 18v2"}]],"arrow-left":[["path",{"d":"m12 19-7-7 7-7"}],["path",{"d":"M19 12H5"}]],"arrow-right":[["path",{"d":"M5 12h14"}],["path",{"d":"m12 5 7 7-7 7"}]],"book-open":[["path",{"d":"M12 5v16"}],["path",{"d":"M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z"}]],"bus-front":[["path",{"d":"M4 6 2 7"}],["path",{"d":"M10 6h4"}],["path",{"d":"m22 7-2-1"}],["rect",{"width":"16","height":"16","x":"4","y":"3","rx":"2"}],["path",{"d":"M4 11h16"}],["path",{"d":"M8 15h.01"}],["path",{"d":"M16 15h.01"}],["path",{"d":"M6 19v2"}],["path",{"d":"M18 21v-2"}]],"camera":[["path",{"d":"M13.997 4a2 2 0 0 1 1.76 1.05l.486.9A2 2 0 0 0 18.003 7H20a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h1.997a2 2 0 0 0 1.759-1.048l.489-.904A2 2 0 0 1 10.004 4z"}],["circle",{"cx":"12","cy":"13","r":"3"}]],"expand":[["path",{"d":"m15 15 6 6"}],["path",{"d":"m15 9 6-6"}],["path",{"d":"M21 16v5h-5"}],["path",{"d":"M21 8V3h-5"}],["path",{"d":"M3 16v5h5"}],["path",{"d":"m3 21 6-6"}],["path",{"d":"M3 8V3h5"}],["path",{"d":"M9 9 3 3"}]],"footprints":[["path",{"d":"M4 16v-2.38C4 11.5 2.97 10.5 3 8c.03-2.72 1.49-6 4.5-6C9.37 2 10 3.8 10 5.5c0 3.11-2 5.66-2 8.68V16a2 2 0 1 1-4 0Z"}],["path",{"d":"M20 20v-2.38c0-2.12 1.03-3.12 1-5.62-.03-2.72-1.49-6-4.5-6C14.63 6 14 7.8 14 9.5c0 3.11 2 5.66 2 8.68V20a2 2 0 1 0 4 0Z"}],["path",{"d":"M16 17h4"}],["path",{"d":"M4 13h4"}]],"globe-2":[["path",{"d":"M21.54 15H17a2 2 0 0 0-2 2v4.54"}],["path",{"d":"M7 3.34V5a3 3 0 0 0 3 3a2 2 0 0 1 2 2c0 1.1.9 2 2 2a2 2 0 0 0 2-2c0-1.1.9-2 2-2h3.17"}],["path",{"d":"M11 21.95V18a2 2 0 0 0-2-2a2 2 0 0 1-2-2v-1a2 2 0 0 0-2-2H2.05"}],["circle",{"cx":"12","cy":"12","r":"10"}]],"pause":[["rect",{"x":"14","y":"3","width":"5","height":"18","rx":"1"}],["rect",{"x":"5","y":"3","width":"5","height":"18","rx":"1"}]],"plane":[["path",{"d":"M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"}]],"play":[["path",{"d":"M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"}]],"rotate-cw":[["path",{"d":"M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"}],["path",{"d":"M21 3v5h-5"}]],"ticket":[["path",{"d":"M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"}],["path",{"d":"M13 5v2"}],["path",{"d":"M13 17v2"}],["path",{"d":"M13 11v2"}]],"user-round":[["circle",{"cx":"12","cy":"8","r":"5"}],["path",{"d":"M20 21a8 8 0 0 0-16 0"}]],"x":[["path",{"d":"M18 6 6 18"}],["path",{"d":"m6 6 12 12"}]]};document.querySelectorAll('i[data-lucide]').forEach(el=>{const n=el.getAttribute('data-lucide'),s=document.createElementNS(NS,'svg');if(!I[n])return;for(const [k,v] of Object.entries({xmlns:NS,width:24,height:24,viewBox:'0 0 24 24',fill:'none',stroke:'currentColor','stroke-width':2,'stroke-linecap':'round','stroke-linejoin':'round'}))s.setAttribute(k,v);for(const a of el.attributes)if(a.name!=='data-lucide'&&a.name!=='class')s.setAttribute(a.name,a.value);s.setAttribute('class',['lucide','lucide-'+n,el.getAttribute('class')].filter(Boolean).join(' '));for(const [t,at] of I[n]){const c=document.createElementNS(NS,t);for(const [k,v] of Object.entries(at))c.setAttribute(k,v);s.append(c);}el.replaceWith(s);});}};
+</script>
 <script>(()=>{
 const EN=window.ROAM_LANG==='en';
 const firstRunPreview=new URLSearchParams(location.search).has('new');
@@ -1760,7 +1875,7 @@ function updateWallet(){
   const id=b.dataset.country,name=destinations[id].name;
   b.setAttribute('aria-checked',String(transferState?.destination===id));
   b.dataset.state=!isBuilt(id)?'soon':hasTicket(id)?'ticket':'locked';
-  b.querySelector('small').textContent=isBuilt(id)?destinations[id].country:T('準備中','Soon');
+  b.querySelector('small').textContent=isBuilt(id)?destinations[id].country+' · '+regLabelTod(id):T('準備中','Soon');
   b.setAttribute('aria-label',!isBuilt(id)?T('{0}（準備中）','{0} (coming soon)',name):hasTicket(id)?name:T('{0}（航空券が必要）','{0} (needs a ticket)',name));
  });
  filterDestinations();
@@ -1827,7 +1942,7 @@ async function buyTickets(pack,button){
   sheet.classList.add('is-buying');packsIdle(sheet);setTimeout(()=>{if(!sheet.hidden&&sheetCity)useTicket();},reduced?0:420);return;
  }
  renderTicketSheet();
- if(result?.ok){bumpOnce(sheet.querySelector('.rt-ticket-count'));bumpOnce(travelRoot.querySelector('.rt-wallet'));}
+ if(result?.ok){bumpOnce(sheet.querySelector('.rt-ticket-count'));bumpOnce(travelRoot.querySelector('.rt-wallet'));ticketShower(result.count);}
  (sheet.dataset.mode==='use'?sheet.querySelector('.rt-ticket-use'):button).focus({preventScroll:true});
 }
 const packsIdle=sheet=>sheet.querySelectorAll('.rt-pack').forEach(b=>b.setAttribute('aria-disabled','true'));
@@ -1836,8 +1951,8 @@ function useTicket(){
  const id=sheetCity,sheet=ticketSheet(),use=sheet.querySelector('.rt-ticket-use');if(!id||ticketSheetMode()!=='use'||use.disabled)return;
  spareTickets--;tickets.add(id);lastTravelDestination=id;persist();updateWallet();
  sheet.querySelector('.rt-ticket-count').textContent=T('{0}枚','{0}',spareTickets);bumpOnce(sheet.querySelector('.rt-ticket-count'));
- use.disabled=true;sheet.classList.add('is-stamped');sound.stamp();
- stampTimer=setTimeout(()=>{if(ticketSheet().hidden||sheetCity!==id)return;closeTicketSheet();if(transferState?.stage==='select'&&transferState.destination===id)setTransferStage('route');},reduced?250:950);
+ use.disabled=true;sheet.classList.add('is-stamped');
+ ticketCeremony(id).then(()=>{if(ticketSheet().hidden||sheetCity!==id)return;closeTicketSheet();if(transferState?.stage==='select'&&transferState.destination===id)setTransferStage('route');});
 }
 
 // Paris walkable areas are traced from each background (world 1000x1500).
@@ -2115,7 +2230,7 @@ const traveler=new Image();traveler.addEventListener('load',()=>renderDirty=true
 function inside(x,y,id=placeId){if(places[id].mask)return !!places[id].mask[Math.floor(y/10)*100+Math.floor(x/10)];const inPoly=poly=>{let hit=false;for(let i=0,j=poly.length-1;i<poly.length;j=i++){const [xi,yi]=poly[i],[xj,yj]=poly[j];if(((yi>y)!==(yj>y))&&(x<(xj-xi)*(y-yi)/(yj-yi)+xi))hit=!hit;}return hit;};return places[id].areas.some(inPoly)&&!(places[id].blocks||[]).some(inPoly);}
 const walkable=(x,y,id=placeId)=>x>20&&x<W-20&&y>20&&y<H-20&&inside(x,y,id)&&!(id===placeId&&typeof localAt==='function'&&localAt(x,y));
 const dirs={up:[0,-1],down:[0,1],left:[-1,0],right:[1,0]},keyMap={ArrowUp:'up',ArrowDown:'down',ArrowLeft:'left',ArrowRight:'right',w:'up',s:'down',a:'left',d:'right'};
-function persist(){const state={modelContent:{view:isAvatarOpen()?'appearance':isTransferOpen()?'travel':!photo.hidden?'scenery':!journal.hidden?'journal':'walk',travelDestination:transferState?travelDestinations[transferState.destination].name:null,travelStage:transferState?.stage||null,currentSpot:scene().name,visitedSpots:[...visited].map(id=>places[id].name),savedSpots:[...savedPlaces].map(id=>places[id].name),foundColosseum:visited.has('colosseum'),savedScenery:savedPlaces.has('colosseum')},privateContent:{avatarAppearance:{...avatarAppearance},worldVersion:8,tickets:[...tickets],spareTickets,stalls:stallSave(),keepsakes:keepsakeSave(),souvenirs:souvenirSave(),sound:sound.enabled,musicVolume:sound.musicVolume,sfxVolume:sound.sfxVolume,phrases:learnedPhrases?[...learnedPhrases]:[],finds:findsSave(),onboarded,onboarding,travelerName,placeId,cityPositions,x:pos.x,y:pos.y,index,facing,panel,visited:[...visited],savedPlaces:[...savedPlaces],departing,journeyGoal,transfer:transferSnapshot(),lastTravelDestination,stateWriter,stateRevision:++stateRevision}};if(!firstRunPreview){try{localStorage.setItem('roam-rome-state',JSON.stringify(state));}catch(e){}window.openai?.setWidgetState?.(state)?.catch(()=>{});}}
+function persist(){const state={modelContent:{view:isAvatarOpen()?'appearance':isTransferOpen()?'travel':!photo.hidden?'scenery':!journal.hidden?'journal':'walk',travelDestination:transferState?travelDestinations[transferState.destination].name:null,travelStage:transferState?.stage||null,currentSpot:scene().name,visitedSpots:[...visited].map(id=>places[id].name),savedSpots:[...savedPlaces].map(id=>places[id].name),foundColosseum:visited.has('colosseum'),savedScenery:savedPlaces.has('colosseum')},privateContent:{avatarAppearance:{...avatarAppearance},worldVersion:8,tickets:[...tickets],spareTickets,stalls:stallSave(),keepsakes:keepsakeSave(),souvenirs:souvenirSave(),gift:giftTaken,regulars:regSave(),sound:sound.enabled,musicVolume:sound.musicVolume,sfxVolume:sound.sfxVolume,phrases:learnedPhrases?[...learnedPhrases]:[],finds:findsSave(),onboarded,onboarding,travelerName,placeId,cityPositions,x:pos.x,y:pos.y,index,facing,panel,visited:[...visited],savedPlaces:[...savedPlaces],departing,journeyGoal,transfer:transferSnapshot(),lastTravelDestination,stateWriter,stateRevision:++stateRevision}};if(!firstRunPreview){try{localStorage.setItem('roam-rome-state',JSON.stringify(state));}catch(e){}window.openai?.setWidgetState?.(state)?.catch(()=>{});}}
 function restore(state){
  stopWalking();clearTimeout(transitionTimer);changing=false;edgeReady=true;snapCamera=true;root.classList.remove('is-travelling','is-edge-switching');
  const p=state?.privateContent,m=state?.modelContent;
@@ -2132,14 +2247,14 @@ function restore(state){
  // Saves from before onboarding existed already belong to a traveller on the road.
  onboarded=p?(p.onboarded!==false):false;
  // Earlier saves were promised Rome and Paris. Keep both even when the new free starter city differs.
- tickets=new Set([...freeTickets,...(p&&(!Number.isInteger(p.worldVersion)||p.worldVersion<8)?['rome','paris']:[]),...(Array.isArray(p?.tickets)?p.tickets.filter(id=>Object.hasOwn(destinations,id)):[])]);spareTickets=Number.isInteger(p?.spareTickets)?Math.max(0,Math.min(999,p.spareTickets)):0;sound.enabled=p?.sound!==false;sound.loadVolumes?.(p);loadPhrases(p);stallRestore(p?.stalls);keepsakeRestore(p?.keepsakes);findsRestore(p?.finds);souvenirRestore(p?.souvenirs);wasNear=true;travelerName=typeof p?.travelerName==='string'?p.travelerName.trim().slice(0,12):'';
+ tickets=new Set([...freeTickets,...(p&&(!Number.isInteger(p.worldVersion)||p.worldVersion<8)?['rome','paris']:[]),...(Array.isArray(p?.tickets)?p.tickets.filter(id=>Object.hasOwn(destinations,id)):[])]);spareTickets=Number.isInteger(p?.spareTickets)?Math.max(0,Math.min(999,p.spareTickets)):0;sound.enabled=p?.sound!==false;sound.loadVolumes?.(p);loadPhrases(p);stallRestore(p?.stalls);keepsakeRestore(p?.keepsakes);findsRestore(p?.finds);souvenirRestore(p?.souvenirs);regRestore(p?.regulars);giftTaken=p?.gift===true||giftCities.every(id=>tickets.has(id));wasNear=true;travelerName=typeof p?.travelerName==='string'?p.travelerName.trim().slice(0,12):'';
  for(const [id,c] of Object.entries(p?.worldVersion>=7&&p.cityPositions||{})){
   if(!Object.hasOwn(cities,id)||id===cityId()||!cities[id].tour.includes(c?.placeId)||!Number.isFinite(c.x)||!Number.isFinite(c.y)||!walkable(c.x,c.y,c.placeId))continue;
   cityPositions[id]={placeId:c.placeId,x:c.x,y:c.y,facing:['up','down','left','right'].includes(c.facing)?c.facing:'up'};
  }
  index=Number.isInteger(p?.index)?Math.max(0,Math.min(scene().photos.length-1,p.index)):0;
  photo.hidden=true;journal.hidden=true;photoTicket++;photoReady=false;photoOrigin='walk';walkingUI.inert=false;renderDirty=true;updateChrome();restoreAvatarAppearance(p?.avatarAppearance);restoreTransfer(p?.transfer,p?.lastTravelDestination);
- if(!onboarded&&!transferState)showOnboard(['welcome','name','avatar','city'].includes(p?.onboarding)?p.onboarding:'splash',false);else{hideOnboard();if(transferState?.fromHome)onboarding='travel';}
+ if(!onboarded&&!transferState)showOnboard(['welcome','name','avatar','gift','city'].includes(p?.onboarding)?p.onboarding:'splash',false);else{hideOnboard();if(transferState?.fromHome)onboarding='travel';}
 }
 function showNotice(text,x,y,follow){
  const fresh=!notice||notice.alpha<.05||notice.text!==text;
@@ -2358,7 +2473,7 @@ function updateChrome(){
  const p=scene(),next=places[p.next];near=!p.quiet&&Math.hypot(pos.x-p.entry.x,pos.y-p.entry.y)<95;
  root.classList.toggle('has-destination-action',near&&!departing);
  if(near&&!wasNear&&!changing){sound.arrive();prefetchPhoto(placeId);}wasNear=near;
- root.querySelector('.rr-city small').textContent=(p.country||city().country)+' · '+visitedCount()+' / '+placeCount()+(headerClock?' · '+headerClock:'');
+ root.querySelector('.rr-city small').textContent=(p.country||city().country)+' · '+visitedCount()+' / '+placeCount()+(headerClock&&restTod?.city!==cityId()?' · '+headerClock:'');
  root.querySelector('.rr-city h2 b').textContent=p.city||city().title;
  const onBridge=placeId==='bridge';
  root.querySelector('.rr-city h2 span').textContent=p.area+' · '+(p.quiet?T('静かな通り','Quiet street'):panel==='piazza'?(onBridge?T('橋','Bridge'):T('広場','Square')):T('通り','Street'));
@@ -3706,7 +3821,7 @@ function closeAvatar(apply=false){
  if(!isAvatarOpen())return;
  if(apply){avatarAppearance=normalizeAvatarAppearance(avatarDraft);if(avatarRoot.dataset.mode!=='create')travelerName=avatarRoot.querySelector('.ra-name-input').value.trim().slice(0,12);}
  avatarDraft=null;avatarRoot.hidden=true;travelRoot.inert=false;walkingUI.inert=isTransferOpen()||!!onboarding;
- if(avatarRoot.dataset.mode==='create'){avatarRoot.dataset.mode='edit';showOnboard(apply?'city':'name');persist();return;}
+ if(avatarRoot.dataset.mode==='create'){avatarRoot.dataset.mode='edit';showOnboard(apply?(giftTaken?'city':'gift'):'name');persist();return;}
  stopWalking();last=0;draw();
  if(isTransferOpen()){stopTransitAnimation();transitLastPaint=null;paintTransfer();}
  (avatarReturnFocus?.isConnected&&!avatarReturnFocus.hidden?avatarReturnFocus:root.querySelector(isTransferOpen()?'.rt-avatar-open':'.rr-avatar-toggle')).focus({preventScroll:true});
@@ -3823,6 +3938,7 @@ function cityHour(zone){try{return Number(new Intl.DateTimeFormat('en-GB',{timeZ
 function cityClock(zone){try{return new Intl.DateTimeFormat('en-GB',{timeZone:zone,hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).format(new Date());}catch(e){return '';}}
 function timeOfDay(){
  if(['night','morning','day'].includes(timeParam))return timeParam;
+ if(restTod?.city===cityId())return restTod.tod;
  const h=cityHour(city().zone);return h>=5&&h<9?'morning':h>=19||h<5?'night':'day';
 }
 let tod='day';
@@ -3981,7 +4097,9 @@ function drawLife(drawPlayer){
   }else if(a.kind==='local'){
    groundShadow(a.x,a.y,14,4.5,.22);
    drawSprite(sheetFor(a.sheet),spriteData[a.sheet].frames[a.frame],a.x,a.y,(84+a.y/H*14)*(scene().figure||1),{flip:a.flip});
-  }else if(a.kind==='stall')drawStall(a);
+   if(a.asks)drawAsk(a,a.y-(84+a.y/H*14)*(scene().figure||1));
+  }else if(a.kind==='stray')drawStray(a);
+  else if(a.kind==='stall')drawStall(a);
   else if(a.kind==='find')drawFind(a);
  }
 }
@@ -4393,7 +4511,7 @@ function drawStall(a){
 // ---- The card: name, a local tip, and one button. Shown while you stand by the stall. ----
 const stallCard=document.createElement('div');
 stallCard.className='rs-card';stallCard.hidden=true;stallCard.setAttribute('role','group');
-stallCard.innerHTML='<small class="rs-kicker"></small><strong class="rs-item"></strong><p class="rs-tip"></p><button class="rs-try cursor-interaction" type="button"><span></span></button><span class="rs-stamp" aria-hidden="true"></span>';
+stallCard.innerHTML='<i class="rs-face" aria-hidden="true"></i><small class="rs-kicker"></small><strong class="rs-item"></strong><p class="rs-tip"></p><button class="rs-try cursor-interaction" type="button"><span></span></button><span class="rs-stamp" aria-hidden="true"></span>';
 root.querySelector('.rr-game').append(stallCard);
 const stallTry=stallCard.querySelector('.rs-try');
 let stallCardFor=null;
@@ -4401,8 +4519,9 @@ const stallVerb=st=>({eat:T('食べてみる','Try it'),drink:T('飲んでみる
 function showStallCard(a){
  stallCardFor=a;const {st}=a,tried=Object.hasOwn(stallTried,st.id);
  stallCard.dataset.stall=st.id;stallCard.setAttribute('aria-label',st.name);
- stallCard.querySelector('.rs-kicker').textContent=st.name;
+ stallCard.querySelector('.rs-kicker').textContent=tried?T('また来たね · {0}','Back again · {0}',st.name):st.name;
  stallCard.querySelector('.rs-item').textContent=st.item;
+ const face=stallCard.querySelector('.rs-face'),faceSheet=vendorArt[a.sheet];face.hidden=!faceSheet;if(faceSheet){face.style.backgroundImage='url("'+faceSheet+'")';face.style.backgroundPosition=(st.frame%2)*100+'% '+Math.floor(st.frame/2)*100+'%';}
  stallCard.querySelector('.rs-tip').textContent=st.tip;
  setStallButton(tried);
  stallCard.classList.remove('is-new');stallCard.hidden=false;placeStallCard();
@@ -4566,6 +4685,7 @@ function keepPage(city){
  if(keepTaste(city).length)list.push({key:'taste:'+city,kind:'taste',i:list.length,ring:'TASTES & SOUVENIRS',label:T('{0}の味とおみやげをぜんぶ','Every flavour and souvenir in {0}',c.name)});
  if(keepFinds(city))list.push({key:'finds:'+city,kind:'finds',i:list.length,ring:'FINDS',label:T('{0}の見つけものをぜんぶ','Every find in {0}',c.name)});
  for(const p of keepPrompts(city))list.push({key:'shot:'+p.id,kind:'shot',i:list.length,ring:places[p.place].title.toUpperCase(),label:p.text});
+ for(const s of regStamps(city))list.push({...s,i:list.length});
  return list;
 }
 // Paint one stamp impression: ink on transparent, a little worn, slightly turned. size = canvas pixels.
@@ -5555,6 +5675,323 @@ function drawSuitcase(){
  p.querySelector('b').textContent=T('スーツケース  {0} / {1}','Suitcase  {0} of {1}',list.length,Object.keys(stickerLook).length);
  p.querySelector('span').textContent=list.length?T('街の6か所をぜんぶ歩くと、その街のステッカーが増える。','Walk all six places in a city to add its sticker.'):T('街の6か所をぜんぶ歩くと、ステッカーがもらえる。','Walk all six places in a city to earn its sticker.');
 }
+
+// ---- Paper tickets: the welcome gift (Rome and Paris, shown once) and the ticket ceremony after buying or spending one. ----
+// Art: art/codex-results via tools/import_gift_art.py. Names are live text laid over the art, so the art itself carries no words.
+const ticketArt={rome:'assets/hd/ticket-city-rome.webp',paris:'assets/hd/ticket-city-paris.webp',tokyo:'assets/hd/ticket-city-tokyo.webp',london:'assets/hd/ticket-city-london.webp',seoul:'assets/hd/ticket-city-seoul.webp',bangkok:'assets/hd/ticket-city-bangkok.webp',dubai:'assets/hd/ticket-city-dubai.webp',newyork:'assets/hd/ticket-city-newyork.webp',rio:'assets/hd/ticket-city-rio.webp',taiwan:'assets/hd/ticket-city-taiwan.webp',singapore:'assets/hd/ticket-city-singapore.webp',jaipur:'assets/hd/ticket-city-jaipur.webp',istanbul:'assets/hd/ticket-city-istanbul.webp',cartagena:'assets/hd/ticket-city-cartagena.webp'};
+function ticketEl(id){
+ const t=document.createElement('div');t.className='rg-ticket';t.dataset.city=id;
+ t.innerHTML='<img alt="" draggable="false"><span class="rg-ticket-name"><b></b><small></small></span>';
+ t.querySelector('img').src=ticketArt[id];t.querySelector('b').textContent=destinations[id].name;t.querySelector('small').textContent=destinations[id].title.toUpperCase();
+ return t;
+}
+const giftCities=['rome','paris'];
+let giftTaken=false,giftDone=null,giftInert=false;
+const giftRoot=document.createElement('section');giftRoot.className='rg-gift';giftRoot.hidden=true;
+giftRoot.setAttribute('role','dialog');giftRoot.setAttribute('aria-modal','true');giftRoot.setAttribute('aria-labelledby','rg-title');
+giftRoot.innerHTML='<div class="rg-glow" aria-hidden="true"></div><button class="rg-skip cursor-interaction" type="button"></button>'
+ +'<div class="rg-head"><small class="rg-from"></small><h2 id="rg-title"></h2><p class="rg-lead" aria-live="polite"></p></div>'
+ +'<div class="rg-stage"><button class="rg-envelope cursor-interaction" type="button"><img class="rg-open" alt="" draggable="false" src="assets/hd/gift-envelope-open.webp"><img class="rg-closed" alt="" draggable="false" src="assets/hd/gift-envelope-closed.webp"></button><div class="rg-tickets" aria-hidden="true"></div><div class="rg-sparks" aria-hidden="true"></div></div>'
+ +'<div class="rg-foot"><button class="rg-next cursor-interaction" type="button" hidden></button></div>'
+ +'<div class="rg-purse" aria-hidden="true">'+ticketIcon+'<b>0</b></div>';
+root.querySelector('.rr-app').append(giftRoot);
+const giftQ=s=>giftRoot.querySelector(s),giftText=(h,lead)=>{giftQ('h2').textContent=h;giftQ('.rg-lead').textContent=lead;};
+// Tickets are in the wallet from the moment the envelope opens (or is skipped), so a closed app never loses them.
+function giftGrant(){if(giftTaken)return;giftTaken=true;giftCities.forEach(id=>tickets.add(id));persist();try{updateWallet();}catch(e){}}
+function openGift(done){
+ giftDone=done;giftRoot.dataset.stage='closed';giftRoot.hidden=false;giftInert=walkingUI.inert;walkingUI.inert=true;stopWalking();
+ giftQ('.rg-from').textContent=travelerName?T('{0}さんへ','For {0}',travelerName):T('旅人さんへ','For the traveller');
+ giftText(T('贈り物が届いています','A gift has arrived'),T('封筒をタップして開けよう','Tap the envelope to open it'));
+ giftQ('.rg-skip').textContent=T('スキップ','Skip');giftQ('.rg-envelope').setAttribute('aria-label',T('封筒を開ける','Open the envelope'));
+ giftQ('.rg-next').hidden=true;giftQ('.rg-purse b').textContent='0';
+ giftQ('.rg-tickets').replaceChildren(...giftCities.map(ticketEl));
+ giftQ('.rg-sparks').replaceChildren(...Array.from({length:14},(_,i)=>{const s=document.createElement('i'),a=i/14*Math.PI*2;s.style.setProperty('--x',Math.cos(a)*(90+i%3*50)+'px');s.style.setProperty('--y',Math.sin(a)*(70+i%4*38)+'px');s.style.animationDelay=(i%5)*70+'ms';return s;}));
+ sound.page?.();giftQ('.rg-envelope').focus({preventScroll:true});
+}
+function giftOpen(){
+ if(giftRoot.dataset.stage!=='closed')return;giftRoot.dataset.stage='open';giftGrant();sound.page?.();navigator.vibrate?.(10);
+ setTimeout(()=>{
+  if(giftRoot.hidden)return;giftRoot.dataset.stage='tickets';sound.purchase?.();
+  giftText(T('ローマとパリの航空券','Tickets to Rome and Paris'),T('2枚とも、あなたのもの。期限なし、ずっと歩ける。','Both are yours. No expiry, yours for good.'));
+  const next=giftQ('.rg-next');next.textContent=T('財布にしまう','Put them in your wallet');next.hidden=false;next.focus({preventScroll:true});
+ },reduced?0:620);
+}
+function giftStow(){
+ if(giftRoot.dataset.stage!=='tickets')return;giftRoot.dataset.stage='stow';giftQ('.rg-next').hidden=true;
+ giftText(T('財布にしまいました','In your wallet'),T('行き先は、地球儀のボタンからいつでも選べる。','Choose where to go any time with the globe button.'));
+ setTimeout(()=>{if(giftRoot.hidden)return;giftQ('.rg-purse b').textContent='2';giftQ('.rg-purse').classList.add('is-bumped');sound.stamp?.();},reduced?0:520);
+ setTimeout(giftFinish,reduced?900:1500);
+}
+function giftFinish(){
+ if(giftRoot.hidden)return;giftRoot.hidden=true;giftQ('.rg-purse').classList.remove('is-bumped');walkingUI.inert=giftInert;const done=giftDone;giftDone=null;done?.();
+}
+giftQ('.rg-envelope').addEventListener('click',giftOpen);
+giftQ('.rg-next').addEventListener('click',giftStow);
+giftQ('.rg-skip').addEventListener('click',()=>{giftGrant();giftFinish();});
+giftRoot.addEventListener('keydown',e=>{if(e.key==='Escape'){e.stopPropagation();giftGrant();giftFinish();}else if(e.key==='Tab')trapDialogFocus(e,giftRoot);});
+// A traveller who started before the gift existed gets it on their next opening.
+function giftLate(){if(giftTaken||!onboarded||onboarding||isTransferOpen()||isAvatarOpen()||!photo.hidden||!journal.hidden)return;openGift(()=>view.focus?.({preventScroll:true}));}
+
+// ---- The ceremony: the ticket prints out of the machine, is stamped, and a plane flies the route. Any tap skips it. ----
+function ticketCeremony(id){
+ return new Promise(resolve=>{
+  const from=transferState?.fromHome?null:cityId(),box=document.createElement('div');box.className='rtc';box.dataset.step='print';
+  box.innerHTML='<div class="rtc-slot" aria-hidden="true"><span>ROAM AIR</span></div><div class="rtc-paper"><span class="rt-stamp rtc-stamp" aria-hidden="true"><b>OPEN</b><small></small></span></div>'
+   +'<svg class="rtc-map" aria-hidden="true" preserveAspectRatio="xMidYMid slice"><path class="rtc-route" fill="none"/><path class="rtc-plane" d="M-1-.72 1 0-1 .72-.6 0Z"/></svg>'
+   +'<p class="rtc-line"></p><p class="rr-sr-only" role="status"></p><button class="rtc-tap cursor-interaction" type="button"></button>';
+  box.querySelector('.rtc-paper').prepend(ticketEl(id));
+  box.querySelector('.rtc-stamp small').textContent=keepStampDate(Date.now(),cities[id]?.zone||'UTC');
+  box.querySelector('.rtc-line').textContent=T('{0}行きの航空券','Your ticket to {0}',destinations[id].name);
+  box.querySelector('[role=status]').textContent=T('{0}行きの航空券を発行しました','Ticket to {0} issued',destinations[id].name);
+  box.querySelector('.rtc-tap').setAttribute('aria-label',T('続ける','Continue'));
+  travelRoot.append(box);box.querySelector('.rtc-tap').focus({preventScroll:true});
+  let ended=false,frame=0;const timers=[];
+  const at=(ms,f)=>timers.push(setTimeout(f,reduced?Math.min(ms,120):ms));
+  const end=()=>{if(ended)return;ended=true;timers.forEach(clearTimeout);cancelAnimationFrame(frame);box.remove();resolve();};
+  box.querySelector('.rtc-tap').addEventListener('click',end);
+  sound.page?.();
+  at(760,()=>{box.dataset.step='stamp';sound.stamp?.();navigator.vibrate?.(16);});
+  if(from&&!reduced){
+   const svg=box.querySelector('.rtc-map'),a=project(destinations[from].lon,destinations[from].lat),b=project(destinations[id].lon,destinations[id].lat);
+   svg.insertAdjacentHTML('afterbegin',travelRoot.querySelector('.rt-map-countries').outerHTML);
+   at(1500,()=>{
+    box.dataset.step='fly';
+    const r=svg.getBoundingClientRect(),aspect=r.width/Math.max(1,r.height),pad=Math.max(36,Math.hypot(b.x-a.x,b.y-a.y)*.3);
+    let x0=Math.min(a.x,b.x)-pad,x1=Math.max(a.x,b.x)+pad,y0=Math.min(a.y,b.y)-pad*1.3,y1=Math.max(a.y,b.y)+pad,w=x1-x0,h=y1-y0;
+    if(w/h<aspect){const n=h*aspect;x0-=(n-w)/2;w=n;}else{const n=w/aspect;y0-=(n-h)/2;h=n;}
+    svg.setAttribute('viewBox',[x0,y0,w,h].map(v=>v.toFixed(1)).join(' '));
+    const route=svg.querySelector('.rtc-route'),plane=svg.querySelector('.rtc-plane');route.setAttribute('d',routePath(from,id));route.style.strokeWidth=w*.008;
+    const len=route.getTotalLength(),start=performance.now(),k=w*.03;route.style.strokeDasharray=len;
+    const fly=now=>{
+     const t=Math.min(1,(now-start)/1250),e=t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2,p=route.getPointAtLength(len*e),q=route.getPointAtLength(Math.min(len,len*e+1));
+     route.style.strokeDashoffset=len*(1-e);plane.setAttribute('transform',`translate(${p.x.toFixed(1)} ${p.y.toFixed(1)}) rotate(${(Math.atan2(q.y-p.y,q.x-p.x)*180/Math.PI).toFixed(1)}) scale(${k.toFixed(2)})`);
+     if(t<1)frame=requestAnimationFrame(fly);else{sound.arrive?.();}
+    };
+    frame=requestAnimationFrame(fly);
+   });
+   at(3300,end);
+  }else at(1900,end);
+ });
+}
+// A pack bought with no city in mind: the tickets fan out, then drop into the wallet.
+function ticketShower(count){
+ const box=document.createElement('div');box.className='rtc rtc-shower';
+ box.innerHTML='<div class="rtc-fan"></div><p class="rtc-line"></p><button class="rtc-tap cursor-interaction" type="button"></button>';
+ box.querySelector('.rtc-line').textContent=T('航空券 {0}枚','{0} tickets',count);box.querySelector('.rtc-tap').setAttribute('aria-label',T('続ける','Continue'));
+ const pool=Object.keys(ticketArt).filter(id=>isBuilt(id)&&!hasTicket(id)),fan=box.querySelector('.rtc-fan');
+ for(let i=0;i<count;i++){const k=i-(count-1)/2,t=ticketEl(pool[i%Math.max(1,pool.length)]||'rome');t.querySelector('.rg-ticket-name').remove();t.style.setProperty('--k',k);t.style.animationDelay=i*90+'ms';fan.append(t);}
+ const opener=document.activeElement;travelRoot.append(box);box.querySelector('.rtc-tap').focus({preventScroll:true});
+ let ended=false;const end=()=>{if(ended)return;ended=true;clearTimeout(timer);box.remove();if(opener?.isConnected)opener.focus({preventScroll:true});};
+ box.querySelector('.rtc-tap').addEventListener('click',end);const timer=setTimeout(end,reduced?700:1700);
+}
+
+// The resident cats of the quiet streets. Art: hd/cats-<city>.webp (3x2 cells of 256), names in the order of each city's tour.
+const catArt={rome:'assets/hd/cats-rome.webp',paris:'assets/hd/cats-paris.webp',tokyo:'assets/hd/cats-tokyo.webp',london:'assets/hd/cats-london.webp',seoul:'assets/hd/cats-seoul.webp',bangkok:'assets/hd/cats-bangkok.webp',dubai:'assets/hd/cats-dubai.webp',newyork:'assets/hd/cats-newyork.webp',rio:'assets/hd/cats-rio.webp',taiwan:'assets/hd/cats-taiwan.webp',singapore:'assets/hd/cats-singapore.webp',jaipur:'assets/hd/cats-jaipur.webp',istanbul:'assets/hd/cats-istanbul.webp',cartagena:'assets/hd/cats-cartagena.webp'};
+const catNames={
+ rome:[['ルーナ','Luna'],['ティト','Tito'],['ニーナ','Nina'],['ブルーノ','Bruno'],['ミミ','Mimi'],['ジーノ','Gino']],
+ paris:[['リュシー','Lucie'],['ノワール','Noir'],['ミレイユ','Mireille'],['ガストン','Gaston'],['ココ','Coco'],['ネージュ','Neige']],
+ tokyo:[['だんご','Dango'],['しらたま','Shiratama'],['とら','Tora'],['くろ','Kuro'],['ねず','Nezu'],['きなこ','Kinako']],
+ london:[['アールグレイ','Earl Grey'],['ウィンストン','Winston'],['マーマレード','Marmalade'],['ティンカー','Tinker'],['ソーティ','Sooty'],['マッジ','Madge']],
+ seoul:[['チーズ','Cheese'],['ナムル','Namul'],['ボリ','Bori'],['トック','Tteok'],['コンイ','Kongi'],['ソル','Seol']],
+ bangkok:[['マリ','Mali'],['ダム','Dam'],['カオニャオ','Khao'],['ナムプン','Nampung'],['ソムタム','Somtam'],['ミーナ','Mina']],
+ dubai:[['ラミ','Rami'],['サハラ','Sahara'],['ヌール','Noor'],['ダラ','Dara'],['ザイン','Zain'],['ライラ','Layla']],
+ newyork:[['ベーグル','Bagel'],['ブロンクス','Bronx'],['タキシード','Tux'],['ラスティ','Rusty'],['ピクルス','Pickles'],['ドミノ','Domino']],
+ rio:[['サンバ','Samba'],['ボサ','Bossa'],['マンゴ','Mango'],['ベイジョ','Beijo'],['ネブリーナ','Neblina'],['カイピ','Caipi']],
+ taiwan:[['タピオカ','Boba'],['マンゴー','Mango'],['フーコ','Fuko'],['ウーロン','Oolong'],['アーニャオ','Ah-Niao'],['トウファ','Douhua']],
+ singapore:[['カヤ','Kaya'],['ラクサ','Laksa'],['オーキッド','Orchid'],['メラ','Mera'],['トースト','Toast'],['プラナカン','Peranakan']],
+ jaipur:[['ラニ','Rani'],['ガネーシュ','Ganesh'],['カジャル','Kajal'],['マサラ','Masala'],['チャイ','Chai'],['ピヤ','Piya']],
+ istanbul:[['トンビリ','Tombili'],['パシャ','Pasha'],['ゲチェ','Gece'],['バクラヴァ','Baklava'],['デニズ','Deniz'],['ナル','Nar']],
+ cartagena:[['ソル','Sol'],['マグダ','Magda'],['コスタ','Costa'],['パルマ','Palma'],['アレパ','Arepa'],['ルナ','Luna']]
+};
+// Portraits of the first locals sheet (4x2, same order as the sprite frames) and the bench scenes.
+const faceArt={rome:'assets/hd/faces-rome.webp',paris:'assets/hd/faces-paris.webp',tokyo:'assets/hd/faces-tokyo.webp',london:'assets/hd/faces-london.webp',seoul:'assets/hd/faces-seoul.webp',bangkok:'assets/hd/faces-bangkok.webp',dubai:'assets/hd/faces-dubai.webp',newyork:'assets/hd/faces-newyork.webp',rio:'assets/hd/faces-rio.webp',taiwan:'assets/hd/faces-taiwan.webp',singapore:'assets/hd/faces-singapore.webp',jaipur:'assets/hd/faces-jaipur.webp',istanbul:'assets/hd/faces-istanbul.webp',cartagena:'assets/hd/faces-cartagena.webp'};
+const benchArt={morning:'assets/hd/bench-morning.webp',day:'assets/hd/bench-day.webp',night:'assets/hd/bench-night.webp'};
+const faceArt2={rome:'assets/hd/faces2-rome.webp',paris:'assets/hd/faces2-paris.webp',tokyo:'assets/hd/faces2-tokyo.webp',london:'assets/hd/faces2-london.webp',seoul:'assets/hd/faces2-seoul.webp',bangkok:'assets/hd/faces2-bangkok.webp',dubai:'assets/hd/faces2-dubai.webp',newyork:'assets/hd/faces2-newyork.webp',rio:'assets/hd/faces2-rio.webp',taiwan:'assets/hd/faces2-taiwan.webp',singapore:'assets/hd/faces2-singapore.webp',jaipur:'assets/hd/faces2-jaipur.webp',istanbul:'assets/hd/faces2-istanbul.webp',cartagena:'assets/hd/faces2-cartagena.webp'};
+// Vendor portraits, 2x2 in the order of each stall sheet.
+const vendorArt={'stall-bangkok':'assets/hd/vendors-stall-bangkok.webp','stall-cartagena':'assets/hd/vendors-stall-cartagena.webp','stall-dubai':'assets/hd/vendors-stall-dubai.webp','stall-istanbul':'assets/hd/vendors-stall-istanbul.webp','stall-jaipur':'assets/hd/vendors-stall-jaipur.webp','stall-london':'assets/hd/vendors-stall-london.webp','stall-newyork':'assets/hd/vendors-stall-newyork.webp','stall-paris':'assets/hd/vendors-stall-paris.webp','stall-rio':'assets/hd/vendors-stall-rio.webp','stall-rome':'assets/hd/vendors-stall-rome.webp','stall-seoul':'assets/hd/vendors-stall-seoul.webp','stall-singapore':'assets/hd/vendors-stall-singapore.webp','stall-taiwan':'assets/hd/vendors-stall-taiwan.webp','stall-tokyo':'assets/hd/vendors-stall-tokyo.webp','stall2-bangkok':'assets/hd/vendors-stall2-bangkok.webp','stall2-cartagena':'assets/hd/vendors-stall2-cartagena.webp','stall2-dubai':'assets/hd/vendors-stall2-dubai.webp','stall2-istanbul':'assets/hd/vendors-stall2-istanbul.webp','stall2-jaipur':'assets/hd/vendors-stall2-jaipur.webp','stall2-london':'assets/hd/vendors-stall2-london.webp','stall2-newyork':'assets/hd/vendors-stall2-newyork.webp','stall2-paris':'assets/hd/vendors-stall2-paris.webp','stall2-rio':'assets/hd/vendors-stall2-rio.webp','stall2-rome':'assets/hd/vendors-stall2-rome.webp','stall2-seoul':'assets/hd/vendors-stall2-seoul.webp','stall2-singapore':'assets/hd/vendors-stall2-singapore.webp','stall2-taiwan':'assets/hd/vendors-stall2-taiwan.webp','stall2-tokyo':'assets/hd/vendors-stall2-tokyo.webp'};
+
+// ---- Coming back. After the sights are seen a city still has things to give:
+//  街のお願い  a local asks one small thing at a time (see a place at dawn or night, walk a quiet street, try a stall, look for a find, come back another day).
+//  朝と夜      three places seen at dawn, three by night: a stamp each. A bench lets anyone wait for that light, so no one needs to play at odd hours.
+//  常連        all the requests of a city done: a stamp, and locals and stall keepers remember you.
+//  静かな通りの猫  one resident cat in each quiet street. Walk up to it to make friends.
+// Everything here works from data that already exists, so a new city gets it for free. No timers, no penalties.
+var restTod=null;
+var reg={first:{},last:{},active:{},done:{},morn:{},dusk:{},cats:{}};
+const regKey=(city,id)=>city+':'+id;
+const regToday=city=>{const {y,m,d}=keepDay(Date.now(),cities[city].zone);return y+'-'+m+'-'+d;};
+const regFinds=city=>findSets[city]||[];
+const regStalls=city=>keepTaste(city).filter(s=>Object.hasOwn(places,s.place)&&spriteData[s.sheet||'stall-'+city]?.frames?.[s.frame]);
+function regList(city){
+ const tour=cities[city].tour,zones=tour.map(id=>'zone-'+id).filter(id=>Object.hasOwn(places,id)),at=i=>tour[i%tour.length];
+ return [{id:'morning',kind:'tod',tod:'morning',place:at(1)},{id:'taste',kind:'taste'},{id:'quiet',kind:'quiet',place:zones[2%Math.max(1,zones.length)]},{id:'night',kind:'tod',tod:'night',place:at(2)},{id:'find',kind:'find'},{id:'return',kind:'return'}]
+  .filter(r=>r.kind==='quiet'?zones.length>0:r.kind==='tod'?!!places[r.place].bgVariants?.[r.tod]:r.kind==='taste'?regStalls(city).length>0:r.kind==='find'?regFinds(city).length>0:true);
+}
+const regDoneCount=city=>regList(city).filter(r=>Object.hasOwn(reg.done,regKey(city,r.id))).length;
+// The next request, with its target chosen. One that has become pointless (every stall already tried) simply counts as done.
+function regNext(city){
+ for(const r of regList(city)){
+  const key=regKey(city,r.id);if(Object.hasOwn(reg.done,key))continue;
+  if(r.kind==='taste'){const s=regStalls(city).find(s=>!Object.hasOwn(stallTried,s.id));if(s)return {...r,key,stall:s.id};reg.done[key]=Date.now();continue;}
+  if(r.kind==='find'){const f=regFinds(city).filter(f=>!Object.hasOwn(findsGot,f.id)&&!f.time).sort((a,b)=>b.rarity-a.rarity)[0];if(f)return {...r,key,find:f.id};reg.done[key]=Date.now();continue;}
+  return {...r,key};
+ }
+ return null;
+}
+const regStallOf=(city,id)=>keepTaste(city).find(s=>s.id===id),regFindOf=(city,id)=>regFinds(city).find(f=>f.id===id);
+const regThey=()=>travelerName?T('{0}さん','{0}',travelerName):T('旅人さん','traveller');
+// What the local says, then the short note kept in the journal.
+function regSay(city,r){
+ const p=r.place&&places[r.place];
+ if(r.kind==='tod')return r.tod==='morning'?[T('朝の{0}は、別の場所みたいだよ。人が少ないうちに見てきて。','{0} is another place at dawn. See it before the crowds.',p.name),T('朝の{0}を見る','See {0} in the morning',p.name)]:[T('夜の{0}、灯りがきれいなんだ。見たことある？','{0} is lovely once the lights come on. Have you seen it?',p.name),T('夜の{0}を見る','See {0} at night',p.name)];
+ if(r.kind==='quiet')return [T('{0}は静かでいいよ。ひと息つきたいときに歩いてみて。','{0} is quiet and lovely. Take a walk there when you need a breath.',p.name),T('静かな{0}を歩く','Walk through quiet {0}',p.name)];
+ if(r.kind==='taste'){const s=regStallOf(city,r.stall);return [T('{0}はもう試した？ 「{1}」がおすすめ。','Have you been to the {0}? Try the {1}.',s.name,s.item),T('{0}で「{1}」','{1} at the {0}',s.name,s.item)];}
+ if(r.kind==='find'){const f=regFindOf(city,r.find);return [T('{0}のあたりで「{1}」を見かけた気がする。探してみて。','I think I saw a {1} around {0}. See if you can find it.',places[f.place].name,f.name),T('{0}で「{1}」を探す','Find the {1} around {0}',places[f.place].name,f.name)];}
+ return [T('また別の日に来てよ。{0}の顔、覚えておくから。','Come again another day, {0}. I’ll remember you.',regThey()),T('別の日にまた来る','Come back another day')];
+}
+const regRank=city=>{const n=regDoneCount(city),all=regList(city).length;return n>=all?T('常連','Regular'):n>=2?T('顔なじみ','Familiar face'):T('旅人','Traveller');};
+// Stamps for the passport (keepPage adds these).
+const regStamps=city=>[{key:'morn:'+city,kind:'walk',ring:'MORNING WALK',label:T('{0}の朝を3か所','Three mornings in {0}',cities[city].name)},{key:'dusk:'+city,kind:'walk',ring:'NIGHT WALK',label:T('{0}の夜を3か所','Three nights in {0}',cities[city].name)},{key:'reg:'+city,kind:'walk',ring:'REGULAR',label:T('{0}の常連','A regular in {0}',cities[city].name)},...(catCount(city)?[{key:'cats:'+city,kind:'walk',ring:'STREET CATS',label:T('{0}の猫と友だちに','Friends with the cats of {0}',cities[city].name)}]:[])];
+function regEarn(city,key){if(Object.hasOwn(keepStamps,key))return;keepStamps[key]=Date.now();keepThunk(city,[key]);}
+
+// ---- The local's card and small toasts. ----
+const regCard=document.createElement('div');regCard.className='rq-card';regCard.hidden=true;regCard.setAttribute('role','group');
+regCard.innerHTML='<i class="rq-face" aria-hidden="true"></i><small class="rq-who"></small><p class="rq-line"></p><div class="rq-actions"><button class="rq-yes cursor-interaction" type="button"></button><button class="rq-no cursor-interaction" type="button"></button></div>';
+const regToastEl=document.createElement('div');regToastEl.className='rq-toast';regToastEl.hidden=true;regToastEl.setAttribute('role','status');
+const regFade=document.createElement('div');regFade.className='rq-fade';regFade.hidden=true;regFade.setAttribute('aria-hidden','true');regFade.innerHTML='<span></span>';
+root.querySelector('.rr-game').append(regCard,regToastEl,regFade);
+let regOffer=null,regSnooze=0,regToastTimer=0,regCity=null,regActors=null;
+function regToast(title,line){regToastEl.innerHTML='<b></b><span></span>';regToastEl.querySelector('b').textContent=title;regToastEl.querySelector('span').textContent=line||'';regToastEl.hidden=false;clearTimeout(regToastTimer);regToastTimer=setTimeout(()=>regToastEl.hidden=true,4200);}
+function regShow(a,r){
+ regOffer={a,r};const [line]=regSay(cityId(),r);regCard.querySelector('.rq-who').textContent=T('{0}の人','A local of {0}',city().name);regCard.querySelector('.rq-line').textContent='「'+line+'」';
+ const face=regCard.querySelector('.rq-face'),two=a.sheet==='locals2-'+cityId(),fr=two||a.sheet==='locals-'+cityId()?a.frame:-1;face.hidden=fr<0||fr>7;if(!face.hidden){face.style.backgroundImage='url("'+(two?faceArt2:faceArt)[cityId()]+'")';face.style.backgroundPosition=(fr%4)/3*100+'% '+Math.floor(fr/4)*100+'%';}
+ regCard.querySelector('.rq-yes').textContent=T('見てみる','I’ll try');regCard.querySelector('.rq-no').textContent=T('また今度','Maybe later');regCard.hidden=false;canvas.dataset.request=r.key;sound.page?.();
+}
+function regHide(){regOffer=null;regCard.hidden=true;canvas.dataset.request='';}
+regCard.querySelector('.rq-yes').addEventListener('click',()=>{
+ const o=regOffer;if(!o)return;const {r}=o,c=cityId();reg.active[c]={key:r.key,id:r.id,kind:r.kind,tod:r.tod,place:r.place,stall:r.stall,find:r.find,day:regToday(c)};
+ o.a.asks=null;regHide();regToast(T('手帖に書いた','Noted in your journal'),regSay(c,r)[1]);persist();canvas.focus?.({preventScroll:true});
+});
+regCard.querySelector('.rq-no').addEventListener('click',()=>{regSnooze=performance.now()+45000;if(regOffer)regOffer.a.asks=null;regHide();canvas.focus?.({preventScroll:true});});
+function regMet(c,a){
+ if(a.kind==='tod')return placeId===a.place&&tod===a.tod&&near;
+ if(a.kind==='quiet')return placeId===a.place;
+ if(a.kind==='taste')return Object.hasOwn(stallTried,a.stall);
+ if(a.kind==='find')return Object.hasOwn(findsGot,a.find);
+ return regToday(c)!==a.day;
+}
+function regFinish(c,a){
+ reg.done[a.key]=Date.now();delete reg.active[c];regSnooze=performance.now()+20000;const n=regDoneCount(c),all=regList(c).length;sound.arrive?.();
+ regToast(T('ありがとう、{0}','Thank you, {0}',regThey()),n>=all?T('{0}の常連になった','You are a regular in {0}',cities[c].name):T('街のお願い {0} / {1}','City requests {0} / {1}',n,all));
+ if(n>=all)regEarn(c,'reg:'+c);persist();
+}
+// Light-based walks: three different places seen at dawn, three by night.
+function regLight(c){
+ if(!near||!cities[c].tour.includes(placeId)||tod==='day')return;
+ const book=tod==='morning'?reg.morn:reg.dusk,key=(tod==='morning'?'morn:':'dusk:')+c;(book[c]||=[]);
+ if(book[c].includes(placeId))return;book[c].push(placeId);if(book[c].length>=3)regEarn(c,key);persist();
+}
+// ---- Waiting on a bench: the light changes for this city until you leave it. ----
+const regTodName=t=>({morning:T('朝','Morning'),day:T('昼','Day'),night:T('夜','Night')})[t];
+function regWait(target){
+ const c=cityId(),real=(()=>{const keep=restTod;restTod=null;const v=timeOfDay();restTod=keep;return v;})();
+ const apply=()=>{restTod=target===real?null:{city:c,tod:target};refreshTimeOfDay();updateChrome();renderDirty=true;};
+ regFade.style.backgroundImage='url("'+benchArt[target]+'")';regFade.firstElementChild.textContent=T('{0}まで、のんびり待つ','Waiting for {0}',regTodName(target).toLowerCase());
+ if(reduced){apply();return;}
+ regFade.hidden=false;regFade.classList.remove('is-out');void regFade.offsetWidth;regFade.classList.add('is-in');
+ setTimeout(apply,1100);setTimeout(()=>regFade.classList.replace('is-in','is-out'),2100);setTimeout(()=>{regFade.hidden=true;regFade.classList.remove('is-out');},3100);
+}
+// ---- Street cats: one in each quiet street, painted per city (art/codex-results/cats-<city>.png → tools/import_gift_art.py). ----
+const catSheets=typeof catArt==='object'?catArt:{};
+const catCount=city=>catSheets[city]?Math.min(6,cities[city].tour.filter(id=>Object.hasOwn(places,'zone-'+id)).length):0;
+const catImages={};
+function catImage(c){if(!catImages[c]){const i=new Image();i.decoding='async';i.addEventListener('load',()=>renderDirty=true);i.src=catSheets[c];catImages[c]=i;}return catImages[c];}
+const catCell=n=>[(n%3)*256,Math.floor(n/3)*256,256,256,128,244];
+const catOf=c=>catNames[c]||[];
+function catSpawn(){
+ if(!scene().quiet||!placeId.startsWith('zone-'))return;const c=cityId(),n=cities[c].tour.indexOf(placeId.slice(5));
+ if(n<0||n>=catCount(c))return;const rand=seeded(placeId+'cat');
+ const p=walkablePoint(rand,(x,y)=>Math.hypot(x-pos.x,y-pos.y)>170&&solid(x,y,12,10)&&walkable(x,y+24)&&(!walkable(x-30,y)||!walkable(x+30,y)))||walkablePoint(rand,(x,y)=>Math.hypot(x-pos.x,y-pos.y)>170&&solid(x,y,12,10));
+ if(p){for(let i=actors.length-1;i>=0;i--)if(actors[i].kind==='cat')actors.splice(i,1);actors.push({kind:'stray',city:c,n,x:p.x,y:p.y,z:0,flip:!walkable(p.x+30,p.y),heart:0});catImage(c);}
+}
+function drawStray(a){const m=ctx.getTransform(),d=Math.min(window.devicePixelRatio||1,2);canvas.dataset.stray=Math.round((m.a*a.x+m.e)/d)+','+Math.round((m.d*a.y+m.f)/d);groundShadow(a.x,a.y,16,4);drawSprite(catImage(a.city),catCell(a.n),a.x,a.y,46,{flip:a.flip,ref:256});if(a.heart>0){ctx.save();ctx.globalAlpha=Math.min(1,a.heart);ctx.fillStyle='#ffb3a7';ctx.font='600 16px sans-serif';ctx.textAlign='center';ctx.fillText('♥',a.x,a.y-52-(1.6-a.heart)*14);ctx.restore();}}
+function catMeet(a){
+ const key=a.city+'-'+a.n,name=catOf(a.city)[a.n];a.heart=1.6;sound.meow?.();if(Object.hasOwn(reg.cats,key))return;
+ reg.cats[key]=Date.now();const got=Object.keys(reg.cats).filter(k=>k.startsWith(a.city+'-')).length,all=catCount(a.city);
+ regToast(T('猫の{0}と友だちになった','You made friends with {0} the cat',name?T(name[0],name[1]):''),T('{0}の猫 {1} / {2}','Cats of {0}: {1} / {2}',cities[a.city].name,got,all));if(got>=all)regEarn(a.city,'cats:'+a.city);persist();
+}
+// ---- Poll: everything above reads the game's state and writes only its own, so the walking code stays untouched. ----
+function regTick(){
+ if(!onboarded||onboarding||isTransferOpen()||isAvatarOpen()||changing)return;
+ const c=cityId();
+ if(regCity!==c){
+  const back=Object.hasOwn(reg.first,c);regCity=c;reg.first[c]??=regToday(c);reg.last[c]=regToday(c);
+  if(back)setTimeout(()=>{if(cityId()===c)sayQuietly(T('おかえり、{0}','Welcome back, {0}',regThey()),2.8);},2400);persist();
+ }
+ if(regActors!==actors){regActors=actors;regHide();catSpawn();}
+ for(const a of actors){a.heart&&=Math.max(0,a.heart-.25);if(a.kind==='stray'&&!a.met&&Math.hypot(a.x-pos.x,a.y-pos.y)<78){a.met=true;catMeet(a);}}
+ if(!photo.hidden||!journal.hidden)return;
+ regLight(c);
+ const act=reg.active[c];
+ if(act){if(regMet(c,act))regFinish(c,act);return;}
+ if(scene().quiet||visitedCount()<Math.min(3,placeCount())||performance.now()<regSnooze)return;
+ if(regOffer){if(!actors.includes(regOffer.a)||Math.hypot(regOffer.a.x-pos.x,regOffer.a.y-pos.y)>170)regHide();return;}
+ const next=regNext(c);if(!next)return;
+ const locals=actors.filter(a=>a.kind==='local');if(!locals.length)return;
+ const giver=locals.find(a=>a.asks)||locals.sort((a,b)=>Math.hypot(a.x-pos.x,a.y-pos.y)-Math.hypot(b.x-pos.x,b.y-pos.y))[0];giver.asks=next;renderDirty=true;
+ if(Math.hypot(giver.x-pos.x,giver.y-pos.y)<125)regShow(giver,next);
+}
+setInterval(regTick,250);
+// A small letter over the head of a local with something to ask.
+function drawAsk(a,top){const m=ctx.getTransform(),d=Math.min(window.devicePixelRatio||1,2);canvas.dataset.asker=Math.round((m.a*a.x+m.e)/d)+','+Math.round((m.d*a.y+m.f)/d);const k=1+Math.sin(performance.now()/420)*.06;ctx.save();ctx.translate(a.x,top-16);ctx.scale(k,k);ctx.fillStyle='#fffaf0';ctx.strokeStyle='#8a5a3b';ctx.lineWidth=1.6;ctx.beginPath();ctx.roundRect(-11,-8,22,16,3);ctx.fill();ctx.stroke();ctx.beginPath();ctx.moveTo(-11,-7);ctx.lineTo(0,2);ctx.lineTo(11,-7);ctx.stroke();ctx.restore();}
+
+// ---- Journal section. ----
+const regSection=document.createElement('section');regSection.className='rq-section';
+regSection.innerHTML='<h3></h3><p class="rq-rank"></p><div class="rq-now"></div><div class="rq-wait"></div><h3 class="rq-cats-title"></h3><p class="rq-cats-note"></p><div class="rq-cats"></div><h3 class="rq-tickets-title"></h3><div class="rq-tickets"></div>';
+function regRender(){
+ const c=cityId(),q=s=>regSection.querySelector(s),list=regList(c),n=regDoneCount(c),act=reg.active[c];
+ q('h3').textContent=T('街のお願い','City requests');q('.rq-rank').textContent=T('{0}の{1} · {2} / {3}','{1} of {0} · {2} / {3}',city().name,regRank(c),n,list.length);
+ const now=q('.rq-now');now.replaceChildren();
+ const note=document.createElement('p');note.className='rq-note';
+ if(act){
+  note.textContent=regSay(c,act)[1];now.append(note);
+  const where=act.kind==='taste'?regStallOf(c,act.stall)?.place:act.kind==='find'?regFindOf(c,act.find)?.place:act.place;
+  if(where&&where!==placeId&&cities[c].tour.includes(where)){const b=document.createElement('button');b.type='button';b.className='rq-go cursor-interaction';b.textContent=T('{0}へ歩く','Walk to {0}',places[where].name);b.addEventListener('click',()=>{closeJournal();startJourney(where);});now.append(b);}
+  if(act.kind==='quiet'){const parent=act.place.slice(5);if(parent!==placeId&&cities[c].tour.includes(parent)){const b=document.createElement('button');b.type='button';b.className='rq-go cursor-interaction';b.textContent=T('{0}へ歩く','Walk to {0}',places[parent].name);b.addEventListener('click',()=>{closeJournal();startJourney(parent);});now.append(b);}}
+ }else{note.textContent=n>=list.length?T('{0}の人たちは、もうあなたの顔を覚えている。','The people of {0} know your face now.',city().name):visitedCount()<Math.min(3,placeCount())?T('3か所歩くと、街の人が話しかけてくる。','Walk three places and the locals will start talking to you.'):T('手紙のマークの人に近づくと、お願いを聞ける。','Walk up to someone with a letter above them.');now.append(note);}
+ const wait=q('.rq-wait');wait.replaceChildren();const label=document.createElement('span');label.textContent=T('ベンチで待つ','Wait on a bench');wait.append(label);
+ for(const t of ['morning','day','night']){const b=document.createElement('button');b.type='button';b.className='rq-time cursor-interaction';b.textContent=regTodName(t);b.setAttribute('aria-pressed',String(tod===t));b.disabled=tod===t;b.addEventListener('click',()=>{closeJournal();regWait(t);});wait.append(b);}
+ const count=catCount(c);q('.rq-cats-title').hidden=q('.rq-cats-note').hidden=q('.rq-cats').hidden=!count;
+ if(count){
+  const got=k=>Object.hasOwn(reg.cats,c+'-'+k);q('.rq-cats-title').textContent=T('静かな通りの猫','Cats of the quiet streets');q('.rq-cats-note').textContent=T('各場所の下の通りに1匹ずつ。近づくと友だちになれる。','One in each quiet street below a place. Walk up to make friends.');
+  q('.rq-cats').replaceChildren(...Array.from({length:count},(_,k)=>{const s=document.createElement('span');s.className='rq-cat'+(got(k)?' is-met':'');const i=document.createElement('i');i.style.backgroundImage='url("'+catSheets[c]+'")';i.style.backgroundPosition=(k%3)*50+'% '+Math.floor(k/3)*100+'%';const b=document.createElement('small');b.textContent=got(k)?T(catOf(c)[k][0],catOf(c)[k][1]):places['zone-'+cities[c].tour[k]].name;s.append(i,b);return s;}));
+ }
+ q('.rq-tickets-title').textContent=T('持っている航空券','Your tickets');
+ q('.rq-tickets').replaceChildren(...Object.keys(ticketArt).filter(id=>isBuilt(id)&&tickets.has(id)).map(id=>{const b=document.createElement('button');b.type='button';b.className='rq-ticket cursor-interaction';b.append(ticketEl(id));b.setAttribute('aria-label',T('{0}の航空券','Ticket to {0}',destinations[id].name));b.addEventListener('click',()=>{closeJournal();openTransfer();});return b;}));
+}
+addJournalSection(regSection,regRender);
+const regSave=()=>reg;
+if(new URLSearchParams(location.search).has('regcheck'))setTimeout(()=>canvas.dataset.regcheck=JSON.stringify(Object.keys(cities).map(c=>[c,regList(c).length,catCount(c),regStamps(c).length,catOf(c).length])),0);
+function regRestore(s){
+ reg={first:{},last:{},active:{},done:{},morn:{},dusk:{},cats:{},...(s&&typeof s==='object'?s:{})};for(const k of ['first','last','active','done','morn','dusk','cats'])if(!reg[k]||typeof reg[k]!=='object')reg[k]={};
+ for(const c of Object.keys(reg.active))if(!Object.hasOwn(cities,c)||typeof reg.active[c]?.key!=='string')delete reg.active[c];regCity=null;regActors=null;restTod=null;regHide();
+}
+const regLabelTod=id=>{const h=cityHour(cities[id].zone);return h>=5&&h<9?T('いま朝','morning now'):h>=19||h<5?T('いま夜','night now'):T('いま昼','daytime now');};
+
+// ---- Text size: the stylesheets are written in px, so the two sizes are applied to the rules themselves. ----
+// Standard keeps the design with a floor that stays readable; large is for people who hold the phone further away.
+const textRules=[];
+(function collect(rules){for(const r of rules){if(r.style?.fontSize?.endsWith('px'))textRules.push([r.style,parseFloat(r.style.fontSize),r.style.getPropertyPriority('font-size')]);if(r.cssRules)collect(r.cssRules);}})([...document.styleSheets].flatMap(s=>{try{return [...s.cssRules];}catch(e){return [];}}));
+let textLarge=false;try{textLarge=localStorage.getItem('roam-text')==='large';}catch(e){}
+function applyTextSize(large){textLarge=large;for(const [s,px,pri] of textRules)s.setProperty('font-size',(large?Math.max(15,px*1.22):Math.max(12,px)).toFixed(1)+'px',pri);root.dataset.text=large?'large':'normal';try{localStorage.setItem('roam-text',large?'large':'normal');}catch(e){}}
+applyTextSize(textLarge);
+const textSetting=document.createElement('div');textSetting.className='ra-textsize';textSetting.setAttribute('role','group');
+textSetting.innerHTML='<span></span><button type="button" class="cursor-interaction" data-size="normal"></button><button type="button" class="cursor-interaction" data-size="large"></button>';
+textSetting.querySelector('span').textContent=T('文字の大きさ','Text size');textSetting.setAttribute('aria-label',T('文字の大きさ','Text size'));
+textSetting.querySelector('[data-size=normal]').textContent=T('標準','Standard');textSetting.querySelector('[data-size=large]').textContent=T('大きく','Large');
+function showTextSize(){textSetting.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String((b.dataset.size==='large')===textLarge)));}
+textSetting.addEventListener('click',e=>{const b=e.target.closest('button');if(b){applyTextSize(b.dataset.size==='large');showTextSize();}});showTextSize();
+root.querySelector('.ra-settings')?.prepend(textSetting);
 
 // ---- Painted transit: the same painterly art as the streets, animated in canvas. ----
 const transitSources={bus:'assets/hd/bus-side.webp',plane:'assets/hd/plane-side.webp',rome:'assets/hd/strip-rome.webp',paris:'assets/hd/strip-paris.webp',tokyo:'assets/hd/strip-tokyo.webp',london:'assets/hd/strip-london.webp',airport:'assets/hd/strip-airport.webp'};
@@ -7818,11 +8255,12 @@ firstCard.querySelector('small').textContent=cities[firstCity].countryEn;
 firstCard.querySelector('strong').textContent=cities[firstCity].name;
 firstCard.querySelector('em').textContent=T('{0}から歩く・{1}か所','Start at {0} · {1} places',firstPlace.name,cities[firstCity].tour.length);
 onboardRoot.querySelector('.ob-city-title').textContent=homeCityIsLocal?T('まず、近くの街から。','Start close to home.'):T('まず、この街から。','Start with this city.');
-onboardRoot.querySelector('.ob-gift span').textContent=homeCityIsLocal?T('{0}は無料。歩いて使い方を覚えよう。','{0} is free. Learn as you walk.',cities[firstCity].name):T('{0}は無料。使い方を覚えたら海外へ。','{0} is free. Then explore abroad.',cities[firstCity].name);
+onboardRoot.querySelector('.ob-gift span').textContent=homeCityIsLocal?T('まず{0}で歩き方を。ローマとパリの券は財布の中。','Learn to walk in {0}. Rome and Paris tickets are in your wallet.',cities[firstCity].name):T('まず{0}から。そのあとは券で海外へ。','Start in {0}. Then your tickets take you abroad.',cities[firstCity].name);
 onboardRoot.querySelector('.ob-depart-label').textContent=T('{0}からはじめる','Start in {0}',cities[firstCity].name);
 function showOnboard(step,save=true){
  clearTimeout(splashTimer);onboarding=step;stopWalking();photo.hidden=true;journal.hidden=true;
  if(step==='avatar'){onboardRoot.hidden=true;openAvatar(true);if(save)persist();return;}
+ if(step==='gift'){onboardRoot.hidden=true;if(save)persist();openGift(()=>{walkingUI.inert=true;showOnboard('city');});return;}
  onboardRoot.hidden=false;walkingUI.inert=true;
  onboardRoot.querySelectorAll('[data-ob]').forEach(el=>el.hidden=el.dataset.ob!==step);
  if(step==='splash')splashTimer=setTimeout(()=>showOnboard('welcome'),reduced?600:1900);
@@ -7855,7 +8293,7 @@ onboardRoot.querySelector('.ob-depart').addEventListener('click',departFromHome)
 function loadLocalState(){try{const raw=localStorage.getItem('roam-rome-state');return raw?JSON.parse(raw):null;}catch(e){return null;}}
 restore(firstRunPreview?null:window.openai?.widgetState||loadLocalState());
 // Opening the app on the road: a soft hello once the street has settled.
-setTimeout(welcomeBack,1100);
+setTimeout(welcomeBack,1100);setTimeout(giftLate,1600);
 tod=timeOfDay();root.dataset.tod=tod;spawnLife(true);headerClock=cityClock(city().zone);
 setInterval(()=>{headerClock=cityClock(city().zone);refreshTimeOfDay();renderDirty=true;},30000);
 // Outside the ChatGPT widget host the page is the whole app, so it fills the screen.
