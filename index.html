@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
 <meta name="robots" content="noindex,nofollow">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>ROAM — 歩いて旅する</title>
 <style>html,body{margin:0;background:#111}</style>
@@ -715,6 +715,9 @@
 #rome-immersive .rs-face{float:right;width:52px;height:52px;margin:0 0 2px 8px;border-radius:50%;background-size:200% 200%;background-repeat:no-repeat;box-shadow:0 0 0 2px #fff,0 2px 6px #0003}
 #rome-immersive .rs-face[hidden]{display:none}
 #rome-immersive button.rq-cat{background:none;padding:0;color:inherit}
+
+#rome-immersive .rc-row{min-height:44px}#rome-immersive .rc-row.is-done{color:#30382f99}
+#rome-immersive .rq-toast.is-low{top:auto;bottom:210px}
 </style><style>/* Gifts, the shelf, letters and the day's card: paper and wood, in the painted language of the streets. */
 #rome-immersive .tk-layer{position:absolute;inset:0;z-index:40;display:flex;align-items:center;justify-content:center;background:#141b1fb0;backdrop-filter:blur(3px);animation:tk-in .3s ease both}
 #rome-immersive .tk-layer[hidden]{display:none}
@@ -1539,6 +1542,7 @@ html[lang=en] #rome-immersive .rt-origin>span:last-child{display:flex;flex-direc
 /* Long city names stay on one line, clear of the suitcase. */
 #rome-immersive .rr-city h2 b{white-space:nowrap}
 #rome-immersive .rr-city h2 b[data-len=long]{font-size:.74em}
+#rome-immersive .rt-pack{text-wrap:balance}
 </style><script>// Japanese is written directly in the markup and code; this table supplies English.
 // ?lang=ja / ?lang=en overrides the device language.
 window.ROAM_LANG=(()=>{const q=new URLSearchParams(location.search).get('lang');if(q==='ja'||q==='en')return q;return /^ja\b/i.test(navigator.language||'')?'ja':'en';})();
@@ -3448,6 +3452,9 @@ function nextTransferStage(){
  if(transferState.stage==='arrived'){arriveInCity(transferState.destination);return;}
  // A city opens only with its ticket; cities still being built stay on the map as coming soon.
  if(transferState.stage==='select'&&!transferState.fromHome){const id=transferState.destination;if(!isBuilt(id)||!hasTicket(id)){openTicketSheet(id);return;}}
+ // Going back to a city you know: straight on the plane and straight into the street. The bus and the gate are for first trips.
+ if(transferState.stage==='select'&&!transferState.fromHome&&Object.hasOwn(reg.first,transferState.destination)){transferState.quick=true;setTransferStage('flight');return;}
+ if(transferState.stage==='flight'&&transferState.quick){arriveInCity(transferState.destination);return;}
  const index=transferStages.indexOf(transferState.stage);
  setTransferStage(transferStages[index+1]||'select');
 }
@@ -3669,7 +3676,7 @@ function paintTransfer(now){
   if(transitLastTick!==null)transitElapsed+=Math.min(100,Math.max(0,now-transitLastTick));
   transitLastTick=now;
   // The bus and the flight end by themselves: nobody should have to press a button to get off a plane.
-  if(transitElapsed>(stage==='bus'?6500:10500)){setTimeout(()=>{if(transferState?.stage===stage)nextTransferStage();},0);return;}
+  if(transitElapsed>(stage==='bus'?6500:transferState.quick?6000:10500)){setTimeout(()=>{if(transferState?.stage===stage)nextTransferStage();},0);return;}
  }else if(!playing)transitLastTick=null;
  const r=travelCanvas.getBoundingClientRect(),w=r.width,h=r.height,dpr=Math.min(window.devicePixelRatio||1,3);
  if(w&&h){
@@ -4301,7 +4308,13 @@ const frontLayers={
  'zone-grandpalace':[{y:770,polys:[[[500,433],[560,510],[650,545],[655,640],[620,670],[610,770],[390,770],[380,670],[345,640],[350,545],[440,510]]],holes:[[[458,771],[458,680],[475,655],[500,645],[525,655],[542,680],[542,771]]]}],
  'zone-istanbul-hagiasophia':[{y:918,polys:[[[498,440],[512,440],[522,470],[537,820],[549,825],[549,885],[570,910],[500,925],[432,910],[455,885],[455,825],[467,820],[483,470]]]}],
  'zone-copacabana':[{y:496,polys:[[[500,262],[508,285],[540,300],[553,340],[565,312],[575,345],[610,345],[627,395],[632,496],[370,496],[374,395],[392,345],[425,345],[437,312],[448,340],[462,300],[492,285]]],holes:[[[460,497],[460,410],[472,395],[502,383],[532,395],[545,410],[547,497]]]}],
- trafalgar:[{y:300,polys:[[[505,116],[515,116],[521,150],[527,165],[522,172],[522,300],[500,300],[500,172],[495,165],[500,150]]]}]
+ trafalgar:[{y:300,polys:[[[505,116],[515,116],[521,150],[527,165],[522,172],[522,300],[500,300],[500,172],[495,165],[500,150]]]}],
+ 'zone-cartagena-clocktower':[{y:700,polys:[[[200,496],[810,496],[810,700],[200,700]]],holes:[[[255,701],[255,625],[262,605],[280,590],[306,581],[335,590],[352,605],[360,625],[360,701]],[[439,701],[439,625],[450,603],[470,590],[497,581],[525,590],[545,603],[556,625],[556,701]],[[639,701],[639,625],[650,603],[670,590],[697,581],[727,590],[745,603],[754,625],[754,701]]]}],
+ 'zone-jaipur-amberfort':[{y:670,polys:[[[322,436],[688,436],[688,582],[672,586],[672,670],[340,670],[340,586],[322,582]],[[398,396],[612,396],[612,436],[398,436]],[[506,258],[514,272],[520,282],[540,295],[552,318],[556,330],[572,345],[570,352],[552,356],[552,396],[458,396],[458,356],[442,352],[444,342],[456,330],[462,305],[478,290],[498,278]],[[362,292],[366,312],[388,335],[391,345],[404,358],[400,366],[392,368],[392,436],[336,436],[336,368],[326,366],[322,358],[336,345],[338,335],[358,312]],[[653,292],[657,312],[679,335],[682,345],[695,358],[691,366],[683,368],[683,436],[627,436],[627,368],[617,366],[613,358],[627,345],[629,335],[649,312]]],holes:[[[443,671],[443,590],[446,560],[456,540],[470,528],[488,516],[505,506],[522,516],[540,528],[554,540],[564,560],[568,590],[568,671]],[[346,671],[346,622],[352,612],[363,604],[374,612],[380,622],[380,671]],[[640,671],[640,622],[644,612],[654,604],[664,612],[668,622],[668,671]]]}],
+ 'zone-jaipur-citypalace':[{y:612,polys:[[[400,190],[600,190],[600,612],[400,612]],[[470,100],[530,100],[535,115],[555,128],[570,150],[575,165],[585,155],[597,135],[610,160],[618,200],[385,200],[384,165],[400,135],[413,160],[425,165],[430,150],[445,128],[465,115]]],holes:[[[416,613],[416,482],[404,470],[404,445],[412,425],[421,389],[453,367],[480,362],[500,350],[520,362],[547,367],[578,389],[588,425],[596,445],[596,470],[585,482],[585,613]]]},{y:575,polys:[[[330,190],[401,190],[401,575],[330,575]],[[599,190],[670,190],[670,575],[599,575]]]}],
+ 'zone-taiwan-longshan':[{y:592,polys:[[[365,345],[632,345],[640,385],[601,385],[601,467],[399,467],[399,385],[360,385]],[[500,280],[512,305],[530,325],[530,345],[470,345],[470,325],[488,305]],[[399,460],[426,460],[426,540],[431,545],[431,598],[396,598],[396,545],[399,540]],[[574,460],[601,460],[601,540],[605,545],[605,598],[570,598],[570,545],[574,540]]]},{y:578,polys:[[[302,392],[400,392],[400,478],[345,478],[345,560],[347,578],[312,578],[316,560],[318,478],[318,425],[302,420]],[[698,392],[600,392],[600,478],[657,478],[657,560],[652,578],[688,578],[683,560],[682,478],[682,425],[698,420]]]}],
+ 'zone-toweroflondon':[{y:582,polys:[[[439,430],[590,425],[590,582],[440,582]],[[372,420],[376,404],[405,398],[432,404],[440,430],[440,582],[376,570]],[[586,425],[640,422],[680,440],[688,455],[688,590],[595,598],[586,560]]],holes:[[[481,583],[481,525],[487,512],[500,502],[514,498],[530,503],[543,513],[549,525],[549,583]]]}],
+ buckingham:[{y:272,polys:[[[30,253],[970,253],[970,284],[30,284]],[[60,213],[80,213],[80,227],[73,229],[73,232],[84,242],[84,283],[56,283],[56,242],[67,232],[67,229],[60,227]],[[201,203],[221,203],[221,217],[214,219],[214,233],[223,243],[223,296],[200,296],[200,243],[208,233],[208,219],[201,217]],[[322,222],[342,222],[342,236],[335,238],[335,242],[342,252],[342,296],[322,296],[322,252],[329,242],[329,238],[322,236]],[[426,183],[446,183],[446,197],[439,199],[439,229],[452,239],[452,296],[421,296],[421,239],[433,229],[433,199],[426,197]],[[554,190],[574,190],[574,204],[567,206],[567,229],[578,239],[578,296],[550,296],[550,239],[561,229],[561,206],[554,204]],[[656,222],[676,222],[676,236],[669,238],[669,248],[676,258],[676,296],[656,296],[656,258],[663,248],[663,238],[656,236]],[[779,207],[799,207],[799,221],[792,223],[792,242],[800,252],[800,296],[778,296],[778,252],[786,242],[786,223],[779,221]],[[920,185],[940,185],[940,199],[933,201],[933,229],[943,239],[943,290],[917,290],[917,239],[927,229],[927,201],[920,199]],[[478,165],[527,165],[527,205],[510,222],[524,232],[530,258],[537,300],[468,300],[474,258],[478,232],[492,222],[488,205]]]}]
 };
 function drawFront(f){
  const image=backdropFor(placeId);if(!image.complete||!image.naturalWidth)return;
@@ -4488,7 +4501,9 @@ function drawLife(drawPlayer){
   }else if(a.kind==='stray')drawStray(a);
   else if(a.kind==='stall')drawStall(a);
   else if(a.kind==='find')drawFind(a);
+  else if(a.kind==='custom')customDraw(a);
  }
+ customOver();
 }
 
 // ---- Street stalls and small shops: walk up, read a local tip, try it, keep it in the journal. ----
@@ -6230,15 +6245,18 @@ const localSay=(city,k,...a)=>{const v=(localVoice[city]||localVoice.tokyo)[k];r
 //  静かな通りの猫  one resident cat in each quiet street. Walk up to it to make friends.
 // Everything here works from data that already exists, so a new city gets it for free. No timers, no penalties.
 var restTod=null;
-var reg={first:{},last:{},active:{},done:{},morn:{},dusk:{},cats:{},lost:{}};
+var reg={first:{},last:{},active:{},done:{},morn:{},dusk:{},cats:{},lost:{},custom:{}};
 const regKey=(city,id)=>city+':'+id;
 const regToday=city=>{const {y,m,d}=keepDay(Date.now(),cities[city].zone);return y+'-'+m+'-'+d;};
 const regFinds=city=>findSets[city]||[];
 const regStalls=city=>keepTaste(city).filter(s=>Object.hasOwn(places,s.place)&&spriteData[s.sheet||'stall-'+city]?.frames?.[s.frame]);
 function regList(city){
  const tour=cities[city].tour,zones=tour.map(id=>'zone-'+id).filter(id=>Object.hasOwn(places,id)),at=i=>tour[i%tour.length];
- return [{id:'morning',kind:'tod',tod:'morning',place:at(1)},{id:'taste',kind:'taste'},{id:'quiet',kind:'quiet',place:zones[2%Math.max(1,zones.length)]},{id:'night',kind:'tod',tod:'night',place:at(2)},{id:'find',kind:'find'},{id:'return',kind:'return'}]
+ const list=[{id:'morning',kind:'tod',tod:'morning',place:at(1)},{id:'taste',kind:'taste'},{id:'quiet',kind:'quiet',place:zones[2%Math.max(1,zones.length)]},{id:'night',kind:'tod',tod:'night',place:at(2)},{id:'find',kind:'find'},{id:'return',kind:'return'}]
   .filter(r=>r.kind==='quiet'?zones.length>0:r.kind==='tod'?!!places[r.place].bgVariants?.[r.tod]:r.kind==='taste'?regStalls(city).length>0:r.kind==='find'?regFinds(city).length>0:true);
+ // The same six, but no city asks them in the same order as the last one. The three free cities keep the gentle order.
+ if(['tokyo','rome','paris'].includes(city))return list;
+ const n=(Object.keys(cities).indexOf(city)*5+1)%list.length;return [...list.slice(n),...list.slice(0,n)];
 }
 const regDoneCount=city=>regList(city).filter(r=>Object.hasOwn(reg.done,regKey(city,r.id))).length;
 // The next request, with its target chosen. One that has become pointless (every stall already tried) simply counts as done.
@@ -6278,7 +6296,7 @@ function regSay(city,r){
 }
 const regRank=city=>{const n=regDoneCount(city),all=regList(city).length;return n>=all?T('常連','Regular'):n>=2?T('顔なじみ','Familiar face'):T('旅人','Traveller');};
 // Stamps for the passport (keepPage adds these).
-const regStamps=city=>[{key:'morn:'+city,kind:'walk',ring:'MORNING WALK',label:T('{0}の朝を3か所','Three mornings in {0}',cities[city].name)},{key:'dusk:'+city,kind:'walk',ring:'NIGHT WALK',label:T('{0}の夜を3か所','Three nights in {0}',cities[city].name)},{key:'reg:'+city,kind:'walk',ring:'REGULAR',label:T('{0}の常連','A regular in {0}',cities[city].name)},...(catCount(city)?[{key:'cats:'+city,kind:'walk',ring:'STREET CATS',label:T('{0}の猫と友だちに','Friends with the cats of {0}',cities[city].name)}]:[])];
+const regStamps=city=>[{key:'morn:'+city,kind:'walk',ring:'MORNING WALK',label:T('{0}の朝を3か所','Three mornings in {0}',cities[city].name)},{key:'dusk:'+city,kind:'walk',ring:'NIGHT WALK',label:T('{0}の夜を3か所','Three nights in {0}',cities[city].name)},{key:'reg:'+city,kind:'walk',ring:'REGULAR',label:T('{0}の常連','A regular in {0}',cities[city].name)},...(catCount(city)?[{key:'cats:'+city,kind:'walk',ring:'STREET CATS',label:T('{0}の猫と友だちに','Friends with the cats of {0}',cities[city].name)}]:[]),{key:'custom:'+city,kind:'walk',ring:'LOCAL CUSTOM',label:T('{0}のならわしを3回','A local custom three times in {0}',cities[city].name)}];
 function regEarn(city,key){if(Object.hasOwn(keepStamps,key))return;keepStamps[key]=Date.now();keepThunk(city,[key]);}
 
 // ---- The local's card and small toasts. ----
@@ -6288,7 +6306,7 @@ const regToastEl=document.createElement('div');regToastEl.className='rq-toast';r
 const regFade=document.createElement('div');regFade.className='rq-fade';regFade.hidden=true;regFade.setAttribute('aria-hidden','true');regFade.innerHTML='<span></span>';
 root.querySelector('.rr-game').append(regCard,regToastEl,regFade);
 let regStallGoal=null,regPassed=0,regMetAt=0,regOffer=null,regSnooze=0,regToastTimer=0,regCity=null,regActors=null;
-function regToast(title,line){regToastEl.innerHTML='<b></b><span></span>';regToastEl.querySelector('b').textContent=title;regToastEl.querySelector('span').textContent=line||'';regToastEl.hidden=false;clearTimeout(regToastTimer);regToastTimer=setTimeout(()=>regToastEl.hidden=true,4200);}
+function regToast(title,line){regToastEl.classList.remove('is-low');regToastEl.innerHTML='<b></b><span></span>';regToastEl.querySelector('b').textContent=title;regToastEl.querySelector('span').textContent=line||'';regToastEl.hidden=false;clearTimeout(regToastTimer);regToastTimer=setTimeout(()=>regToastEl.hidden=true,4200);}
 function regShow(a,r){
  regOffer={a,r};const [line]=regSay(cityId(),r);regCard.querySelector('.rq-who').textContent=T('{0}の人','A local of {0}',city().name);regCard.querySelector('.rq-line').textContent=T('「{0}」','“{0}”',line);
  const face=regCard.querySelector('.rq-face'),two=a.sheet==='locals2-'+cityId(),fr=two||a.sheet==='locals-'+cityId()?a.frame:-1;face.hidden=fr<0||fr>7;if(!face.hidden){face.style.backgroundImage='url("'+(two?faceArt2:faceArt)[cityId()]+'")';face.style.backgroundPosition=(fr%4)/3*100+'% '+Math.floor(fr/4)*100+'%';}
@@ -6364,14 +6382,15 @@ function catMeet(a){
 }
 // ---- Poll: everything above reads the game's state and writes only its own, so the walking code stays untouched. ----
 function regTick(){
- if(!onboarded||onboarding||isTransferOpen()||isAvatarOpen()||changing)return;
+ if(!onboarded||onboarding||isTransferOpen()||isAvatarOpen()||changing||!tkRoot.hidden){customBtn.hidden=true;return;}
  const c=cityId();
  if(regCity!==c){
   const back=Object.hasOwn(reg.first,c);regCity=c;reg.first[c]??=regToday(c);reg.last[c]=regToday(c);
   if(back)setTimeout(()=>{if(cityId()===c)sayQuietly(T('おかえり、{0}','Welcome back, {0}',regThey()),2.8);},2400);persist();
  }
- if(regActors!==actors){regActors=actors;regHide();catSpawn();}
+ if(regActors!==actors){regActors=actors;regHide();catSpawn();customSpawn();}
  for(const a of actors){a.heart&&=Math.max(0,a.heart-.25);if(a.kind==='stray'&&!a.met&&Math.hypot(a.x-pos.x,a.y-pos.y)<78){a.met=true;catMeet(a);}}
+ customTick();
  if(!photo.hidden||!journal.hidden)return;
  regLight(c);
  if(reg.active[c]?.kind==='lost'&&reg.active[c].day!==regToday(c))delete reg.active[c];
@@ -6402,7 +6421,7 @@ function drawAsk(a,top){const m=ctx.getTransform(),d=Math.min(window.devicePixel
 
 // ---- Journal section. ----
 const regSection=document.createElement('section');regSection.className='rq-section';
-regSection.innerHTML='<h3></h3><p class="rq-rank"></p><div class="rq-now"></div><div class="rq-wait"></div><h3 class="rq-cats-title"></h3><p class="rq-cats-note"></p><div class="rq-cats"></div><h3 class="rq-tickets-title"></h3><div class="rq-tickets"></div>';
+regSection.innerHTML='<h3></h3><p class="rq-rank"></p><div class="rq-now"></div><div class="rq-wait"></div><div class="rq-wait rc-row"></div><h3 class="rq-cats-title"></h3><p class="rq-cats-note"></p><div class="rq-cats"></div><h3 class="rq-tickets-title"></h3><div class="rq-tickets"></div>';
 function regRender(){
  const c=cityId(),q=s=>regSection.querySelector(s)||journal.querySelector(s),list=regList(c),n=regDoneCount(c),act=reg.active[c];
  q('h3').textContent=T('お願い','Requests');q('.rq-rank').textContent=T('{0}の{1} · {2} / {3}','{1} of {0} · {2} / {3}',city().name,regRank(c),n,list.length);
@@ -6421,6 +6440,7 @@ function regRender(){
  }
  const wait=q('.rq-wait');wait.replaceChildren();const label=document.createElement('span');label.textContent=T('ベンチで待つ','Wait on a bench');wait.append(label);
  for(const t of ['morning','day','night']){const b=document.createElement('button');b.type='button';b.className='rq-time cursor-interaction';b.textContent=regTodName(t);b.setAttribute('aria-pressed',String(tod===t));b.disabled=tod===t;b.addEventListener('click',()=>{closeJournal();regWait(t);});wait.append(b);}
+ customRow(q('.rc-row'),c);
  const count=catCount(c);q('.rq-cats-title').hidden=q('.rq-cats-note').hidden=q('.rq-cats').hidden=!count;
  if(count){
   const got=k=>Object.hasOwn(reg.cats,c+'-'+k);q('.rq-cats-title').textContent=T('静かな通りの猫','Cats of the quiet streets');q('.rq-cats-note').textContent=T('静かな通りに1匹ずつ','One in each quiet street');
@@ -6433,10 +6453,124 @@ addJournalSection(regSection,regRender);
 const regSave=()=>reg;
 if(new URLSearchParams(location.search).has('regcheck'))setTimeout(()=>canvas.dataset.regcheck=JSON.stringify(Object.keys(cities).map(c=>[c,regList(c).length,catCount(c),regStamps(c).length,catOf(c).length])),0);
 function regRestore(s){
- reg={first:{},last:{},active:{},done:{},morn:{},dusk:{},cats:{},lost:{},...(s&&typeof s==='object'?s:{})};for(const k of ['first','last','active','done','morn','dusk','cats','lost'])if(!reg[k]||typeof reg[k]!=='object')reg[k]={};
+ reg={first:{},last:{},active:{},done:{},morn:{},dusk:{},cats:{},lost:{},custom:{},...(s&&typeof s==='object'?s:{})};for(const k of ['first','last','active','done','morn','dusk','cats','lost','custom'])if(!reg[k]||typeof reg[k]!=='object')reg[k]={};
  for(const c of Object.keys(reg.active))if(!Object.hasOwn(cities,c)||typeof reg.active[c]?.key!=='string')delete reg.active[c];regCity=null;regActors=null;restTod=null;regHide();
 }
 const regLabelTod=id=>{const h=cityHour(cities[id].zone);return h>=5&&h<9?T('いま朝','morning now'):h>=19||h<5?T('いま夜','night now'):T('いま昼','daytime now');};
+
+// ---- One thing to do with your hands in each city, the thing people there really do: wave the incense over you in Asakusa, throw a coin in Rome.
+// It shines on the ground at its spot until you do it, once a real day. Three times and it is a passport stamp. Seoul's pile of stones stays and grows.
+// Drawn in code, so it holds for every light and season.
+const customs={
+ tokyo:{place:'asakusa-sensoji',x:500,y:430,to:[455,402],kind:'smoke',prop:'burner',verb:T('煙を浴びる','Wave the smoke over you'),say:T('頭に当てると、賢くなるらしい','On your head, they say, for wisdom')},
+ rome:{place:'trevi',x:575,y:490,to:[575,392],kind:'coin',verb:T('コインを投げる','Throw a coin'),say:T('1枚で、またローマへ','One coin, and you come back to Rome')},
+ paris:{place:'notredame',x:500,y:480,to:[500,480],kind:'ring',prop:'zero',verb:T('ゼロ地点を踏む','Step on Point Zéro'),say:T('踏むと、またパリに戻れるという','Step on it and you return to Paris')},
+ london:{place:'westminster',x:760,y:430,to:[853,95],kind:'bell',tune:'ben',verb:T('鐘を聞く','Wait for the bell'),say:T('重たい音が、川の向こうまで届く','It carries across the river')},
+ seoul:{place:'bukchon',x:530,y:440,to:[566,424],kind:'stone',prop:'stones',verb:T('石を積む','Add a stone'),say:T('小さな願いをひとつ','One small wish, one stone')},
+ bangkok:{place:'thatien',x:690,y:292,to:[850,205],kind:'float',verb:T('灯籠を流す','Float a krathong'),say:T('川に、ありがとうを流す','A thank-you to the river')},
+ dubai:{place:'spicesouk',x:500,y:345,to:[455,325],kind:'smoke',prop:'censer',verb:T('乳香をたく','Burn frankincense'),say:T('服に香りを移して帰る','You leave with it in your clothes')},
+ newyork:{place:'trinitychurch',x:500,y:440,to:[500,120],kind:'bell',tune:'peal',verb:T('鐘を聞く','Wait for the bells'),say:T('鐘が通りに順に落ちてくる','They come down the street one by one')},
+ rio:{place:'copacabana',x:450,y:176,to:[450,92],kind:'flowers',verb:T('海に花を投げる','Throw flowers to the sea'),say:T('海の女神、イエマンジャに','For Iemanjá, queen of the sea')},
+ taiwan:{place:'taiwan-jiufen',x:510,y:560,to:[510,560],kind:'lantern',verb:T('天燈を上げる','Send up a sky lantern'),say:T('願いは紙に書いて、空へ','Write the wish on it. The sky reads')},
+ singapore:{place:'singapore-littleindia',x:510,y:400,to:[510,372],kind:'petals',verb:T('花輪を供える','Offer a garland'),say:T('ジャスミンとマリーゴールド','Jasmine and marigold')},
+ jaipur:{place:'jaipur-alberthall',x:500,y:345,to:[500,345],kind:'birds',bird:'pigeon',verb:T('鳩に餌をやる','Feed the pigeons'),say:T('ここの朝の日課','The morning habit here')},
+ istanbul:{place:'istanbul-galata',x:500,y:430,to:[500,430],kind:'birds',bird:'gull',verb:T('カモメにシミット','Throw simit to the gulls'),say:T('投げる前から、もう見ている','They were watching before you threw')},
+ cartagena:{place:'cartagena-murallas',x:560,y:440,to:[560,440],kind:'kite',verb:T('凧を上げる','Fly a kite'),say:T('城壁の上は、いつも風がある','Always wind up on the walls')}
+};
+const customDur={smoke:4.2,coin:2.6,ring:2.4,bell:4.5,stone:1.4,float:8,flowers:5,lantern:7.5,petals:4,birds:5.5,kite:8.5};
+const customHere=()=>actors.find(a=>a.kind==='custom')||null;
+const customOf=c=>Object.hasOwn(customs,c)?customs[c]:null;
+const customDue=c=>!!customOf(c)&&reg.custom?.[c]?.day!==regToday(c);
+const customCount=c=>reg.custom?.[c]?.n||0;
+const customBtn=document.createElement('button');customBtn.type='button';customBtn.className='rf-pick rc-do cursor-interaction';customBtn.hidden=true;customBtn.innerHTML='<b></b>';
+root.querySelector('.rr-game').append(customBtn);
+let customFx=null,customGoal=false;
+function customSpawn(){const c=cityId(),u=customOf(c);customBtn.hidden=true;customFx=null;if(u?.place===placeId)actors.push({kind:'custom',city:c,u,x:u.x,y:u.y});}
+function customGo(c){const u=customOf(c);if(!u)return;customGoal=true;if(placeId!==u.place)startJourney(u.place);}
+function customDo(){
+ const a=customHere();if(!a||customFx||!customDue(a.city))return;
+ const n=customCount(a.city)+1;(reg.custom||={})[a.city]={day:regToday(a.city),n};stopWalking();facing=Math.abs(a.u.to[0]-pos.x)>Math.abs(a.u.to[1]-pos.y)?(a.u.to[0]<pos.x?'left':'right'):'up';gait.moment='stretch';gait.momentT=1.3;customBtn.hidden=true;customFx={a,t:performance.now(),n};
+ if(n===3)regEarn(a.city,'custom:'+a.city);persist();sound.custom?.(a.u.tune||a.u.kind);regToast(a.u.say,n>1?T('{0}回目','×{0}',n):'');regToastEl.classList.toggle('is-low',(pos.y-camera.y)*getScale()<300);renderDirty=true;
+}
+customBtn.addEventListener('click',()=>{customDo();canvas.focus?.({preventScroll:true});});
+// Called from regTick, four times a second.
+function customTick(){
+ const a=customHere();
+ if(customGoal&&!journeyGoal&&!departing&&!changing&&a){customGoal=false;route(a.x,a.y);}
+ const open=!!a&&!customFx&&customDue(a.city)&&Math.hypot(pos.x-a.x,pos.y-a.y)<110&&!journeyGoal&&!departing&&!changing&&!regOffer&&photo.hidden&&journal.hidden;
+ if(open!==!customBtn.hidden){customBtn.hidden=!open;if(open){const v=a.u.verb;customBtn.querySelector('b').textContent=v;customBtn.setAttribute('aria-label',v);}}
+ if(open&&a.screen){const w=customBtn.offsetWidth||120,gw=canvas.clientWidth||width,tx=(pos.x-camera.x)*getScale(),x=Math.max(10,Math.min(gw-w-10,tx-w/2)),feet=(pos.y-camera.y)*getScale(),gh=canvas.clientHeight||height;customBtn.style.transform=`translate(${Math.round(x)}px,${Math.round(Math.min(gh-214,feet+16))}px)`;}
+ if(a&&customDue(a.city))renderDirty=true;
+}
+const customLight=()=>tod==='night'?.55:tod==='morning'?.86:1;
+const shade=(hex,k)=>{const n=parseInt(hex.slice(1),16),v=s=>Math.round(((n>>s)&255)*k);return `rgb(${v(16)},${v(8)},${v(0)})`;};
+const lerp=(p,q,t)=>p+(q-p)*t;
+const rnd=i=>{const s=Math.sin(i*127.1+11.7)*43758.5453;return s-Math.floor(s);};
+function customProp(a){
+ const u=a.u,k=customLight();
+ if(u.prop==='burner'||u.prop==='censer'){
+  const big=u.prop==='burner',[x,y]=u.to,w=big?30:15,h=big?34:24;groundShadow(x,y+2,w*.95,w*.32,.24);ctx.save();ctx.fillStyle=shade(big?'#4d4436':'#8f6b3e',k);
+  ctx.fillRect(x-w*.62,y-h*.26,w*.14,h*.26);ctx.fillRect(x+w*.48,y-h*.26,w*.14,h*.26);
+  ctx.beginPath();ctx.moveTo(x-w*.8,y-h*.72);ctx.quadraticCurveTo(x-w*.72,y-h*.1,x,y-h*.1);ctx.quadraticCurveTo(x+w*.72,y-h*.1,x+w*.8,y-h*.72);ctx.closePath();ctx.fill();
+  ctx.fillStyle=shade(big?'#6b5f4b':'#b48c55',k);ctx.beginPath();ctx.ellipse(x,y-h*.72,w*.86,w*.22,0,0,7);ctx.fill();ctx.fillStyle=shade('#2b2620',k);ctx.beginPath();ctx.ellipse(x,y-h*.72,w*.6,w*.13,0,0,7);ctx.fill();ctx.restore();
+ }else if(u.prop==='zero'){
+  const [x,y]=u.to;ctx.save();ctx.fillStyle=shade('#9b8455',k);ctx.beginPath();ctx.ellipse(x,y,25,11,0,0,7);ctx.fill();ctx.strokeStyle=shade('#5e5034',k);ctx.lineWidth=1.4;ctx.stroke();ctx.beginPath();for(let i=0;i<8;i++){const t=i*Math.PI/4;ctx.moveTo(x,y);ctx.lineTo(x+Math.cos(t)*20,y+Math.sin(t)*8.6);}ctx.stroke();ctx.restore();
+ }else if(u.prop==='stones'){
+  const [x,y]=u.to,n=3+Math.min(13,customCount(a.city)-(customFx&&(performance.now()-customFx.t)/1000<.62?1:0));groundShadow(x,y+1,22,6,.24);ctx.save();
+  for(let i=0,lay=0,top=y;i<n;i++){const r=Math.max(6,15-i*1.05+rnd(i)*4-2),off=(rnd(i+40)-.5)*5,g=shade(['#8d8a83','#a39e94','#77746d','#b0aaa0'][i%4],k);ctx.fillStyle=g;ctx.beginPath();ctx.ellipse(x+off,top-r*.3,r,r*.42,(rnd(i+9)-.5)*.3,0,7);ctx.fill();ctx.fillStyle='#ffffff1c';ctx.beginPath();ctx.ellipse(x+off-r*.2,top-r*.42,r*.5,r*.14,0,0,7);ctx.fill();top-=r*.58;lay++;}
+  ctx.restore();
+ }
+}
+function customDraw(a){
+ const m=ctx.getTransform(),dpr=canvas.width/width||1;a.screen=[(m.a*a.x+m.c*a.y+m.e)/dpr,(m.b*a.x+m.d*a.y+m.f)/dpr];canvas.dataset.custom=a.city+':'+a.screen.map(v=>v.toFixed(0)).join(',');
+ customProp(a);
+ if(!customDue(a.city)||customFx)return;
+ const t=performance.now()/1000,r=34;ctx.save();ctx.globalCompositeOperation='lighter';ctx.globalAlpha=reduced?.6:.5+.16*Math.sin(t*2.2);
+ const g=ctx.createRadialGradient(a.x,a.y-4,0,a.x,a.y-4,r);g.addColorStop(0,'rgba(255,244,208,.6)');g.addColorStop(1,'rgba(255,244,208,0)');ctx.fillStyle=g;ctx.fillRect(a.x-r,a.y-4-r,r*2,r*2);
+ ctx.strokeStyle='#fffbe8';ctx.lineWidth=1.1;ctx.lineCap='round';for(let i=0;i<3;i++){const k=reduced?.7:Math.max(0,Math.sin(t*2.6+i*2.1)),gx=a.x+[-14,13,1][i],gy=a.y+[-10,-3,-22][i],l=2+k*5;if(k<.05)continue;ctx.globalAlpha=k*.9;ctx.beginPath();ctx.moveTo(gx-l,gy);ctx.lineTo(gx+l,gy);ctx.moveTo(gx,gy-l);ctx.lineTo(gx,gy+l);ctx.stroke();}
+ ctx.restore();
+}
+const fxRings=(x,y,k,n,gap,life,max,flat,col)=>{ctx.lineWidth=1.8;for(let j=0;j<n;j++){const t=k-j*gap;if(t<0||t>life)continue;ctx.strokeStyle=col;ctx.globalAlpha=(1-t/life)*.85;ctx.beginPath();ctx.ellipse(x,y,4+t/life*max,(4+t/life*max)*flat,0,0,7);ctx.stroke();}ctx.globalAlpha=1;};
+const fxArc=(x0,y0,x1,y1,p,h)=>[lerp(x0,x1,p),lerp(y0,y1,p)-Math.sin(p*Math.PI)*h];
+// The street's own pigeon, whitened for a gull.
+const customGulls={};
+function customBird(n,x,y,h,flip,white,shadow){
+ const sheet=sheetFor('pigeon'),fr=spriteData.pigeon.frames[n];groundShadow(x,y+h*.1,6,2,.16*shadow);
+ if(!white){drawSprite(sheet,fr,x,y,h,{flip});return;}
+ if(!sheet.complete||!sheet.naturalWidth)return;
+ let g=customGulls[n];if(!g){g=customGulls[n]=document.createElement('canvas');g.width=fr[2];g.height=fr[3];const c=g.getContext('2d');c.drawImage(sheet,fr[0],fr[1],fr[2],fr[3],0,0,fr[2],fr[3]);c.globalCompositeOperation='source-atop';c.fillStyle='rgba(248,246,238,.82)';c.fillRect(0,0,fr[2],fr[3]);}
+ const w=h*fr[2]/fr[3]*1.3;ctx.save();ctx.translate(x,y);if(flip)ctx.scale(-1,1);ctx.drawImage(g,-w/2,-h*1.3,w,h*1.3);ctx.restore();
+}
+const customFxDraw={
+ smoke(a,k){const [x,y]=a.u.to;for(let i=0;i<20;i++){const t=k-i*.15;if(t<0||t>2.8)continue;const p=Math.min(1,t/2.2),sx=lerp(x,pos.x,p*.8)+Math.sin(t*2+i)*(5+t*7),sy=lerp(y-30,pos.y-70,p)-t*14,r=7+t*11,c=a.u.prop==='censer'?'236,226,206':'232,232,226',g=ctx.createRadialGradient(sx,sy,0,sx,sy,r);g.addColorStop(0,`rgba(${c},${.42*(1-t/2.8)*Math.min(1,t*4)})`);g.addColorStop(1,`rgba(${c},0)`);ctx.fillStyle=g;ctx.fillRect(sx-r,sy-r,r*2,r*2);}},
+ coin(a,k){const [x,y]=a.u.to,p=Math.min(1,k/.8);if(k<.8){const [cx,cy]=fxArc(pos.x,pos.y-58,x,y,p,120);ctx.fillStyle='#e8c15a';ctx.beginPath();ctx.ellipse(cx,cy,5.5*Math.abs(Math.cos(k*16))+1.2,5.5,0,0,7);ctx.fill();}else{fxRings(x,y,k-.8,3,.2,1.4,60,.4,'#fffdf2');for(let i=0;i<9;i++){const t=(k-.8)/.5;if(t>1)break;const q=i/9*6.28,[dx,dy]=[Math.cos(q)*t*26,Math.sin(q)*t*9-Math.sin(t*3.14)*26];ctx.fillStyle='#ffffffb0';ctx.beginPath();ctx.arc(x+dx,y+dy,1.8,0,7);ctx.fill();}}},
+ ring(a,k){const [x,y]=a.u.to;ctx.globalCompositeOperation='lighter';fxRings(x,y,k,3,.34,1.5,90,.42,'#ffe7a6');ctx.globalCompositeOperation='source-over';},
+ bell(a,k){const [x,y]=a.u.to;fxRings(x,y,k,a.u.tune==='ben'?3:6,a.u.tune==='ben'?1.1:.5,2.2,190,1,'#fff6da');},
+ stone(a,k){if(k>.62)return;const [x,y]=a.u.to,p=k/.62,[cx,cy]=fxArc(pos.x,pos.y-46,x,y-Math.min(46,customCount(a.city)*6)-12,p,40);ctx.fillStyle='#a39e94';ctx.beginPath();ctx.ellipse(cx,cy,7,3.6,k*3,0,7);ctx.fill();},
+ float(a,k){const [x0,y0]=a.u.to,x=x0-k*15,y=y0+Math.sin(k*1.3)*2.5,fade=Math.min(1,(8-k)/1.5);ctx.globalAlpha=fade;fxRings(x,y+5,k%2.4,2,.9,2.2,34,.32,'#ffffff80');ctx.globalAlpha=fade;
+  ctx.fillStyle='#4f7a46';ctx.beginPath();ctx.ellipse(x,y+3,17,6,0,0,7);ctx.fill();ctx.fillStyle='#eec4cf';for(let i=0;i<7;i++){const q=i/7*6.28;ctx.beginPath();ctx.ellipse(x+Math.cos(q)*8,y-3+Math.sin(q)*3,5,3,q,0,7);ctx.fill();}ctx.fillStyle='#fff4c2';ctx.fillRect(x-1,y-14,2,11);
+  const g=ctx.createRadialGradient(x,y-16,0,x,y-16,20);g.addColorStop(0,'rgba(255,214,120,.8)');g.addColorStop(1,'rgba(255,214,120,0)');ctx.fillStyle=g;ctx.fillRect(x-20,y-36,40,40);ctx.globalAlpha=1;},
+ flowers(a,k){const [x,y]=a.u.to;for(let i=0;i<12;i++){const t=Math.min(1,(k-i*.05)/.9);if(t<=0)continue;const tx=x+(rnd(i)-.5)*170+Math.sin(k+i)*5,ty=y+(rnd(i+7)-.5)*36+Math.sin(k*1.4+i)*2,[fx,fy]=fxArc(pos.x,pos.y-60,tx,ty,t,84);ctx.globalAlpha=Math.min(1,(5-k)/1.4);ctx.fillStyle=i%3?'#fbf6ec':'#f3c7d2';for(let p=0;p<5;p++){const q=p/5*6.28;ctx.beginPath();ctx.arc(fx+Math.cos(q)*4,fy+Math.sin(q)*3,3,0,7);ctx.fill();}ctx.fillStyle='#e8c15a';ctx.beginPath();ctx.arc(fx,fy,1.6,0,7);ctx.fill();}ctx.globalAlpha=1;},
+ lantern(a,k){const x=a.x+72+Math.sin(k*.9)*16+k*5,y=pos.y-74-k*k*5.4-k*14,s=1-k*.04,w=15*s,h=22*s;ctx.globalAlpha=Math.min(1,(7.5-k)/2);const g=ctx.createRadialGradient(x,y,0,x,y,50*s);g.addColorStop(0,'rgba(255,190,100,.7)');g.addColorStop(1,'rgba(255,190,100,0)');ctx.fillStyle=g;ctx.fillRect(x-50,y-50,100,100);ctx.fillStyle='#f6d9a0';ctx.beginPath();ctx.moveTo(x-w,y-h);ctx.quadraticCurveTo(x,y-h*1.5,x+w,y-h);ctx.lineTo(x+w*.72,y+h);ctx.lineTo(x-w*.72,y+h);ctx.closePath();ctx.fill();ctx.strokeStyle='#c8814a';ctx.lineWidth=1.3;ctx.stroke();ctx.fillStyle='#ffb45e';ctx.beginPath();ctx.ellipse(x,y+h,w*.5,3*s,0,0,7);ctx.fill();ctx.globalAlpha=1;},
+ petals(a,k){const [x,y]=a.u.to,fade=Math.min(1,(4-k)/1.1);ctx.globalAlpha=fade;for(let i=0;i<22;i++){const t=Math.min(1,(k-i*.02)/.8);if(t<=0)continue;const [px,py]=fxArc(pos.x,pos.y-52,x+(rnd(i)-.5)*96,y+(rnd(i+3)-.5)*30,t,56);ctx.fillStyle=i%3?'#ef9a2e':'#fbf3df';ctx.beginPath();ctx.ellipse(px,py,3.4,2,i,0,7);ctx.fill();}ctx.globalAlpha=1;},
+ birds(a,k){const [x,y]=a.u.to;for(let i=0;i<6;i++){const t=Math.min(1,k/.5);const gx=x+(rnd(i)-.5)*70,gy=y+(rnd(i+5)-.5)*26;const [px,py]=fxArc(pos.x,pos.y-52,gx,gy,t,30);ctx.fillStyle='#c79a56';ctx.beginPath();ctx.arc(px,py,2,0,7);ctx.fill();}
+  for(let i=0;i<10;i++){const s=rnd(i+20),side=i%2?1:-1,arr=Math.min(1,Math.max(0,(k-.5-s*.5)/1)),go=Math.max(0,(k-4.2-s*.5)/1),e=1-(1-arr)**2,hx=x+(rnd(i)-.5)*120,hy=y+(rnd(i+5)-.5)*46,bx=lerp(x+side*520,hx,e)+side*go*go*520,z=lerp(420,0,e)+go*go*420,by=lerp(y,hy,e),air=arr<1||go>0,frame=air?4+Math.floor(k*12+i)%3:Math.floor(k*3+i)%2;
+   customBird(frame,bx,by-z,a.u.bird==='gull'?(air?24:15):(air?30:22),side>0?go>0:go<=0,a.u.bird==='gull',e);}},
+ kite(a,k){const hx=pos.x+10,hy=pos.y-62,rise=1-Math.exp(-k/1.8),x=hx+64+rise*90+Math.sin(k*1.1)*20,y=hy-48-rise*Math.min(290,hy-48-camera.y-150/getScale())+Math.cos(k*1.7)*12;ctx.globalAlpha=Math.min(1,(8.5-k)/1.3);ctx.strokeStyle='#fffdf0b0';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(hx,hy);ctx.quadraticCurveTo(lerp(hx,x,.5)+22,lerp(hy,y,.5)+36,x,y+22);ctx.stroke();
+  ctx.save();ctx.translate(x,y);ctx.rotate(Math.sin(k*1.3)*.25);const cs=['#d8483a','#f0c23c','#2e7fb6','#3f9c62'],pt=[[0,-26],[20,0],[0,26],[-20,0]];cs.forEach((c,i)=>{ctx.fillStyle=c;ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(...pt[i]);ctx.lineTo(...pt[(i+1)%4]);ctx.closePath();ctx.fill();});ctx.strokeStyle='#fff8';ctx.beginPath();for(let i=0;i<8;i++){const ty=26+i*8;i?ctx.lineTo(Math.sin(k*5-i)*7,ty):ctx.moveTo(0,ty);}ctx.stroke();ctx.restore();ctx.globalAlpha=1;}
+};
+// Drawn last, over the street.
+function customOver(){
+ if(!customFx)return;const k=(performance.now()-customFx.t)/1000,a=customFx.a,dur=reduced?1:customDur[a.u.kind]||3;
+ if(!actors.includes(a)||k>dur){customFx=null;renderDirty=true;return;}
+ ctx.save();customFxDraw[a.u.kind](a,reduced?dur*.5:k);ctx.restore();renderDirty=true;
+}
+// The journal row.
+function customRow(el,c){
+ const u=customOf(c);el.replaceChildren();el.hidden=!u;if(!u)return;const n=customCount(c),due=customDue(c),label=document.createElement('span');
+ label.textContent=n?T('{0}・{1}回','{0} ×{1}',u.verb,n):u.verb;el.append(label);el.classList.toggle('is-done',!due);
+ if(due){const b=document.createElement('button');b.type='button';b.className='rq-time cursor-interaction';b.textContent=T('行く','Go');b.addEventListener('click',()=>{closeJournal();customGo(c);});el.append(b);}
+}
 
 // ---- One postcard a month, from the real calendar, in the same mailbox as the letters. It comes on the first return of a month; a month missed simply comes round again next year.
 const monthArt=n=>['assets/hd/month-01.webp','assets/hd/month-02.webp','assets/hd/month-03.webp','assets/hd/month-04.webp','assets/hd/month-05.webp','assets/hd/month-06.webp','assets/hd/month-07.webp','assets/hd/month-08.webp','assets/hd/month-09.webp','assets/hd/month-10.webp','assets/hd/month-11.webp','assets/hd/month-12.webp'][n];
@@ -6502,7 +6636,7 @@ root.querySelector('.rr-game').append(tkRoot);
 const tkEl=(cls,tag='div')=>{const e=document.createElement(tag);e.className=cls;return e;};
 const tkBtn=(cls,text,on)=>{const b=tkEl(cls+' cursor-interaction','button');b.type='button';b.textContent=text;b.addEventListener('click',on);return b;};
 let tkOpener=null,tkEsc=null;
-function tkOpen(node,esc){stopWalking();if(tkRoot.hidden)tkOpener=document.activeElement;tkRoot.replaceChildren(node);tkRoot.hidden=false;tkEsc=esc;walkingUI.inert=true;const f=node.querySelector('button');f?.focus({preventScroll:true});}
+function tkOpen(node,esc){stopWalking();regHide();if(tkRoot.hidden)tkOpener=document.activeElement;tkRoot.replaceChildren(node);tkRoot.hidden=false;tkEsc=esc;walkingUI.inert=true;const f=node.querySelector('button');f?.focus({preventScroll:true});}
 function tkClose(){tkRoot.hidden=true;tkRoot.replaceChildren();tkEsc=null;walkingUI.inert=false;if(tkOpener?.isConnected&&!tkOpener.closest('[hidden]'))tkOpener.focus({preventScroll:true});tkOpener=null;mailUpdate();}
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!tkRoot.hidden){e.stopPropagation();tkEsc?.();}},true);
 const giftSprite=(c,i)=>{const s=tkEl('tk-item','i');s.style.backgroundImage='url("'+thanksArt.gifts[c]+'")';s.style.backgroundPosition=(i%3)*50+'% '+Math.floor(i/3)*100+'%';s.setAttribute('aria-hidden','true');return s;};
@@ -6592,12 +6726,13 @@ function todayReasons(){
  if(k){const [c,kind]=k.split(':');out.push({text:c==='month'?T('{0}月のはがき','{0} postcard',T(...monthCards[+kind-1].name)):T('{0}から手紙','Letter from {0}',letterWho(c)),go:T('読む','Read'),act:()=>letterShow(k)});}
  const parcel=parcelOpen()[0];if(parcel)out.push({text:T('{0}へ届けもの','Parcel for {0}',letterWho(parcel.to)),note:cities[parcel.to].name});
  const here=cityId(),act=reg.active[here];
- const lostIn=thanksCities().filter(c=>(c===homeCityId||tickets.has(c))&&regLost(c)).sort((a,b)=>(b===here)-(a===here))[0];if(lostIn)out.push({text:T('{0}に落とし物','Something lost in {0}',cities[lostIn].name)});
+ const lostIn=thanksCities().filter(c=>(c===homeCityId||tickets.has(c))&&regLost(c)).sort((a,b)=>(b===here)-(a===here))[0];if(lostIn)out.push({text:T('{0}に落とし物','Something lost in {0}',cities[lostIn].name),...(lostIn===here?{go:T('行く','Go'),act:()=>{tkClose();const n=regNext(here);if(n)regTake(n);}}:{})});
  if(act)out.push({text:regSay(here,act)[1],note:T('{0}のお願い','A request in {0}',cities[here].name)});
+ if(customDue(here))out.push({text:customs[here].verb,note:cities[here].name,go:T('行く','Go'),act:()=>{tkClose();customGo(here);}});
  const morning=thanksCities().filter(c=>tickets.has(c)&&c!==here&&cityHour(cities[c].zone)>=5&&cityHour(cities[c].zone)<9)[0];
  if(morning)out.push({text:T('{0}はいま朝','Morning in {0}',cities[morning].name),note:T('人が少ない','Few people')});
  const scene=Object.keys(seasonSceneArt).filter(id=>seasonScene(id)&&tickets.has(places[id].cityId)).sort((a,b)=>(places[b].cityId===here)-(places[a].cityId===here))[0];
- if(scene&&!seasonSceneAlways)out.push({text:T('{0}、季節の姿','{0}, in season',places[scene].name),note:T('{0}の今月','This month in {0}',cities[places[scene].cityId].name)});
+ if(scene&&!seasonSceneAlways)out.push({text:T('{0}、季節の姿','{0}, in season',places[scene].name),note:T('{0}の今月','This month in {0}',cities[places[scene].cityId].name),...(places[scene].cityId===here?{go:T('行く','Go'),act:()=>{tkClose();if(scene!==placeId)startJourney(scene);}}:{})});
  if(out.length<3&&!reg.booth&&!reg.boothAsked&&visited.size>=3){reg.boothAsked=1;out.push({text:T('パスポートの写真がまだ','No passport photo yet'),note:T('証明写真','Passport photo'),go:T('撮る','Take it'),act:()=>boothOpen()});}
  return out.slice(0,3);
 }
@@ -7189,6 +7324,20 @@ if(new URLSearchParams(location.search).has('audiodebug'))window.roamAudio={musi
   page:play(()=>{hiss(0,.09,.03,'bandpass',1400,.7,3200);hiss(.07,.11,.022,'bandpass',2600,.7,1100);}),
   // A new phrase in the phrasebook: two soft notes rising and a faint sparkle.
   learn:play(()=>{sound.duck(.6,1.2);bell(783.99,0,.022,.9,.12);bell(1174.66,.11,.02,1.2,.12);bell(2349.32,.22,.006,.7,.04);}),
+  // A city's custom. Each one its own small sound.
+  custom:play(kind=>{
+   if(kind==='coin'){bell(2093,0,.012,.25,.3);hiss(.8,.2,.05,'bandpass',2200,.8,900);knock(.8,240,.02,.08);}
+   else if(kind==='smoke')hiss(0,2.6,.012,'bandpass',900,.6,500);
+   else if(kind==='ring'){sound.duck(.6,1.4);bell(523.25,0,.024,1.6,.12);bell(783.99,.3,.02,1.8,.12);}
+   else if(kind==='ben'){sound.duck(.4,4);[0,1.1,2.2].forEach(at=>{bell(164.81,at,.09,2.6,.3);bell(329.63,at,.024,1.6,.12);});}
+   else if(kind==='peal'){sound.duck(.4,3.6);[1046.5,987.77,880,783.99,698.46,659.25,587.33,523.25].forEach((f,i)=>bell(f,i*.42,.024,1.6,.2));}
+   else if(kind==='stone'){knock(.62,420,.05,.07,'triangle');knock(.7,520,.024,.05,'triangle');}
+   else if(kind==='float'||kind==='flowers')hiss(.2,1.3,.02,'lowpass',700,.7,300);
+   else if(kind==='lantern'){hiss(0,.9,.012,'bandpass',600,.7,1400);bell(659.25,.4,.012,1.6,.1);}
+   else if(kind==='petals')hiss(0,.5,.012,'highpass',2600);
+   else if(kind==='birds'){for(let i=0;i<7;i++)hiss(.55+i*.13,.16,.02,'bandpass',1100,.7,1900);}
+   else if(kind==='kite')hiss(0,2.4,.012,'bandpass',500,.6,900);
+  }),
   // Every place in a city seen.
   complete:play(()=>{sound.duck(.3,2.6);[[659.25,0],[783.99,.13],[1046.5,.26],[987.77,.46],[1318.51,.6]].forEach(([f,at],i)=>bell(f,at,i===4?.026:.022,i===4?2:1.1,.14));})
  });
