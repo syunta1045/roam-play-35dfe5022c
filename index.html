@@ -1760,7 +1760,7 @@ html,body{overscroll-behavior:none;-webkit-text-size-adjust:100%;text-size-adjus
 #rome-immersive .rm-close svg{width:22px;height:22px}
 #rome-immersive .rm-stage{position:relative;flex:1;min-height:0;overflow:hidden}
 #rome-immersive .rm-canvas,#rome-immersive .rm-spots{position:absolute;inset:0;width:100%;height:100%}
-#rome-immersive .rm-dot{position:absolute;width:40px;height:40px;margin:-20px 0 0 -20px;padding:0;border-radius:50%;background:none}
+#rome-immersive .rm-dot{position:absolute;z-index:2;width:40px;height:40px;margin:-20px 0 0 -20px;padding:0;border-radius:50%;background:none}
 #rome-immersive .rm-dot::before{content:"";position:absolute;left:50%;top:50%;width:11px;height:11px;margin:-5.5px 0 0 -5.5px;border-radius:50%;background:#fbf5e6;box-shadow:inset 0 0 0 2px #5a4a33a0}
 #rome-immersive .rm-dot.is-zone::before{width:9px;height:9px;margin:-4.5px 0 0 -4.5px}
 #rome-immersive .rm-dot.is-walked::before{background:var(--city,#2f4e3f);box-shadow:0 0 0 2px #fbf5e6}
@@ -1774,7 +1774,7 @@ html,body{overscroll-behavior:none;-webkit-text-size-adjust:100%;text-size-adjus
 #rome-immersive .rm-spot.is-next::after{content:"";position:absolute;inset:-9px;border-radius:50%;box-shadow:0 0 0 2px var(--city,#2f4e3f);opacity:0;animation:rm-next 1.9s ease-out infinite}
 @keyframes rm-next{0%{transform:scale(.86);opacity:.9}100%{transform:scale(1.18);opacity:0}}
 #rome-immersive .rm-spot[aria-pressed] .rm-stamp{outline:2.5px solid #1f2d26;outline-offset:6px}
-#rome-immersive .rm-spot span{position:absolute;left:50%;top:calc(100% + 6px);transform:translateX(-50%);width:max-content;max-width:104px;padding:1px 5px 2px;font-size:11.5px;font-weight:700;line-height:1.16;text-align:center;word-break:keep-all;overflow-wrap:anywhere;color:#2b2a22;background:#fbf5e6e0;border-radius:3px;box-shadow:0 0 0 1px #5a4a3326;pointer-events:none}
+#rome-immersive .rm-spot span{position:absolute;left:50%;top:calc(100% + 6px);transform:translateX(-50%);width:max-content;max-width:116px;padding:1px 5px 2px;font-size:11.5px;font-weight:700;line-height:1.16;text-align:center;text-wrap:balance;word-break:keep-all;overflow-wrap:anywhere;color:#2b2a22;background:#fbf5e6e0;border-radius:3px;box-shadow:0 0 0 1px #5a4a3326;pointer-events:none}
 #rome-immersive .rm-spot[data-name=t] span{top:auto;bottom:calc(100% + 6px)}
 #rome-immersive .rm-spot[data-name=r] span{left:calc(100% + 6px);top:50%;transform:translateY(-50%)}
 #rome-immersive .rm-spot[data-name=l] span{left:auto;right:calc(100% + 6px);top:50%;transform:translateY(-50%)}
@@ -2713,6 +2713,8 @@ function connectTour(){
    p.entry={x:503,y:505};if(p.mask)for(let r=0;r<44;r++)for(let c=0;c<100;c++)if(!(r>=30&&c>=43&&c<=58))p.mask[r*100+c]=0;
   }
   const q=places['asakusa-nakamise'],out=q?.edges.find(e=>e.side==='left');if(out)q.edges.unshift(vgate('up',525,168,out.to,out.arrival,62));}
+ // Piazza Venezia: the terracotta roofs at the lower left were walkable ground in the mask.
+ {const v=places.venezia;if(v?.mask)for(let r=100;r<150;r++)for(let c=0;c<43;c++)v.mask[r*100+c]=0;}
 }
 connectTour();
 
@@ -2983,7 +2985,7 @@ function moveAlong(dx,dy){
  if(pos.x!==x0||pos.y!==y0||!step)return;
  // Blocked head-on: if the way opens a little to one side, drift toward it instead of stopping.
  const fx=dx/step,fy=dy/step;
- for(let k=6;k<=36;k+=6)for(const side of [1,-1]){
+ for(let k=6;k<=66;k+=6)for(const side of [1,-1]){
   const sx=-fy*side,sy=fx*side;
   if(ground(pos.x+sx*k+fx*10,pos.y+sy*k+fy*10)&&ground(pos.x+sx*step,pos.y+sy*step)){pos.x+=sx*step;pos.y+=sy*step;return;}
  }
@@ -3407,6 +3409,9 @@ function previousTransferStage(){
 function arriveInCity(destination){
  if(!Object.hasOwn(cities,destination))return;
  const fromHome=!!transferState?.fromHome;
+ // A direct flight lands through a soft fade, and a second tap on the landing button does not fall through to the street's buttons.
+ if(transferState?.quick)hudCurtain('#f8f2e6');
+ walkingUI.style.pointerEvents='none';setTimeout(()=>{walkingUI.style.pointerEvents='';},450);
  // The very first walk is in daylight, whatever the hour: the first thing anyone sees should be the street at its clearest. The bench's override lasts until they leave the city.
  if(fromHome){onboarded=true;onboarding=null;cityPositions={};const h=cityHour(cities[destination].zone);if(h>=19||h<5)restTod={city:destination,tod:'day'};}
  else if(destination===cityId())return;
@@ -4909,7 +4914,7 @@ stallTry.addEventListener('click',()=>{
  const a=stallCardFor;if(!a||Object.hasOwn(stallTried,a.st.id))return;
  stallTried[a.st.id]=Date.now();
  setStallButton(true);stallCard.classList.add('is-new');stallSound(true);persist();stampTasteCheck(cityId());
- {const list=keepTaste(cityId()),got=list.filter(s=>Object.hasOwn(stallTried,s.id)).length;if(!reduced)gait.hop=.42;stallCard.querySelector('.rs-tip').textContent=({eat:T('おいしい！','Delicious!'),drink:T('うまい！','Lovely!'),keep:T('いい買い物','Good find')})[a.st.kind]+' '+T('味とおみやげ {0} / {1}','Tastes {0} of {1}',got,list.length);renderDirty=true;}
+ {const list=keepTaste(cityId()),got=list.filter(s=>Object.hasOwn(stallTried,s.id)).length;if(!reduced){gait.hop=.42;wFx.push({k:'gift',x:a.x,y:a.y-58,col:'#e0a83a',t:0});}stallCard.querySelector('.rs-tip').textContent=({eat:T('おいしい！','Delicious!'),drink:T('うまい！','Lovely!'),keep:T('いい買い物','Good find')})[a.st.kind]+' '+T('味とおみやげ {0} / {1}','Tastes {0} of {1}',got,list.length);renderDirty=true;}
  canvas.focus?.({preventScroll:true});
 });
 // A wooden "tock" when a stall greets you; three soft notes when something goes into the journal.
@@ -7571,7 +7576,7 @@ function seasonCheck(){
  if(reduced||!onboarded||onboarding){seasonKind=null;seasonCanvas.hidden=true;return;}
  let k=seasonNow(cityId());if(k==='fireflies'&&tod!=='night')k=null;
  // A painting in blossom does not get falling maple.
- if(k==='leaves'){const im=backdrops[placeId],m=im?.naturalWidth?lightOf(im):null;if(m&&m.pink>=4)k=null;}
+ if(k==='leaves'){const im=backdrops[placeId],m=im?.naturalWidth?lightOf(im):null;if(m&&m.pink>=2)k=null;}
  if(k!==seasonKind||k==='leaves'&&seasonLeafCity!==cityId()){seasonKind=k;seasonLeafCity=cityId();seasonCanvas.hidden=!k;if(k){const r=seasonCanvas.getBoundingClientRect();seasonSeed(k,r.width||390,r.height||844);}else seasonCanvas.getContext('2d').clearRect(0,0,seasonCanvas.width,seasonCanvas.height);}
  canvas.dataset.season=k||'';
  if(k&&!seasonRun&&!document.hidden){seasonLast=performance.now();seasonRun=requestAnimationFrame(seasonFrame);}
@@ -9388,7 +9393,7 @@ let plateNote='',plateUntil=0;
 function plateSay(text){plateNote=text;plateUntil=performance.now()+2600;guideBump('.rr-city');renderDirty=true;}
 let guideTipAt=0,guideStoryFor=null,guideSeenPlace=null,guideSeenCity=null,guideCount=-1,guideInk=null;
 function guideTick(){
- skipFlight.hidden=!(transferState?.stage==='route'&&!transferState.fromHome&&Object.keys(reg.first).length>=1);
+ skipFlight.hidden=!(transferState?.stage==='route'&&(transferState.fromHome||Object.keys(reg.first).length>=1));
  const open=!onboarded||!!onboarding||isTransferOpen()||isAvatarOpen()||!photo.hidden||!journal.hidden||mapIsOpen();
  root.classList.toggle('is-journey',!!journeyGoal);root.classList.toggle('is-first-run',guideFirstRun());root.classList.toggle('is-moving',isWalking&&!open&&!reduced);
  if(hudMark.dataset.t!==tod)hudMark.dataset.t=tod;
@@ -9477,7 +9482,7 @@ root.querySelector('.ra-options')?.append(petChoice);
 function hudCurtain(color){if(reduced)return;const c=document.createElement('div');c.className='rr-curtain';c.style.background=color;root.querySelector('.rr-app').append(c);c.addEventListener('animationend',()=>c.remove());setTimeout(()=>c.remove(),900);}
 // After the first flight nobody has to ride the bus again: the route page offers the short way.
 const skipFlight=document.createElement('button');skipFlight.type='button';skipFlight.className='rt-skip cursor-interaction';skipFlight.hidden=true;skipFlight.textContent=T('そのまま飛ぶ','Fly straight there');root.querySelector('.rt-footer')?.prepend(skipFlight);
-skipFlight.addEventListener('click',()=>{if(transferState?.stage==='route'&&!transferState.fromHome){transferState.quick=true;setTransferStage('flight');}});
+skipFlight.addEventListener('click',()=>{if(transferState?.stage==='route'){transferState.quick=true;setTransferStage('flight');}});
 // The place plate is a sign you can touch: it opens the map of this city, and it never lets a tap through to the ground under it.
 root.querySelector('.rr-city').addEventListener('click',()=>{if(!changing&&!onboarding)openCityMap();});
 // The way through a city at a glance, on the first page of the journal: sights, the streets between them, and where you are.
@@ -9815,11 +9820,13 @@ const wMake={
  heap(rand,d){const p=wSpot(rand,30);if(!p)return;const bits=[];for(let i=0;i<34;i++){const q=rand()*6.28,r=Math.sqrt(rand())*30;bits.push({x:p.x+Math.cos(q)*r,y:p.y+Math.sin(q)*r*.42,c:d.heap[i%d.heap.length],a:rand()*6.28,s:3+rand()*2.8});}actors.push({kind:'w',w:'heap',flat:true,x:p.x,y:p.y,bits,burst:false});},
  cover(rand,d){const p=wSpot(rand,30);if(p)actors.push({kind:'w',w:'cover',flat:true,x:p.x,y:p.y,d,ring:0});}
 };
+// A shop's board stands on a shopping street: every plain walking street, and side streets named as streets, not a garden, a hill or a gate.
+const wanderOnStreet=()=>scene().walk||/通り|路地|小路|横丁|市場|裏道|街|回廊/.test(zoneArt[scene().parent]?.[0]||'');
 function wanderSpawn(){
  const c=cityId();walkerSpawn();if(!wanderCity[c]||!Object.hasOwn(reg,'first'))return;
  const d=wanderCity[c],rand=seeded(placeId+'wander');
- wMake.board(rand);
- if(!scene().quiet){wMake.board(rand);return;}
+ if(!scene().quiet)return;
+ if(wanderOnStreet())wMake.board(rand);
  for(const kind of wanderDeal(c,placeId))wMake[kind]?.(rand,d);
  canvas.dataset.wander=actors.filter(a=>a.kind==='w').map(a=>a.w+':'+Math.round(a.x)+','+Math.round(a.y)).join('|');
 }
@@ -9874,7 +9881,7 @@ function wanderUpdate(dt){
    if(a.mode==='sound'&&a.met&&a.puff>.34&&d<240){a.puff=0;wFx.push({k:'note',x:a.x+(Math.random()-.5)*16,y:a.y-46,t:0,life:1.7});}
   }else if(w==='light'){
    const inside=Math.hypot((pos.x-a.x)/a.r,(pos.y-a.y)/(a.r*.56))<1;
-   if(inside&&!a.told){a.told=true;sayQuietly(T('ここ、いい光','Good light here'),2);}
+   if(d<210&&!a.told&&!wDone(wKey('light'))){a.told=true;sayQuietly(T('ここ、いい光','Good light here'),2.4);}
    if(inside&&!isWalking&&!path.length&&!wDone(wKey('light'))){a.stood+=dt;if(a.stood>.7){a.stood=-9;wanderShot(T('{0}の光','Light on {0}',scene().name));wanderGot('light',T('一枚残した','One for the album'),true);}}else if(!inside)a.stood=0;
   }else if(w==='heap'){
    if(d<38&&!a.burst&&(isWalking||gait.speed>20)){
@@ -9954,7 +9961,7 @@ function wSense(a){
 }
 function wLight(a){
  if(wDone(wKey('light')))return;const t=performance.now()/1000,s=reduced?.5:.5+.5*Math.sin(t*1.5),night=tod==='night',rx=a.r,ry=a.r*.56;
- ctx.save();ctx.globalCompositeOperation='lighter';ctx.translate(a.x,a.y);ctx.scale(1,.56);const g=ctx.createRadialGradient(0,0,0,0,0,rx);g.addColorStop(0,night?`rgba(255,190,110,${.2+s*.07})`:`rgba(255,226,160,${.2+s*.08})`);g.addColorStop(.72,night?'rgba(255,180,100,.12)':'rgba(255,224,160,.12)');g.addColorStop(1,'rgba(255,220,150,0)');ctx.fillStyle=g;ctx.fillRect(-rx,-rx,rx*2,rx*2);ctx.restore();
+ ctx.save();ctx.globalCompositeOperation=night?'lighter':'overlay';ctx.translate(a.x,a.y);ctx.scale(1,.56);const g=ctx.createRadialGradient(0,0,0,0,0,rx);g.addColorStop(0,night?`rgba(255,190,110,${.2+s*.07})`:`rgba(255,196,110,${.6+s*.15})`);g.addColorStop(.72,night?'rgba(255,180,100,.12)':'rgba(255,190,110,.42)');g.addColorStop(1,'rgba(255,190,110,0)');ctx.fillStyle=g;ctx.fillRect(-rx,-rx,rx*2,rx*2);ctx.restore();
  ctx.save();ctx.strokeStyle='#fffbe8';ctx.lineWidth=1;ctx.lineCap='round';for(let i=0;i<3;i++){const k=reduced?.7:Math.max(0,Math.sin(t*2.1+i*2.1)),gx=a.x+[-22,20,2][i],gy=a.y+[-6,4,-14][i]-k*3,l=1.5+k*4.5;if(k<.05)continue;ctx.globalAlpha=k*.85;ctx.beginPath();ctx.moveTo(gx-l,gy);ctx.lineTo(gx+l,gy);ctx.moveTo(gx,gy-l);ctx.lineTo(gx,gy+l);ctx.stroke();}ctx.restore();
 }
 function wHeap(a){
@@ -10108,7 +10115,7 @@ function camTick(){
  if(placeId!==camPlace){
   camPlace=placeId;
   // The first steps into a sight: the whole painting, then in to you.
-  if(onboarded&&!onboarding&&city().tour.includes(placeId)&&!visited.has(placeId)&&!camSeen.has(placeId)&&!revealCity){camSeen.add(placeId);camHold=1.1;camZoom=least;snapCamera=true;}
+  if(onboarded&&!onboarding&&city().tour.includes(placeId)&&!visited.has(placeId)&&!camSeen.has(placeId)&&!revealCity){camSeen.add(placeId);camHold=.7;camZoom=least;snapCamera=true;}
  }
  let want=scene().quiet?.9:1;
  if(guideHurry&&journeyGoal)want-=.05;
@@ -10116,36 +10123,16 @@ function camTick(){
  if(!isWalking&&gait.idle>4)want+=Math.min(.05,(gait.idle-4)*.012);
  want=Math.max(want,least);
  // At the photo spot the view lifts, so the sight fills the frame and you stand low in it.
- {const lift=near?-84:0;if(Math.abs(lift-camLift)>.5){camLift+=(lift-camLift)*(1-Math.exp(-dt*2.4));renderDirty=true;}else camLift=lift;}
+ {const lift=near?-84:0;if(Math.abs(lift-camLift)>.5){camLift+=(lift-camLift)*(1-Math.exp(-dt*6));renderDirty=true;}else camLift=lift;}
  if(camHold>0){camHold-=dt;renderDirty=true;return;}
- const next=camZoom+(want-camZoom)*(1-Math.exp(-dt*(want>camZoom+.12?1.25:2.2)));
+ const next=camZoom+(want-camZoom)*(1-Math.exp(-dt*(want>camZoom+.12?2.6:5)));
  if(Math.abs(want-next)>.002)renderDirty=true;camZoom=Math.abs(want-next)<.002?want:next;
 }
 // ---- Depth on a flat painting. ----
-// Cloud shadows drift across the street by day. What the painting shows just out of frame stands close to the lens, soft and quicker than the ground, so you look past something.
-const nearSmall=new WeakMap();
-function nearCopy(image){let c=nearSmall.get(image);if(c===undefined){c=null;try{c=document.createElement('canvas');c.width=160;c.height=240;const g=c.getContext('2d');g.imageSmoothingQuality='high';g.drawImage(image,0,0,160,240);}catch(e){c=null;}nearSmall.set(image,c);}return c;}
+// Cloud shadows drift across the street by day.
 function depthOver(scale){
  if(reduced)return;const image=backdropFor(placeId);if(!image.complete||!image.naturalWidth)return;const t=performance.now()/1000;
  if(tod==='day'){ctx.save();ctx.globalCompositeOperation='multiply';for(let i=0;i<2;i++){const x=((t*(5+i*2.4)+i*640)%2300)-650,y=[300,1050][i],w=[880,720][i],h=w*.56;ctx.globalAlpha=.3;ctx.drawImage(softDisc,x-w/2,y-h/2,w,h);}ctx.restore();}
-}
-function nearOver(scale){
- if(reduced||!scene().quiet)return;const image=backdropFor(placeId);if(!image.complete||!image.naturalWidth)return;const small=nearCopy(image);if(!small)return;
- const vw=width/scale,dark=tod==='night'?.56:tod==='morning'?.42:.34,strip=Math.min(38,width*.1),hgt=height;
- ctx.save();ctx.setTransform(canvas.width/width,0,0,canvas.width/width,0,0);
- // The two side strips: the ground runs by underneath, these go by half as fast again.
- for(const side of [0,1]){
-  const world=side?camera.x+vw:camera.x-120,zoom=1.5,sw=(strip+24)/scale/zoom*.16,sh=hgt/scale/zoom*.16,sx=Math.max(0,Math.min(160-sw,(world+(camera.x-(W-vw)/2)*.5)*.16)),sy=Math.max(0,Math.min(240-sh,camera.y*.16*1.02)),x=side?width-strip:0;
-  nearMask(small,sx,sy,sw,sh,x,strip,hgt,side,dark);
- }
- ctx.restore();
-}
-const nearCanvas=document.createElement('canvas');
-function nearMask(small,sx,sy,sw,sh,x,w,h,side,dark){
- const cw=Math.ceil(w/3),ch=Math.ceil(h/6);if(nearCanvas.width!==cw||nearCanvas.height!==ch){nearCanvas.width=cw;nearCanvas.height=ch;}
- const g=nearCanvas.getContext('2d');g.globalCompositeOperation='source-over';g.globalAlpha=1;g.clearRect(0,0,cw,ch);g.drawImage(small,sx,sy,sw,sh,0,0,cw,ch);g.fillStyle=`rgba(14,16,20,${dark})`;g.fillRect(0,0,cw,ch);
- const f=g.createLinearGradient(0,0,cw,0);f.addColorStop(side?0:1,'rgba(0,0,0,0)');f.addColorStop(side?.55:.45,'rgba(0,0,0,.62)');f.addColorStop(side?1:0,'rgba(0,0,0,.96)');g.globalCompositeOperation='destination-in';g.fillStyle=f;g.fillRect(0,0,cw,ch);
- ctx.imageSmoothingEnabled=true;ctx.drawImage(nearCanvas,x,0,w,h);
 }
 // One sheet of print grain over painting and people alike: the last thing that ties them to the same surface, and it takes the digital sheen off the paint.
 const grainTile=(()=>{const c=document.createElement('canvas');c.width=c.height=192;const g=c.getContext('2d'),d=g.createImageData(192,192),rand=seeded('grain');for(let i=0;i<d.data.length;i+=4){const v=108+rand()*40;d.data[i]=d.data[i+1]=d.data[i+2]=v;d.data[i+3]=255;}g.putImageData(d,0,0);return c;})();
@@ -10348,7 +10335,7 @@ function paintSigns(g,id){
   const state={tod,life:actors.map(a=>a.kind[0]).join(''),backdrop:(backdrop.currentSrc||backdrop.src||'').split('/').pop(),notice:notice&&notice.alpha>.3?notice.text:'',feet:Math.round((pos.x-camera.x)*getScale())+','+Math.round((pos.y-camera.y)*getScale()),zoom:getScale().toFixed(3),place:placeId,panel,destination:journeyGoal||departing||placeId,facing,motion:isWalking?'walking':'idle',step:String(step),worldX:pos.x.toFixed(1),worldY:pos.y.toFixed(1)};
   for(const [key,value] of Object.entries(state))if(canvas.dataset[key]!==value)canvas.dataset[key]=value;
   ctx.restore();
-  overheadOver(scale);nearOver(scale);grainOver();
+  overheadOver(scale);grainOver();
   updateChrome();
   const entry=scene().entry;
   const px=(entry.x-camera.x)*scale;let py=(entry.y-(near&&!departing?160:45)-camera.y)*scale;
@@ -10376,7 +10363,7 @@ function paintSigns(g,id){
     if(edge.side==='down'){const side=root.querySelector('.rr-edge[data-side=right]');if(!side.hidden&&Math.abs(side.offsetTop-top)<(button.offsetHeight||44)+6)side.style.top=Math.max(0,top-(side.offsetHeight||44)-8)+'px';}
     return;
    }
-   button.hidden=!edge||edge.y-camera.y<130||edge.y-camera.y>visibleHeight-140||edge.to!==guideRoute&&Math.hypot(pos.x-edge.x,pos.y-edge.y)>420||scene().edges.some(e=>e!==edge&&e.to===edge.to&&e.vertical);if(!edge)return;
+   button.hidden=!edge||edge.y-camera.y<130||edge.y-camera.y>visibleHeight-140||edge.to!==guideRoute&&Math.hypot(pos.x-edge.x,pos.y-edge.y)>300||scene().edges.some(e=>e!==edge&&e.to===edge.to&&e.vertical);if(!edge)return;
    const obstacle=edge.side==='left'?stick:root.querySelector('.rr-destination');
    const availableTop=obstacle.getBoundingClientRect().top-canvas.getBoundingClientRect().top-(button.offsetHeight||44)-8;
    button.dataset.to=edge.to;button.style.top=Math.max(0,Math.min((edge.y-camera.y+50)*scale,availableTop))+'px';
@@ -10390,7 +10377,7 @@ function paintSigns(g,id){
   if(photo.hidden&&journal.hidden&&keepMode.hidden&&rmRoot.hidden&&!changing&&!isTransferOpen()&&!isAvatarOpen()&&!onboarding){
    const previous={...pos},wasWalking=isWalking;let finished=false,intended=0,want=null;
    // Held input sets a wanted velocity (a half-tilted stick walks at half pace); the body eases toward it.
-   if(stickState.pointerId!==null){const tilt=Math.hypot(stickState.x,stickState.y);gait.push=tilt>.82?(gait.push||0)+dt:0;const pace=WALK*(1+.62*Math.min(1,Math.max(0,((gait.push||0)-.7)/.5)));want={x:stickState.x*pace,y:stickState.y*pace};}
+   if(stickState.pointerId!==null){const tilt=Math.hypot(stickState.x,stickState.y);gait.push=tilt>.7?(gait.push||0)+dt:0;const pace=WALK*(1+.75*Math.min(1,Math.max(0,((gait.push||0)-.3)/.35)));want={x:stickState.x*pace,y:stickState.y*pace};}
    else if(keys.size){
     let dx=0,dy=0;keys.forEach(k=>{dx+=dirs[k][0];dy+=dirs[k][1];});
     const norm=Math.hypot(dx,dy)||1;want={x:dx/norm*WALK,y:dy/norm*WALK};
@@ -10428,7 +10415,7 @@ function paintSigns(g,id){
    checkScreenEdges(pos.x-previous.x,pos.y-previous.y);
    // Pushing into a wall: after half a second of (almost) not moving, a faint line says the way is closed.
    const moved=Math.hypot(pos.x-previous.x,pos.y-previous.y);
-   if(!changing&&intended>140*dt*.3&&moved<intended*.5){if(moved<intended*.3)blockedFor+=dt;if(blockedFor>.5){
+   if(!changing&&intended>140*dt*.3&&moved<intended*.5){if(moved<intended*.3)blockedFor+=dt;if(blockedFor>.9){
     // Bumping into a local earns a greeting instead of the wall message.
     const local=actors.find(a=>a.kind==='local'&&Math.hypot(a.x-pos.x,a.y-pos.y)<34);
     if(local)root.dispatchEvent(new CustomEvent('roam:greet',{detail:{local}}));
