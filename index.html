@@ -1603,7 +1603,7 @@ html,body{overscroll-behavior:none;-webkit-text-size-adjust:100%;text-size-adjus
 #rome-immersive .rr-city h2{order:1;margin:0;font:inherit;letter-spacing:0}
 #rome-immersive .rr-city h2 b{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
 #rome-immersive .rr-city h2 span{display:block;width:auto;max-width:100%;margin:0;font:600 15px/1.2 -apple-system,BlinkMacSystemFont,"Hiragino Sans","PingFang TC",sans-serif;letter-spacing:.01em;color:#1f2d26;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-#rome-immersive .rr-city small{order:2;display:block;font-size:12px;line-height:1.2;letter-spacing:.02em;color:#4d5a50;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#rome-immersive .rr-city small{order:2;display:block;font-size:12.5px;line-height:1.2;letter-spacing:.02em;color:#4d5a50;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 #rome-immersive .rr-city .tod-mark{position:absolute;right:9px;top:50%;width:22px;height:22px;margin:-11px 0 0}
 /* Each city's plate is its own street sign: enamel in Paris, travertine in Rome, a green sign in New York. */
 #rome-immersive[data-city] .rr-city{background:var(--sign,#f8f1e2);border-radius:var(--sign-r,5px);box-shadow:inset 0 0 0 1px var(--sign-in,#fffdf6),inset 0 0 0 2px var(--sign-rule,#7d6f5540),0 0 0 1px #2b2a22c0,2px 3px 0 #15140f70}
@@ -1661,7 +1661,7 @@ html,body{overscroll-behavior:none;-webkit-text-size-adjust:100%;text-size-adjus
 #rome-immersive .rr-fstick{position:absolute;width:104px;height:104px;margin:-52px 0 0 -52px;border-radius:50%;background:#14201826;box-shadow:inset 0 0 0 1px #fff6;pointer-events:none}
 #rome-immersive .rr-fstick i{position:absolute;left:31px;top:31px;width:42px;height:42px;border-radius:50%;background:#f5efe0e6;box-shadow:0 1px 3px #0005}
 /* Pin: quiet paper marker on the sight */
-#rome-immersive .rr-pin{min-width:40px;height:40px;padding:0 10px;background:#f8f1e2;color:#2f4e3f;box-shadow:inset 0 0 0 1px #fffdf6,0 0 0 1px #2b2a22c0,1px 2px 0 #15140f70}
+#rome-immersive .rr-pin{min-width:44px;height:44px;padding:0 11px;background:#f8f1e2;color:#2f4e3f;box-shadow:inset 0 0 0 1px #fffdf6,0 0 0 1px #2b2a22c0,1px 2px 0 #15140f70}
 #rome-immersive .rr-pin::after{bottom:-4px;box-shadow:1px 1px 0 #2b2a22a0}
 #rome-immersive.is-first-photo .rr-pin::after{bottom:auto;rotate:none;box-shadow:0 0 0 2px #0007,inset 0 0 0 2px #0007;background:none}
 /* Exit plates: the way on is the green one */
@@ -1705,7 +1705,7 @@ html,body{overscroll-behavior:none;-webkit-text-size-adjust:100%;text-size-adjus
 #rome-immersive .rr-story{margin:8px 0 0;font-size:14px;line-height:1.5;color:#efe8d8}
 #rome-immersive .rr-story[hidden]{display:none}
 #rome-immersive .rt-pack small,#rome-immersive .rt-pack span{word-break:keep-all;overflow-wrap:anywhere}
-#rome-immersive :is(.rr-credit,.rr-source) a{display:inline-block;padding:7px 0}
+#rome-immersive :is(.rr-credit,.rr-source) a{display:inline-block;min-height:44px;padding:13px 0}
 /* Warm paper on the sheets too, so they belong to the street's plates. */
 #rome-immersive{--paper:#f8f2e6}
 #rome-immersive .rr-game{background:#171c18}
@@ -1730,9 +1730,75 @@ html,body{overscroll-behavior:none;-webkit-text-size-adjust:100%;text-size-adjus
 /* Close sits top right on every sheet */
 #rome-immersive .rk-top{flex-direction:row-reverse}
 #rome-immersive .rk-chip{min-height:44px}
+#rome-immersive .rk-retake{min-height:44px;display:inline-flex;align-items:center}
 #rome-immersive .rk-from-photo{min-height:44px;display:inline-flex;align-items:center}
 #rome-immersive .rg-gift[data-stage=tickets] .rg-skip,#rome-immersive .rg-gift[data-stage=stow] .rg-skip,#rome-immersive .rg-gift[data-stage=open] .rg-skip{visibility:hidden}
+/* The goal plate says how far; the tray steps back while you are walking */
+#rome-immersive .rr-goal{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:8px;align-items:center}
+#rome-immersive .rr-goal::after{grid-column:2;grid-row:1/3}
+#rome-immersive .rr-goal small{grid-column:1;font-size:11.5px;font-weight:600;line-height:1.15;color:#5a6a5f}
+#rome-immersive .rr-goal small:empty{display:none}
+#rome-immersive .rr-goal[data-kind=going] small{color:#d8d2c0}
+#rome-immersive :is(.rr-tray,.rr-journal-toggle,.rr-travel-toggle,.rr-avatar-toggle,.rk-camera-toggle){transition:opacity .25s}
+#rome-immersive.is-journey .rr-stick{opacity:.45}
+#rome-immersive.is-moving :is(.rr-tray,.rr-journal-toggle,.rr-travel-toggle,.rr-avatar-toggle,.rk-camera-toggle){opacity:.72}
+#rome-immersive .rw-page{margin:16px 0 4px}
+#rome-immersive .rw-page[hidden]{display:none}
+#rome-immersive .rw-page h3{margin:0 0 6px;font-size:14px}
+#rome-immersive .rw-page ul{list-style:none;margin:0;padding:0}
+#rome-immersive .rw-page li{display:flex;gap:10px;align-items:baseline;padding:6px 0;border-top:1px solid #2b2a2218;font-size:13.5px;line-height:1.35}
+#rome-immersive .rw-page b{flex:none;max-width:44%;font-weight:600;color:#4d5a50;font-size:12px}
 @media (prefers-reduced-motion:reduce){#rome-immersive :is(.rr-edge,.rr-banner,.rr-tutorial-hint,.is-bump,.rr-journal,.rk-mode){animation:none}}
+</style><style>/* The city map: one sheet of paper with the way through the city on it. */
+#rome-immersive .rm{position:absolute;inset:0;z-index:30;display:flex;flex-direction:column;background:#efe4cb;color:#2b2a22;animation:hud-sheet .26s cubic-bezier(.2,.8,.2,1)}
+#rome-immersive .rm[hidden]{display:none}
+#rome-immersive .rm-top{flex:none;display:flex;align-items:center;gap:10px;padding:calc(10px + env(safe-area-inset-top,0px)) 8px 8px 16px;background:#f8f1e2;box-shadow:0 1px 0 #2b2a2240}
+#rome-immersive .rm-head{min-width:0;flex:1}
+#rome-immersive .rm-top h2{margin:0;font:600 21px/1.2 Georgia,"Hiragino Mincho ProN","Songti TC",serif;letter-spacing:.02em;color:#1f2d26}
+#rome-immersive .rm-sub{margin:2px 0 0;font-size:12.5px;line-height:1.3;color:#4d5a50}
+#rome-immersive .rm-close{flex:none;width:44px;height:44px;display:grid;place-items:center;padding:0;border-radius:50%;background:none;color:#1f2d26}
+#rome-immersive .rm-close svg{width:22px;height:22px}
+#rome-immersive .rm-stage{position:relative;flex:1;min-height:0;overflow:hidden}
+#rome-immersive .rm-canvas,#rome-immersive .rm-spots{position:absolute;inset:0;width:100%;height:100%}
+#rome-immersive .rm-dot{position:absolute;width:40px;height:40px;margin:-20px 0 0 -20px;padding:0;border-radius:50%;background:none}
+#rome-immersive .rm-dot::before{content:"";position:absolute;left:50%;top:50%;width:11px;height:11px;margin:-5.5px 0 0 -5.5px;border-radius:50%;background:#fbf5e6;box-shadow:inset 0 0 0 2px #5a4a33a0}
+#rome-immersive .rm-dot.is-zone::before{width:9px;height:9px;margin:-4.5px 0 0 -4.5px}
+#rome-immersive .rm-dot.is-walked::before{background:var(--city,#2f4e3f);box-shadow:0 0 0 2px #fbf5e6}
+#rome-immersive .rm-dot[aria-pressed]::before{width:17px;height:17px;margin:-8.5px 0 0 -8.5px;background:#fbf5e6;box-shadow:inset 0 0 0 5px var(--city,#2f4e3f),0 0 0 2px #fbf5e6}
+#rome-immersive .rm-paw{position:absolute;left:24px;top:2px;width:15px;height:15px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cg fill='%233a3226'%3E%3Cellipse cx='10' cy='13.4' rx='4.6' ry='3.7'/%3E%3Cellipse cx='4.2' cy='9' rx='1.9' ry='2.5'/%3E%3Cellipse cx='8' cy='5.6' rx='1.9' ry='2.6'/%3E%3Cellipse cx='12.2' cy='5.6' rx='1.9' ry='2.6'/%3E%3Cellipse cx='15.9' cy='9' rx='1.9' ry='2.5'/%3E%3C/g%3E%3C/svg%3E") center/contain no-repeat;opacity:.72}
+#rome-immersive .rm-spot{position:absolute;width:var(--s);height:var(--s);margin:calc(var(--s)/-2) 0 0 calc(var(--s)/-2);padding:0;border-radius:50%;background:none;z-index:1;color:#2b2a22}
+#rome-immersive .rm-stamp{position:absolute;inset:0;border-radius:50%;background-size:230%;background-repeat:no-repeat;filter:sepia(.55) saturate(.72);box-shadow:0 0 0 2.5px #fbf5e6,0 0 0 3.5px #5a4a3390,1px 3px 5px #3a2e1a70}
+#rome-immersive .rm-stamp.is-photo{background-size:cover}
+#rome-immersive .rm-spot.is-seen .rm-stamp{filter:none;box-shadow:0 0 0 2.5px #fbf5e6,0 0 0 4px var(--city,#2f4e3f),1px 3px 5px #3a2e1a70}
+#rome-immersive .rm-spot.is-next .rm-stamp{filter:saturate(.95);box-shadow:0 0 0 2.5px #fbf5e6,0 0 0 5px var(--city,#2f4e3f),1px 3px 5px #3a2e1a70}
+#rome-immersive .rm-spot.is-next::after{content:"";position:absolute;inset:-9px;border-radius:50%;box-shadow:0 0 0 2px var(--city,#2f4e3f);opacity:0;animation:rm-next 1.9s ease-out infinite}
+@keyframes rm-next{0%{transform:scale(.86);opacity:.9}100%{transform:scale(1.18);opacity:0}}
+#rome-immersive .rm-spot[aria-pressed] .rm-stamp{outline:2.5px solid #1f2d26;outline-offset:6px}
+#rome-immersive .rm-spot span{position:absolute;left:50%;top:calc(100% + 6px);transform:translateX(-50%);width:max-content;max-width:104px;padding:1px 5px 2px;font-size:11.5px;font-weight:700;line-height:1.16;text-align:center;word-break:keep-all;overflow-wrap:anywhere;color:#2b2a22;background:#fbf5e6e0;border-radius:3px;box-shadow:0 0 0 1px #5a4a3326;pointer-events:none}
+#rome-immersive .rm-spot[data-name=t] span{top:auto;bottom:calc(100% + 6px)}
+#rome-immersive .rm-spot[data-name=r] span{left:calc(100% + 6px);top:50%;transform:translateY(-50%)}
+#rome-immersive .rm-spot[data-name=l] span{left:auto;right:calc(100% + 6px);top:50%;transform:translateY(-50%)}
+#rome-immersive .rm-mark{position:absolute;right:-4px;top:-5px;width:20px;height:20px;border-radius:50%;background:#fbf5e6 center/14px no-repeat;box-shadow:0 0 0 1px #5a4a3380,1px 1px 2px #0003}
+#rome-immersive .rm-mark.is-letter{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M2.5 5.5h15v10h-15zM2.5 5.5l7.5 6 7.5-6' fill='none' stroke='%238a5a3b' stroke-width='1.8' stroke-linejoin='round'/%3E%3C/svg%3E")}
+#rome-immersive .rm-mark.is-shine{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M10 2l1.8 6.2L18 10l-6.2 1.8L10 18l-1.8-6.2L2 10l6.2-1.8z' fill='%23c8921f'/%3E%3C/svg%3E")}
+#rome-immersive .rm-me{position:absolute;left:0;top:0;width:40px;height:55px;pointer-events:none;z-index:2;filter:drop-shadow(0 1px 1px #fff8) drop-shadow(0 2px 2px #3a2e1a80)}
+#rome-immersive .rm-foot{flex:none;padding:10px 12px calc(8px + env(safe-area-inset-bottom,0px));background:#f8f1e2;box-shadow:0 -1px 0 #2b2a2240}
+#rome-immersive .rm-card{display:flex;align-items:center;gap:10px;min-height:64px}
+#rome-immersive .rm-thumb{flex:none;width:60px;height:60px;border-radius:4px;overflow:hidden;box-shadow:0 0 0 1px #2b2a2240}
+#rome-immersive .rm-thumb img{display:block;width:100%;height:100%;object-fit:cover}
+#rome-immersive .rm-copy{min-width:0;flex:1}
+#rome-immersive .rm-copy strong{display:block;font-size:15.5px;line-height:1.25;color:#1f2d26;word-break:keep-all;overflow-wrap:anywhere}
+#rome-immersive .rm-copy small{display:block;margin-top:2px;font-size:12.5px;line-height:1.32;color:#4d5a50}
+#rome-immersive .rm-go{flex:none;min-width:96px;min-height:48px;padding:0 13px;border-radius:5px;background:var(--city,#2f4e3f);color:#fbf5e6;font-size:15px;font-weight:700;box-shadow:0 0 0 1px #0d1512,2px 3px 0 #15140f70}
+#rome-immersive .rm-go:disabled{background:none;color:#4d5a50;box-shadow:inset 0 0 0 1px #2b2a2240}
+#rome-immersive .rm-go:not(:disabled):active{translate:1px 1px}
+#rome-immersive .rm-world{display:block;width:100%;min-height:44px;margin-top:4px;background:none;color:#1f2d26;font-size:14.5px;font-weight:600;text-decoration:underline;text-underline-offset:3px}
+/* The world map on the same paper as the city maps */
+#rome-immersive .rr-travel{--rt-sea:#a9cbd1;--rt-land:#efe4cb;--rt-coast:#6f9aa3;--rt-destination:#e6cf96}
+#rome-immersive .rt-map-stage::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:url("assets/hd/ui-paper.webp") center/320px;mix-blend-mode:multiply;opacity:.6;box-shadow:inset 0 0 40px #785a3244}
+/* A short phone with ten sights: names only for the one you picked and the next one */
+#rome-immersive .rm-spots.is-tight .rm-spot:not([aria-pressed],.is-next) span{display:none}
+@media (prefers-reduced-motion:reduce){#rome-immersive .rm{animation:none}#rome-immersive .rm-spot.is-next::after{animation:none;opacity:.8}}
 </style><script>// Japanese is written directly in the markup and code; this table supplies English.
 // ?lang=ja / ?lang=en overrides the device language.
 // Chinese runs down the Japanese code path (names in characters, 「」, 年月日) with its own table; zh-Hans devices stay on English.
@@ -1830,6 +1896,8 @@ window.ROAM_ZH={"旅人の名前がまだ":"旅人還沒有名字","つける":"
 // Month numbers reach T() bare: T('11','November').
 for(let i=1;i<=12;i++)window.ROAM_ZH[i]=String(i);
 Object.assign(window.ROAM_ZH,{"見た場所 {0} / {1}":"看過 {0} / {1}","地図":"地圖","手帖":"手帳","絵はがき":"明信片","{0}へ歩いている":"正在走向{0}","次は {0}":"下一站 {0}","まず {0}へ":"先去{0}","次の街へ":"前往下一座城市","{0}か所を歩いて、景色を集めよう":"走過{0}個地點，收集風景吧","{0}か所を歩く":"走過{0}個地點","{0}か所目":"第{0}個地點","着いた。写真を見よう":"到了。看看照片吧","道をタップすると、そこまで歩く":"點一下道路，就會走過去","次の場所へは、ここをタップ":"點這裡前往下一個地點","設定":"設定","{1}で{0}を探す":"在{1}尋找{0}","見つけもの {0} / {1} · 味とおみやげ {2} / {3}":"發現物 {0} / {1} · 美食與伴手禮 {2} / {3}","もう少し歩く":"再走一會兒","いまは {0}":"目前在{0}","通りがかりの人「一枚、撮りましょうか」":"路人：「要幫你拍一張嗎？」","そのまま飛ぶ":"直接起飛","{0}の航空券を見る":"查看前往{0}的機票","味とおみやげ {0} / {1}":"美食與伴手禮 {0} / {1}","{0}をぜんぶ歩いた":"走遍了{0}","{0}か所の景色が手帖に":"{0}處風景都收進手帳了","{0}へ急いでいる":"正在趕往{0}","{0}の見どころへ":"前往{0}的看點","おいしい！":"好吃！","うまい！":"好喝！","いい買い物":"買得真好"});
+// 11/2 pass 2: city map, side-street moments. Machine translated, NO NATIVE SPEAKER HAS READ THIS.
+Object.assign(window.ROAM_ZH,{"2階でピアノの練習":"樓上有人在練鋼琴","{0}で声をかけられた":"在{0}有人跟你打招呼","{0}の光":"{0}的光","{0}を{1}回けった":"{0}踢了{1}下","{0}をもらった":"收到了{0}","いまここ":"你在這裡","おせんべい":"仙貝","けんけんぱ！":"跳房子！","ここ、いい光":"這裡的光真好","ここから{0}本先":"從這裡再走{0}條街","すみれの飴":"紫羅蘭糖","どこかでクンビア":"不知哪裡傳來昆比亞舞曲","どこかでサックス":"不知哪裡傳來薩克斯風","どこかで風鈴が鳴った":"不知哪裡的風鈴響了","まだ歩いていない":"還沒走過","まだ見ていない":"還沒看過","みかん":"橘子","りんご":"蘋果","アコーディオンが聞こえる":"聽見手風琴聲","アザーンが丘をわたる":"喚拜聲越過山丘","アブラのエンジン音":"阿布拉船的引擎聲","アマレッティ":"杏仁小餅","ウーロン茶をひと口":"一口烏龍茶","オレンジ":"柳橙","カササギが鳴いている":"喜鵲在叫","カモメが鳴いている":"海鷗在叫","カヤトーストの匂い":"咖椰吐司的香味","カルダモンのコーヒー":"小豆蔻咖啡","カルダモンの実":"小豆蔻","ガパオを炒める匂い":"打拋葉下鍋的香味","クエ":"娘惹糕","クロワッサンの端":"可頌的一角","グアバ飴":"芭樂糖","ココナッツの飴":"椰子糖","ココナッツ菓子":"椰子糖糕","ココナッツ飴":"椰子糖","コーヒーとたばこの匂い":"咖啡和香菸的味道","コーヒー店の食器の音":"咖啡店裡杯盤的聲音","ゴムまり":"橡皮球","ゴムボール":"橡皮球","サッカーボール":"足球","シミットのかけら":"一小塊芝麻圈","ジャスミンの花":"茉莉花","タクローのボール":"藤球","タロイモ団子":"芋圓","チャイとシミット":"紅茶和芝麻圈","チャイをひと口":"一口香料奶茶","チャイを煮る匂い":"煮香料奶茶的香味","チーズパンの匂い":"起司麵包的香味","テニスボール":"網球","トッポッキの甘辛い匂い":"辣炒年糕的甜辣香","ナツメヤシ":"椰棗","ハルモニウムが聞こえる":"聽見簧風琴聲","パイナップルタルト":"鳳梨塔","パブから笑い声":"酒吧傳來笑聲","パンダンの甘い匂い":"香蘭的甜香","ビスケット":"餅乾","ビスコッティ":"義式脆餅","ビー玉":"彈珠","ピザのひと切れの匂い":"披薩剛出爐的香味","フィッシュ&チップスの匂い":"炸魚薯條的香味","ブリガデイロ":"巴西巧克力球","プレッツェルの端":"蝴蝶餅的一角","ベーグルのかけら":"一小塊貝果","ペタンクの球":"法式滾球","ボール":"球","マドレーヌ":"瑪德蓮","マリーゴールドの匂い":"萬壽菊的香氣","マンゴーのかけら":"一小塊芒果","マンホール {0} / {1}":"人孔蓋 {0} / {1}","ミントキャンディ":"薄荷糖","ラドゥ":"拉杜球","一枚残した":"留下了一張","三味線の稽古が聞こえる":"有人在練三味線","世界地図へ":"看世界地圖","乳香の煙":"乳香的煙","八角と醤油の煮込み":"八角和醬油的滷香","収集車の「エリーゼのために」":"垃圾車的〈給愛麗絲〉","地下鉄が足の下を通った":"地鐵從腳下經過","地図を閉じる":"關閉地圖","坂の上からサンバ":"坡上傳來森巴","寺の太鼓":"廟裡的鼓聲","寺の鐘":"寺廟的鐘聲","寺の鐘が小さく鳴った":"寺廟的鐘輕輕響了","小さなボール":"小球","廟からお経が聞こえる":"廟裡傳來誦經聲","揚げたアレパの匂い":"炸玉米餅的香味","果物売りの呼び声":"水果小販的叫賣聲","歩いた":"走過了","歩いた通り {0} / {1}":"走過的街道 {0} / {1}","歩いて行く":"走過去","海の匂い":"海的味道","海風の匂い":"海風的味道","焙煎したてのコーヒー":"剛烘好的咖啡","焼きたてのピッツァ":"剛出爐的披薩","焼きだんごの匂い":"烤糰子的香味","焼きプレッツェルの匂い":"烤蝴蝶餅的香味","焼き栗の匂い":"烤栗子的香味","猫がいるらしい":"好像有貓","空き缶":"空罐","窓からオペラが聞こえる":"窗邊傳來歌劇","紅茶のティーバッグ":"紅茶包","線香の匂いがする":"有線香的味道","臭豆腐の匂い":"臭豆腐的味道","見た":"看過了","足あとの先に猫がいた":"腳印的盡頭有隻貓","路地でギターを弾いている":"巷子裡有人在彈吉他","路地の奥からパンソリ":"巷底傳來盤索里","遠くでアザーンが聞こえる":"遠處傳來喚拜聲","遠くでトゥクトゥクの音":"遠處傳來嘟嘟車的聲音","遠くで鐘が鳴った":"遠處的鐘響了","遠くで鐘が鳴っている":"遠處的鐘聲響著","雨上がりの石畳の匂い":"雨後石板路的味道","飴玉":"糖果","歩いた通り":"走過的街道","道草 {0}":"閒晃 {0}","道草":"閒晃","あと{0}本":"還有{0}條街","新しい通り {0} / {1}":"新街道 {0} / {1}","撮った写真を見る":"看你拍的照片","まずは近所から":"先從家附近開始","歩いた通りは地図に残る":"走過的街道會留在地圖上","まだ歩いていない通りが{0}本":"還有{0}條街沒走過","地図を開く":"打開地圖","{0}の通りをぜんぶ":"走遍{0}的每條街","ここから1本先":"從這裡再走1條街"});
 </script>
 <script>// Generated by tools/make_icons.mjs from Lucide 1.60.0 (ISC licence). The icons the game uses, bundled so it works offline.
 window.lucide={createIcons(){const NS='http://www.w3.org/2000/svg',I={"armchair":[["path",{"d":"M19 9V6a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v3"}],["path",{"d":"M3 16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V11a2 2 0 0 0-4 0z"}],["path",{"d":"M5 18v2"}],["path",{"d":"M19 18v2"}]],"arrow-left":[["path",{"d":"m12 19-7-7 7-7"}],["path",{"d":"M19 12H5"}]],"arrow-right":[["path",{"d":"M5 12h14"}],["path",{"d":"m12 5 7 7-7 7"}]],"book-open":[["path",{"d":"M12 5v16"}],["path",{"d":"M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z"}]],"bus-front":[["path",{"d":"M4 6 2 7"}],["path",{"d":"M10 6h4"}],["path",{"d":"m22 7-2-1"}],["rect",{"width":"16","height":"16","x":"4","y":"3","rx":"2"}],["path",{"d":"M4 11h16"}],["path",{"d":"M8 15h.01"}],["path",{"d":"M16 15h.01"}],["path",{"d":"M6 19v2"}],["path",{"d":"M18 21v-2"}]],"camera":[["path",{"d":"M13.997 4a2 2 0 0 1 1.76 1.05l.486.9A2 2 0 0 0 18.003 7H20a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h1.997a2 2 0 0 0 1.759-1.048l.489-.904A2 2 0 0 1 10.004 4z"}],["circle",{"cx":"12","cy":"13","r":"3"}]],"expand":[["path",{"d":"m15 15 6 6"}],["path",{"d":"m15 9 6-6"}],["path",{"d":"M21 16v5h-5"}],["path",{"d":"M21 8V3h-5"}],["path",{"d":"M3 16v5h5"}],["path",{"d":"m3 21 6-6"}],["path",{"d":"M3 8V3h5"}],["path",{"d":"M9 9 3 3"}]],"footprints":[["path",{"d":"M4 16v-2.38C4 11.5 2.97 10.5 3 8c.03-2.72 1.49-6 4.5-6C9.37 2 10 3.8 10 5.5c0 3.11-2 5.66-2 8.68V16a2 2 0 1 1-4 0Z"}],["path",{"d":"M20 20v-2.38c0-2.12 1.03-3.12 1-5.62-.03-2.72-1.49-6-4.5-6C14.63 6 14 7.8 14 9.5c0 3.11 2 5.66 2 8.68V20a2 2 0 1 0 4 0Z"}],["path",{"d":"M16 17h4"}],["path",{"d":"M4 13h4"}]],"globe-2":[["path",{"d":"M21.54 15H17a2 2 0 0 0-2 2v4.54"}],["path",{"d":"M7 3.34V5a3 3 0 0 0 3 3a2 2 0 0 1 2 2c0 1.1.9 2 2 2a2 2 0 0 0 2-2c0-1.1.9-2 2-2h3.17"}],["path",{"d":"M11 21.95V18a2 2 0 0 0-2-2a2 2 0 0 1-2-2v-1a2 2 0 0 0-2-2H2.05"}],["circle",{"cx":"12","cy":"12","r":"10"}]],"pause":[["rect",{"x":"14","y":"3","width":"5","height":"18","rx":"1"}],["rect",{"x":"5","y":"3","width":"5","height":"18","rx":"1"}]],"plane":[["path",{"d":"M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"}]],"play":[["path",{"d":"M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"}]],"rotate-cw":[["path",{"d":"M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"}],["path",{"d":"M21 3v5h-5"}]],"ticket":[["path",{"d":"M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"}],["path",{"d":"M13 5v2"}],["path",{"d":"M13 17v2"}],["path",{"d":"M13 11v2"}]],"user-round":[["circle",{"cx":"12","cy":"8","r":"5"}],["path",{"d":"M20 21a8 8 0 0 0-16 0"}]],"x":[["path",{"d":"M18 6 6 18"}],["path",{"d":"m6 6 12 12"}]]};document.querySelectorAll('i[data-lucide]').forEach(el=>{const n=el.getAttribute('data-lucide'),s=document.createElementNS(NS,'svg');if(!I[n])return;for(const [k,v] of Object.entries({xmlns:NS,width:24,height:24,viewBox:'0 0 24 24',fill:'none',stroke:'currentColor','stroke-width':2,'stroke-linecap':'round','stroke-linejoin':'round'}))s.setAttribute(k,v);for(const a of el.attributes)if(a.name!=='data-lucide'&&a.name!=='class')s.setAttribute(a.name,a.value);s.setAttribute('class',['lucide','lucide-'+n,el.getAttribute('class')].filter(Boolean).join(' '));for(const [t,at] of I[n]){const c=document.createElementNS(NS,t);for(const [k,v] of Object.entries(at))c.setAttribute(k,v);s.append(c);}el.replaceWith(s);});}};
@@ -2578,12 +2646,18 @@ function reachable(id,from){
  for(let i=0;i<q.length;i++){const n=q[i],x=n%100;for(const k of [n-100,n+100,x>0?n-1:-1,x<99?n+1:-1])if(k>=0&&k<15000&&!seen[k]&&m[k]){seen[k]=1;q.push(k);}}
  return seen;
 }
+// Coming in at the top of a street: far enough down that you do not arrive behind the place plate, on ground wide enough to be the street itself.
+function arrivalBelow(id,top){
+ if(id!=='zone-taiwan-jiufen')for(const dy of [260,240,220,200,180,160,140,120,100])if(top.y+dy<1400){ // Jiufen's steps narrow below the top
+ const s=streetAt(id,top.mid,[top.y+dy],300);if(s&&s.half>=45&&clearAround(id,s.x,s.y,30))return s;}
+ return streetAt(id,top.mid,[top.y+75,top.y+65,top.y+55,top.y+45],400)||{x:top.mid,y:top.y+45};
+}
 function connectZones(){
  for(const id of Object.keys(places)){
   const up=places[id],zone=places['zone-'+id];if(!zone)continue;
   const below=streetAt(id,up.spawn.x,[1465,1455,1445,1435,1425,1415,1405]);if(!below)continue;
   const above=streetAt('zone-'+id,below.mid,[35,45,55,65,75,85,95],400)||{x:below.mid,mid:below.mid,y:45,half:25};
-  const landing=streetAt('zone-'+id,above.mid,[above.y+75,above.y+65,above.y+55,above.y+45],400)||{x:above.mid,y:above.y+45};
+  const landing=arrivalBelow('zone-'+id,above);
   const back=streetAt(id,below.mid,[below.y-75,below.y-65,below.y-55,below.y-45],400)||{x:below.mid,y:below.y-45};
   zone.spawn={x:landing.x,y:landing.y};
   // The middle of the zone (where its sight is), on ground you can walk to from the top.
@@ -2598,7 +2672,7 @@ function connectZones(){
 }
 function walkEnds(id){
  const foot=streetAt(id,500,[1465,1455,1445,1435,1425,1415,1405],500)||{x:500,mid:500,y:1450,half:25},head=streetAt(id,500,[35,45,55,65,75,85,95],500)||{x:500,mid:500,y:45,half:25};
- const footIn=streetAt(id,foot.mid,[foot.y-160,foot.y-140,foot.y-120,foot.y-100,foot.y-85,foot.y-75,foot.y-65,foot.y-55,foot.y-45],400)||{x:foot.mid,y:foot.y-45},headIn=streetAt(id,head.mid,[head.y+75,head.y+65,head.y+55,head.y+45],400)||{x:head.mid,y:head.y+45};
+ const footIn=streetAt(id,foot.mid,[foot.y-160,foot.y-140,foot.y-120,foot.y-100,foot.y-85,foot.y-75,foot.y-65,foot.y-55,foot.y-45],400)||{x:foot.mid,y:foot.y-45},headIn=arrivalBelow(id,head);
  return {foot,head,footIn:{x:footIn.x,y:footIn.y},headIn:{x:headIn.x,y:headIn.y}};
 }
 function connectWalks(){
@@ -2634,7 +2708,7 @@ function connectTour(){
  // Where the painting shows a gate, the way on goes through it, not round a corner of the square.
  {const p=places['asakusa-kaminarimon'],left=p?.edges.find(e=>e.side==='left');
   if(left){
-   p.edges.unshift(vgate('up',503,312,left.to,left.arrival,80));const back=places[left.to]?.edges.find(e=>e.side==='down');if(back)back.arrival={x:503,y:372};
+   p.edges.unshift(vgate('up',503,312,left.to,left.arrival,80));p.edges[0].plateY=372;const back=places[left.to]?.edges.find(e=>e.side==='down');if(back)back.arrival={x:503,y:372};
    // Nothing to walk to behind the gate but the passage, and the photo spot stands clear of the lantern.
    p.entry={x:503,y:505};if(p.mask)for(let r=0;r<44;r++)for(let c=0;c<100;c++)if(!(r>=30&&c>=43&&c<=58))p.mask[r*100+c]=0;
   }
@@ -2987,7 +3061,7 @@ function updateChrome(){
  const p=scene(),next=places[p.next];near=!p.quiet&&Math.hypot(pos.x-p.entry.x,pos.y-p.entry.y)<95;
  root.classList.toggle('has-destination-action',near&&!departing);
  if(near&&!wasNear&&!changing){sound.arrive();prefetchPhoto(placeId);}wasNear=near;
- root.querySelector('.rr-city small').textContent=city().name+' · '+T('見た場所 {0} / {1}','Seen {0} / {1}',visitedCount(),placeCount())+(headerClock&&restTod?.city!==cityId()?' · '+headerClock:'');
+ root.querySelector('.rr-city small').textContent=performance.now()<plateUntil?plateNote:city().name+' · '+T('見た場所 {0} / {1}','Seen {0} / {1}',visitedCount(),placeCount())+(headerClock&&restTod?.city!==cityId()?' · '+headerClock:'');
  {const b=root.querySelector('.rr-city h2 b'),name=EN?p.city||city().title:city().name;b.textContent=name;b.dataset.len=name.length>=(EN?12:6)?'long':'';}
  const onBridge=placeId==='bridge';
  root.querySelector('.rr-city h2 span').textContent=p.area;
@@ -3168,7 +3242,7 @@ function showPhoto(){
  stopWalking();turnTo('up');gait.pose='camera';gait.poseAt=performance.now()+(turning?170:90);renderDirty=true;poseSheet();
  setTimeout(()=>{
   const go=gait.pose==='camera'&&revision===manualInputRevision&&placeId===at&&photo.hidden&&journal.hidden&&!changing&&!isTransferOpen()&&!isAvatarOpen();
-  gait.pose=null;renderDirty=true;if(go){sound.shutter();openPhoto(placeId,'walk');}
+  gait.pose=null;renderDirty=true;if(go){sound.shutter();hudCurtain('#fffdf6');openPhoto(placeId,'walk');if(!reduced)root.querySelector('.rr-real')?.animate?.([{transform:'scale(1.07)'},{transform:'none'}],{duration:520,easing:'cubic-bezier(.2,.8,.2,1)'});}
  },turning?560:470);
 }
 function closePhoto(){
@@ -3238,7 +3312,7 @@ function updateJournal(){
   img.hidden=false;img.src=thumbOf(seen?places[id].photos[0]:places[id].background);
  });
  root.querySelectorAll('[data-go]').forEach(button=>{const current=button.dataset.go===placeId;button.classList.toggle('is-current',current);button.textContent=T('歩く','Walk');});
- renderStallJournal();renderKeepsakes();
+ renderStallJournal();renderKeepsakes();wanderPage();
 }
 function openJournal(){
  if(changing)return;stopWalking();journalReturnFocus=photo.hidden?document.activeElement:view;
@@ -3493,7 +3567,7 @@ function paintTransfer(now){
  }
  if(playing)transitAnimation=requestAnimationFrame(paintTransfer);
 }
-travelToggle.addEventListener('click',openTransfer);
+travelToggle.addEventListener('click',openCityMap);
 travelRoot.querySelector('.rt-close').addEventListener('click',closeTransfer);travelRoot.querySelector('.rt-return').addEventListener('click',()=>{if(transferState?.stage==='arrived')setTransferStage('select');else closeTransfer();});
 travelRoot.querySelector('.rt-motion-toggle').addEventListener('click',toggleTransitMotion);
 travelRoot.querySelector('.rt-ticket-close').addEventListener('click',closeTicketSheet);
@@ -3545,7 +3619,8 @@ function maskPixels(src){
    catch(e){m.data=false;}
    lookAssetsChanged();
   });
-  image.addEventListener('error',()=>{m.data=false;lookAssetsChanged();});
+  // A file that fails once (a busy disk) gets two more tries; without the mask the look silently fell back to the old sprites for the whole session.
+  image.addEventListener('error',()=>{m.tries=(m.tries||0)+1;if(m.tries<3)setTimeout(()=>{image.src=src;},700);else{m.data=false;lookAssetsChanged();}});
   image.src=src;
  }
  return m.data||null;
@@ -4161,6 +4236,7 @@ function drawFront(f){
  const trace=(poly,hole)=>{const area=poly.reduce((a,[x,y],i)=>{const [u,v]=poly[(i+1)%poly.length];return a+x*v-u*y;},0),pts=(area<0)!==hole?[...poly].reverse():poly;pts.forEach(([x,y],i)=>i?ctx.lineTo(x,y):ctx.moveTo(x,y));ctx.closePath();};
  ctx.save();ctx.beginPath();f.polys.forEach(p=>trace(p,false));(f.holes||[]).forEach(p=>trace(p,true));ctx.clip();
  ctx.drawImage(image,x0*kx,y0*ky,(x1-x0)*kx,(y1-y0)*ky,x0,y0,x1-x0,y1-y0);ctx.restore();
+ if(placeId==='asakusa-kaminarimon')lanternDraw(ctx);
 }
 
 // ---- Time of day: each city's own clock picks dawn, golden afternoon or night art. ----
@@ -4216,28 +4292,40 @@ function dayTintOf(image){
 // (one scale per facing), and squash/stretch scale about the feet.
 // Morning and night tints: each tinted cell is painted once and kept. Repainting one shared canvas per sprite per frame cost WebKit
 // two thirds of its frame rate (simulator, Rome walking: 22 fps at morning, 32 at night, 58 by day).
-const tintCells=new Map(),tintIds=new WeakMap();let tintNext=1;
-function tintedCell(image,sx,sy,sw,sh,tint){
+const tintCells=new Map(),tintIds=new WeakMap();let tintNext=1;const cellDensity=.44;
+function tintedCell(image,sx,sy,sw,sh,both){
+ const [tint,foot]=both.split('|');
  let id=tintIds.get(image);if(!id){id=tintNext++;tintIds.set(image,id);}
- const key=id+'|'+sx+','+sy+','+sw+','+sh+'|'+tint;let cell=tintCells.get(key);
+ const key=id+'|'+sx+','+sy+','+sw+','+sh+'|'+both;let cell=tintCells.get(key);
  if(cell){tintCells.delete(key);tintCells.set(key,cell);return cell;}
- cell=document.createElement('canvas');cell.width=Math.ceil(sw);cell.height=Math.ceil(sh);const g=cell.getContext('2d');
+ // The sheets hold three times the detail of the paintings, so a crisp figure on a soft street read as a sticker. Each cell keeps about the painting's own density, and is drawn up with the same softness.
+ const q=cellDensity;
+ cell=document.createElement('canvas');cell.width=Math.max(2,Math.ceil(sw*q));cell.height=Math.max(2,Math.ceil(sh*q));const g=cell.getContext('2d');g.imageSmoothingQuality='high';g.scale(cell.width/sw,cell.height/sh);
  g.drawImage(image,sx,sy,sw,sh,0,0,sw,sh);g.globalCompositeOperation='source-atop';g.fillStyle=tint;g.fillRect(0,0,sw,sh);
- tintCells.set(key,cell);if(tintCells.size>80)tintCells.delete(tintCells.keys().next().value);
+ // The ground's colour comes up the legs a little: what ties a figure to the street more than any shadow.
+ if(foot){const f=g.createLinearGradient(0,sh,0,sh*.62),[r,gr,b]=foot.match(/\d+/g);f.addColorStop(0,`rgba(${r},${gr},${b},.46)`);f.addColorStop(1,`rgba(${r},${gr},${b},0)`);g.fillStyle=f;g.fillRect(0,0,sw,sh);}
+ tintCells.set(key,cell);if(tintCells.size>160)tintCells.delete(tintCells.keys().next().value);
  return cell;
 }
-function drawSprite(image,frame,x,y,height,{flip=false,alpha=1,ref=0,squash=1,stretch=1}={}){
+function drawSprite(image,frame,x,y,height,{flip=false,alpha=1,ref=0,squash=1,stretch=1,lean=0}={}){
  if(!avatarSpriteReady(image)||!frame)return;
- const [sx,sy,sw,sh,ax0,gy=sh]=frame,r=height/(ref||sh),w=sw*r*stretch,ax=ax0*stretch,top=y-gy*r*squash,tall=sh*r*squash,tint=tod==='night'?nightTintAt(x,y):spriteTints[tod]||dayTintOf(backdrops[placeId]);
- let source=image,ox=sx,oy=sy;
- if(tint){source=tintedCell(image,sx,sy,sw,sh,tint);ox=0;oy=0;}
- ctx.save();if(alpha<1)ctx.globalAlpha=alpha;
- if(flip){ctx.translate(x,0);ctx.scale(-1,1);ctx.drawImage(source,ox,oy,sw,sh,-ax*r,top,w,tall);}
- else ctx.drawImage(source,ox,oy,sw,sh,x-ax*r,top,w,tall);
+ const [sx,sy,sw,sh,ax0,gy=sh]=frame,r=height/(ref||sh),w=sw*r*stretch,ax=ax0*stretch,top=y-gy*r*squash,tall=sh*r*squash,tint=tod==='night'?nightTintAt(x,y):lightAt(x,y);
+ let source=image,ox=sx,oy=sy,cw=sw,ch=sh;
+ if(tint){source=tintedCell(image,sx,sy,sw,sh,tint);ox=0;oy=0;cw=source.width;ch=source.height;}
+ ctx.save();if(alpha<1)ctx.globalAlpha=alpha;if(lean)ctx.transform(1,0,-lean,1,lean*y,0);
+ if(flip){ctx.translate(x,0);ctx.scale(-1,1);ctx.drawImage(source,ox,oy,cw,ch,-ax*r,top,w,tall);}
+ else ctx.drawImage(source,ox,oy,cw,ch,x-ax*r,top,w,tall);
  ctx.restore();
 }
 function groundShadow(x,y,rx,ry,alpha=.28){softShadow(x+rx*.25,y+1,rx*1.5,ry*1.7,alpha*(tod==='night'?.8:1.3));}
 
+// The street's own birds: gulls by the sea, mynas in Bangkok and Singapore, parakeets in Jaipur. The pigeon's sheet, washed once a city.
+const birdTones={istanbul:'rgba(248,246,238,.8)',rio:'rgba(248,246,238,.8)',cartagena:'rgba(248,246,238,.8)',dubai:'rgba(232,222,200,.6)',bangkok:'rgba(52,40,32,.62)',singapore:'rgba(52,40,32,.62)',jaipur:'rgba(92,158,74,.62)',seoul:'rgba(28,30,40,.55)',tokyo:'rgba(120,88,58,.4)'},birdSheets={};
+function birdSheet(){
+ const base=sheetFor('pigeon'),tone=birdTones[cityId()];if(!tone||!base.complete||!base.naturalWidth)return base;
+ let c=birdSheets[tone];if(!c){c=birdSheets[tone]=document.createElement('canvas');c.width=base.naturalWidth;c.height=base.naturalHeight;const g=c.getContext('2d');g.drawImage(base,0,0);g.globalCompositeOperation='source-atop';g.fillStyle=tone;g.fillRect(0,0,c.width,c.height);}
+ return c;
+}
 // ---- Street life: pigeons that scatter, a cat that says hello, locals going about their day. ----
 // Fountains feed the ambient water sound; coordinates match the fountain blocks.
 const fountains={trevi:[[572,370]],navona:[[535,335]],colosseum:[[285,898]],spagna:[[378,531]],stpeter:[[287,382],[800,379]]};
@@ -4248,7 +4336,7 @@ function walkablePoint(rand,test=()=>true,y0=40,y1=1460,tries=300){
  return null;
 }
 // Locals are solid: a small footprint you walk around.
-const localAt=(x,y)=>actors.some(a=>a.kind==='local'&&Math.pow((x-a.x)/15,2)+Math.pow((y-a.y)/9,2)<1||a.kind==='stall'&&stallBlocks(a,x,y));
+const localAt=(x,y)=>actors.some(a=>a.kind==='local'&&Math.pow((x-a.x)/15,2)+Math.pow((y-a.y)/9,2)<1||a.solid&&Math.pow((x-a.x)/22,2)+Math.pow((y-a.y)/9,2)<1||a.kind==='stall'&&stallBlocks(a,x,y));
 const solid=(x,y,rx,ry)=>walkable(x-rx,y)&&walkable(x+rx,y)&&walkable(x,y-ry)&&walkable(x,y+ry)&&walkable(x-rx,y-ry)&&walkable(x+rx,y+ry);
 const clearLine=(a,b)=>{const d=Math.hypot(b.x-a.x,b.y-a.y),n=Math.ceil(d/12);for(let i=1;i<=n;i++){const t=i/n;if(!walkable(a.x+(b.x-a.x)*t,a.y+(b.y-a.y)*t))return false;}return true;};
 function spawnLife(force=false){
@@ -4293,7 +4381,7 @@ function spawnLife(force=false){
 }
 function updateLife(dt){
  if(!actors.length||!dt){if(!actors.length&&canvas.dataset.stalls)canvas.dataset.stalls='';return;}
- const now=performance.now()/1000;updateStallCard();updateFinds(dt);
+ const now=performance.now()/1000;updateStallCard();updateFinds(dt);wanderUpdate(dt);
  for(const a of actors){
   const d=Math.hypot(a.x-pos.x,a.y-pos.y);
   if(a.kind==='pigeon'){
@@ -4320,30 +4408,35 @@ function updateLife(dt){
   }else if(a.kind==='cat'){
    a.timer-=dt;a.heart=Math.max(0,a.heart-dt);
    if(a.timer<=0){a.frame=a.frame===3?0:Math.random()<.15?3:Math.random()<.5?0:1;a.timer=a.frame===3?6+Math.random()*6:1.4+Math.random()*2.4;}
-   if(d<75&&now-a.meowAt>25){a.meowAt=now;a.heart=1.6;a.frame=2;a.timer=1.4;sound.meow();}
+   a.say=Math.max(0,(a.say||0)-dt);if(d<75&&now-a.meowAt>25){a.meowAt=now;a.heart=1.6;a.say=1.6;a.frame=2;a.timer=1.4;sound.meow();}
   }
  }
 }
 // Everything on the ground is drawn back to front, the traveller included.
 function drawLife(drawPlayer){
- const list=actors.filter(a=>a.state!=='gone').map(a=>({y:a.y,a}));list.push({y:pos.y,player:true});if(petNow())list.push({y:pet.y,pet:true});for(const f of frontLayers[placeId]||[])list.push({y:f.y,front:f});
+ wanderFlat();
+ const list=actors.filter(a=>a.state!=='gone'&&!a.flat).map(a=>({y:a.y,a}));list.push({y:pos.y,player:true});for(const a of actors)if(a.w==='trail')list.push({y:a.cat.y,wcat:a});if(petNow())list.push({y:pet.y,pet:true});for(const f of frontLayers[placeId]||[])list.push({y:f.y,front:f});
  list.sort((p,q)=>p.y-q.y);
  for(const item of list){
   if(item.front){drawFront(item.front);continue;}
+  if(item.wcat){wCat(item.wcat);continue;}
   if(item.player){drawPlayer();continue;}
   if(item.pet){petDraw();continue;}
   const a=item.a;
   if(a.kind==='pigeon'){
-   const sheet=sheetFor('pigeon'),fly=a.z>0,h=fly?24:17;
+   const sheet=birdSheet(),fly=a.z>0,h=fly?24:17;
    groundShadow(a.x,a.y,fly?7:5.5,fly?2.2:1.8,fly?Math.max(0,.22-a.z/700):.26);
    drawSprite(sheet,spriteData.pigeon.frames[a.frame],a.x,a.y-a.z,h,{flip:a.flip,alpha:a.state==='flee'?Math.max(0,1-Math.max(0,a.t-1.1)/.6):1});
   }else if(a.kind==='cat'){
-   groundShadow(a.x,a.y,11,3);
-   drawSprite(sheetFor('cat'),spriteData.cat.frames[a.frame],a.x,a.y,a.frame===3?20:28,{flip:a.flip});
+   groundShadow(a.x,a.y,11,3,.32);
+   if(catSheets[cityId()]){a.n??=Math.floor(seeded(placeId+'catlook')()*6);drawSprite(catImage(cityId()),catCell(a.n),a.x,a.y,38,{flip:a.flip,ref:256});}
+   else drawSprite(sheetFor('cat'),spriteData.cat.frames[a.frame],a.x,a.y,a.frame===3?20:28,{flip:a.flip});
    if(a.heart>0){ctx.save();ctx.globalAlpha=Math.min(1,a.heart);ctx.fillStyle='#ffb3a7';ctx.font='600 14px sans-serif';ctx.textAlign='center';ctx.fillText('♥',a.x,a.y-38-(1.6-a.heart)*14);ctx.restore();}
   }else if(a.kind==='local'){
-   groundShadow(a.x,a.y,14,4.5,.22);
-   drawSprite(sheetFor(a.sheet),spriteData[a.sheet].frames[a.frame],a.x,a.y,(figureTall(a.y)+2)*(scene().figure||1),{flip:a.flip});
+   // Alive: a slow breath of their own, a small nod when they speak.
+   const lt=(figureTall(a.y)+2)*(scene().figure||1),lf=spriteData[a.sheet].frames[a.frame],breath=reduced?0:Math.sin(performance.now()/1000*1.74+a.x)*.008,nod=a.nod>0?Math.sin(a.nod*6.28)*.03:0;
+   groundShadow(a.x,a.y,13,4,.3);figureShadow(sheetFor(a.sheet),lf,a.x,a.y,lt,0,1,a.flip);
+   drawSprite(sheetFor(a.sheet),lf,a.x,a.y,lt,{flip:a.flip,squash:1+breath-nod,stretch:1-breath*.4});
    if(a.asks)drawAsk(a,a.y-(figureTall(a.y)+2)*(scene().figure||1));
    if(a.pair)seekHeart(a,a.y-(figureTall(a.y)+2)*(scene().figure||1));
    if(a.seek)seekMark(a);
@@ -4351,8 +4444,10 @@ function drawLife(drawPlayer){
   else if(a.kind==='stall')drawStall(a);
   else if(a.kind==='find')drawFind(a);
   else if(a.kind==='custom')customDraw(a);
+  else if(a.kind==='w')wanderDraw(a);
+  else if(a.kind==='walker')walkerDraw(a);
  }
- customOver();
+ customOver();wanderOver();
 }
 
 // ---- Street stalls and small shops: walk up, read a local tip, try it, keep it in the journal. ----
@@ -4698,7 +4793,7 @@ function stallSpot(st,ok,keep){
  return null;
 }
 const stallKeep=id=>{
- const p=places[id],keep=[p.spawn,p.entry,...p.edges.flatMap(e=>[{x:e.x,y:e.y},e.arrival])];
+ const p=places[id],keep=[p.spawn,p.entry,...p.edges.map(e=>({x:e.x,y:e.y}))]; // an exit's arrival is a point in the next scene, not here
  for(const q of Object.values(places))for(const e of q.edges||[])if(e.to===id)keep.push(e.arrival);
  // The main street runs from where you start up to the landmark: keep it open.
  for(let t=0;t<=1;t+=.05)keep.push({x:p.spawn.x+(p.entry.x-p.spawn.x)*t,y:p.spawn.y+(p.entry.y-p.spawn.y)*t,r:85});
@@ -4728,6 +4823,7 @@ function drawStall(a){
  const frame=[box[0],box[1],box[2],box[3],box[2]*.5];  // a stall stands on its middle, not on one corner
  const h=st.w*frame[3]/frame[2],t=performance.now()/1000+a.seed,still=reduced;
  ctx.save();ctx.globalAlpha=tod==='night'?.16:.26;ctx.fillStyle='#2b2419';ctx.beginPath();ctx.ellipse(a.x+a.rx*.18,a.y-a.ry*.6,a.rx*1.08,a.ry*1.15,0,0,Math.PI*2);ctx.fill();ctx.restore();
+ figureShadow(image,frame,a.x,a.y,h,0,.8,a.flip);
  if(st.awning&&!still){
   // The awning (top of the sprite) leans a fraction of a pixel; the counter below stays put.
   const top=a.y-h,cut=top+h*st.awning,lean=Math.sin(t*1.3)*.5+Math.sin(t*2.9)*.25;
@@ -4804,7 +4900,7 @@ function updateStallCard(){
   if(d<bestD){best=a;bestD=d;}
  }
  // Not while walking somewhere else, and never under a local's request.
- if(journeyGoal||departing||root.querySelector('.rq-card:not([hidden])'))best=null;
+ if(journeyGoal||departing||path.length&&!stallCardFor||!hudBanner.hidden||root.querySelector('.rq-card:not([hidden])'))best=null;
  if(best!==stallCardFor){if(best)showStallCard(best);else hideStallCard();}
  const fronts=actors.filter(a=>a.kind==='stall'&&a.screenFront).map(a=>a.st.id+':'+[...a.screenFront,...a.screenFoot].map(v=>v.toFixed(0)).join(',')).join('|');
  if(canvas.dataset.stalls!==fronts)canvas.dataset.stalls=fronts;
@@ -5098,6 +5194,7 @@ async function keepScene(card,outW,outH){
  if(bg){const kx=bg.naturalWidth/W,ky=bg.naturalHeight/H;g.drawImage(bg,f.x*kx,f.y*ky,f.w*kx,f.h*ky,0,0,c.width,c.height);}
  else{g.fillStyle='#d1c5a9';g.fillRect(0,0,c.width,c.height);}
  const k=c.width/f.w;g.setTransform(k,0,0,k,-f.x*k,-f.y*k);
+ if(bg)paintSigns(g,card.place);
  const items=card.actors.filter(a=>!(night&&a[0]==='p')).map(a=>({y:a[2],a}));items.push({y:card.y,me:true});items.sort((p,q)=>p.y-q.y);
  for(const {a,me:self} of items){
   if(self){
@@ -6158,7 +6255,7 @@ function regSay(city,r){
 }
 const regRank=city=>{const n=regDoneCount(city),all=regList(city).length;return n>=all?T('常連','Regular'):n>=2?T('顔なじみ','Familiar face'):T('旅人','Traveller');};
 // Stamps for the passport (keepPage adds these).
-const regStamps=city=>[{key:'morn:'+city,kind:'walk',ring:'MORNING WALK',label:T('{0}の朝を3か所','Three mornings in {0}',cities[city].name)},{key:'dusk:'+city,kind:'walk',ring:'NIGHT WALK',label:T('{0}の夜を3か所','Three nights in {0}',cities[city].name)},{key:'reg:'+city,kind:'walk',ring:'REGULAR',label:T('{0}の常連','A regular in {0}',cities[city].name)},...(catCount(city)?[{key:'cats:'+city,kind:'walk',ring:'STREET CATS',label:T('{0}の猫と友だちに','Friends with the cats of {0}',cities[city].name)}]:[]),...(seekOn(city)?[{key:'seek:'+city,kind:'walk',ring:'REUNITED',label:T('{0}で人さがし','Found someone in {0}',cities[city].name)}]:[]),{key:'custom:'+city,kind:'walk',ring:'LOCAL CUSTOM',label:T('{0}のならわしを3回','A local custom three times in {0}',cities[city].name)}];
+const regStamps=city=>[...(rmStreets(city).length?[{key:'walked:'+city,kind:'walk',ring:'EVERY STREET',label:T('{0}の通りをぜんぶ','Every street in {0}',cities[city].name)}]:[]),{key:'morn:'+city,kind:'walk',ring:'MORNING WALK',label:T('{0}の朝を3か所','Three mornings in {0}',cities[city].name)},{key:'dusk:'+city,kind:'walk',ring:'NIGHT WALK',label:T('{0}の夜を3か所','Three nights in {0}',cities[city].name)},{key:'reg:'+city,kind:'walk',ring:'REGULAR',label:T('{0}の常連','A regular in {0}',cities[city].name)},...(catCount(city)?[{key:'cats:'+city,kind:'walk',ring:'STREET CATS',label:T('{0}の猫と友だちに','Friends with the cats of {0}',cities[city].name)}]:[]),...(seekOn(city)?[{key:'seek:'+city,kind:'walk',ring:'REUNITED',label:T('{0}で人さがし','Found someone in {0}',cities[city].name)}]:[]),{key:'custom:'+city,kind:'walk',ring:'LOCAL CUSTOM',label:T('{0}のならわしを3回','A local custom three times in {0}',cities[city].name)}];
 function regEarn(city,key){if(Object.hasOwn(keepStamps,key))return;keepStamps[key]=Date.now();keepThunk(city,[key]);}
 
 // ---- The local's card and small toasts. ----
@@ -6240,20 +6337,23 @@ function catSpawn(){
 }
 function drawStray(a){const m=ctx.getTransform(),d=Math.min(window.devicePixelRatio||1,2);canvas.dataset.stray=Math.round((m.a*a.x+m.e)/d)+','+Math.round((m.d*a.y+m.f)/d);groundShadow(a.x,a.y,16,4);drawSprite(catImage(a.city),catCell(a.n),a.x,a.y,46,{flip:a.flip,ref:256});if(a.heart>0){ctx.save();ctx.globalAlpha=Math.min(1,a.heart);ctx.fillStyle='#ffb3a7';ctx.font='600 16px sans-serif';ctx.textAlign='center';ctx.fillText('♥',a.x,a.y-52-(1.6-a.heart)*14);ctx.restore();}}
 function catMeet(a){
- const key=a.city+'-'+a.n,name=catOf(a.city)[a.n];a.heart=1.6;sound.meow?.();if(Object.hasOwn(reg.cats,key))return;
+ const key=a.city+'-'+a.n,name=catOf(a.city)[a.n];a.heart=1.6;a.say=1.6;sound.meow?.();if(Object.hasOwn(reg.cats,key))return;
  reg.cats[key]=Date.now();const got=Object.keys(reg.cats).filter(k=>k.startsWith(a.city+'-')).length,all=catCount(a.city);
  regToast(T('{0}と友だちに','Friends with {0}',name?T(name[0],name[1]):''),T('{0}の猫 {1} / {2}','Cats of {0}: {1} / {2}',cities[a.city].name,got,all));if(got>=all){regEarn(a.city,'cats:'+a.city);if(petEarn())regToast(T('猫がついてきた','A cat joined you'),catOf(a.city)[0]?T('{0}の猫たちから','From the cats of {0}',cities[a.city].name):'');}persist();
 }
 // ---- Poll: everything above reads the game's state and writes only its own, so the walking code stays untouched. ----
+let regPlace=null;
 function regTick(){
- if(!onboarded||onboarding||isTransferOpen()||isAvatarOpen()||changing||!tkRoot.hidden){customBtn.hidden=true;return;}
+ if(!onboarded||onboarding||isTransferOpen()||isAvatarOpen()||changing||!tkRoot.hidden||mapIsOpen()){customBtn.hidden=true;return;}
  const c=cityId();
+ if(regPlace!==placeId){regPlace=placeId;if(reg.walked?.[placeId])reg.walked[placeId]=2;}
+ if(!reg.walked?.[placeId]){const fresh=!!reg.walked&&scene().quiet;(reg.walked||={})[placeId]=1;persist();if(fresh){const w=rmStreetCount(c);plateSay(T('新しい通り {0} / {1}','New street {0} / {1}',w.got,w.all));if(w.all&&w.got>=w.all)regEarn(c,'walked:'+c);}}
  if(regCity!==c){
   const back=Object.hasOwn(reg.first,c);regCity=c;reg.first[c]??=regToday(c);reg.last[c]=regToday(c);
   if(back)setTimeout(()=>{if(cityId()===c)sayQuietly(T('おかえり、{0}','Welcome back, {0}',regThey()),2.8);},2400);persist();
  }
- if(regActors!==actors){regActors=actors;regHide();catSpawn();customSpawn();seekSpawn();}
- for(const a of actors){a.heart&&=Math.max(0,a.heart-.25);if(a.kind==='stray'&&!a.met&&Math.hypot(a.x-pos.x,a.y-pos.y)<78){a.met=true;catMeet(a);}}
+ if(regActors!==actors){regActors=actors;regHide();catSpawn();customSpawn();seekSpawn();wanderSpawn();}
+ for(const a of actors){a.heart&&=Math.max(0,a.heart-.25);if(a.kind==='stray')a.say=Math.max(0,(a.say||0)-.25);if(a.kind==='stray'&&!a.met&&Math.hypot(a.x-pos.x,a.y-pos.y)<78){a.met=true;catMeet(a);}}
  customTick();
  if(!photo.hidden||!journal.hidden)return;
  regLight(c);
@@ -6430,7 +6530,7 @@ const customFxDraw={
 // Drawn last, over the street.
 function customOver(){
  if(!customFx)return;const k=(performance.now()-customFx.t)/1000,a=customFx.a,dur=reduced?1:customDur[a.u.kind]||3;
- if(!actors.includes(a)||k>dur){customFx=null;renderDirty=true;return;}
+ if(!actors.includes(a)||k>dur){customFx=null;renderDirty=true;if(actors.includes(a)&&!reg.customShot?.[a.city]){(reg.customShot||={})[a.city]=1;wanderShot(a.u.say);}return;}
  ctx.save();customFxDraw[a.u.kind](a,reduced?dur*.5:k);ctx.restore();renderDirty=true;
 }
 // The journal row.
@@ -6609,7 +6709,7 @@ function todayReasons(){
 }
 function todayShow(){
  if(!onboarded||onboarding||isTransferOpen()||isAvatarOpen()||!photo.hidden||!journal.hidden||!tkRoot.hidden)return;
- if(journeyGoal||departing){setTimeout(todayShow,5000);return;} // not across a walk already under way
+ if(journeyGoal||departing||mapIsOpen()){setTimeout(todayShow,5000);return;} // not across a walk already under way
  const day=new Date().toDateString();if(reg.todaySeen===day)return;const first=!reg.todaySeen&&!visited.size;reg.todaySeen=day;if(!first)monthPost();persist();if(first)return;
  const list=todayReasons();if(!list.length)return;
  const box=tkEl('tk-today');box.setAttribute('role','dialog');box.setAttribute('aria-modal','true');
@@ -6823,7 +6923,7 @@ function travellerTitle(){
  return walked>=3?T('{0}都市を歩いた旅人','Traveller of {0} cities',walked):T('名前','Name');
 }
 // ---- Once a city, after your third place there, someone offers to take your picture. A real postcard in the album, with you in it, in this light. ----
-function snapBusy(){return !onboarded||!!onboarding||changing||!photo.hidden||!journal.hidden||isTransferOpen()||isAvatarOpen()||keepIsOpen();}
+function snapBusy(){return !onboarded||!!onboarding||changing||!photo.hidden||!journal.hidden||isTransferOpen()||isAvatarOpen()||keepIsOpen()||mapIsOpen();}
 function snapMoment(){
  const here=cityId();
  if(reg.snap?.[here]||visitedCount()<3||snapBusy()||Math.hypot(pos.x-scene().entry.x,pos.y-scene().entry.y)>300)return;
@@ -6846,9 +6946,9 @@ function reviewMoment(){
 }
 async function snapShow(card){
  const dpr=Math.min(window.devicePixelRatio||1,2),art=await renderPostcard(card,96*dpr).catch(()=>null);if(!keepIsOpen())keepImages.clear();if(!art||snapBusy())return;
- const print=document.createElement('button');print.type='button';print.className='tv-print cursor-interaction';print.setAttribute('aria-label',T('撮ってもらった写真を見る','See the picture they took'));
+ const print=document.createElement('button');print.type='button';print.className='tv-print cursor-interaction';print.setAttribute('aria-label',card.self?T('撮った写真を見る','See your picture'):T('撮ってもらった写真を見る','See the picture they took'));
  const pic=document.createElement('canvas');pic.width=art.width;pic.height=art.height;pic.getContext('2d').drawImage(art,0,0);
- const line=document.createElement('small');line.textContent=T('撮ってもらった','Taken for you');print.append(pic,line);
+ const line=document.createElement('small');line.textContent=card.self?T('一枚残した','One for the album'):T('撮ってもらった','Taken for you');print.append(pic,line);
  print.addEventListener('click',()=>{print.remove();if(snapBusy())return;openJournal();journalTab('things');journal.hidden=true;keepReturn=null;keepDraft={...card};keepShow('view');keepEditor(true);keepPaint();});
  walkingUI.append(print);setTimeout(()=>print.remove(),7000);
 }
@@ -7413,6 +7513,12 @@ if(new URLSearchParams(location.search).has('audiodebug'))window.roamAudio={musi
    else if(kind==='birds'){for(let i=0;i<7;i++)hiss(.55+i*.13,.16,.02,'bandpass',1100,.7,1900);}
    else if(kind==='kite')hiss(0,2.4,.012,'bandpass',500,.6,900);
   }),
+  // Side-street sounds: a stone skipping, a cover under the foot, chalk squares rising, a small chime, leaves.
+  kick:play((soft=1)=>{knock(0,210,.05*soft,.05,'triangle');hiss(0,.05,.018*soft,'bandpass',1500);}),
+  clunk:play(()=>{knock(0,118,.11,.13,'triangle');knock(.05,86,.08,.12);bell(1760,.02,.006,.3,.3);}),
+  chalk:play(i=>{bell([523.25,587.33,659.25,783.99,880,1046.5][i]||880,0,.02,.5,.15);}),
+  chime:play(()=>{for(let i=0;i<4;i++)bell(1760+Math.random()*1100,i*.16+Math.random()*.08,.012,1.1,.3);}),
+  rustle:play(()=>{hiss(0,.42,.03,'highpass',1800);hiss(.1,.5,.016,'bandpass',3200);}),
   // Every place in a city seen.
   complete:play(()=>{sound.duck(.3,2.6);[[659.25,0],[783.99,.13],[1046.5,.26],[987.77,.46],[1318.51,.6]].forEach(([f,at],i)=>bell(f,at,i===4?.026:.022,i===4?2:1.1,.14));})
  });
@@ -7438,9 +7544,11 @@ const seasonCanvas=document.createElement('canvas');seasonCanvas.className='rr-s
 root.querySelector('.rr-game').append(seasonCanvas);
 const seasonImages={};let seasonKind=null,seasonBits=[],seasonRun=0,seasonLast=0;
 function seasonImage(k){if(!seasonImages[k]){const i=new Image();i.decoding='async';i.src=seasonArt[k];seasonImages[k]=i;}return seasonImages[k];}
+// The trees of the place: momiji and ginkgo in Tokyo, oak in London, plane and beech in Paris, maple in New York. Cells of season-leaves.
+const seasonLeafKinds={tokyo:[4,3],seoul:[3,4,5],paris:[2,5,6],london:[1,2,6],newyork:[0,7,1],rome:[2,5],istanbul:[2,5,6]};
 function seasonSeed(k,w,h){
  const n=k==='fireflies'?10:k==='snow'?20:7;
- seasonBits=Array.from({length:n},()=>({x:Math.random()*w,y:Math.random()*h,c:Math.floor(Math.random()*8),s:k==='snow'?9+Math.random()*9:k==='fireflies'?11+Math.random()*5:5.5+Math.random()*3,vy:k==='fireflies'?0:k==='snow'?16+Math.random()*16:22+Math.random()*22,vx:k==='snow'?-5+Math.random()*10:10+Math.random()*16,a:Math.random()*6.28,spin:(Math.random()-.5)*1.5,sway:12+Math.random()*16,p:Math.random()*6.28}));
+ const own=k==='leaves'&&seasonLeafKinds[cityId()];seasonBits=Array.from({length:n},()=>({x:Math.random()*w,y:Math.random()*h,c:own?own[Math.floor(Math.random()*own.length)]:Math.floor(Math.random()*8),s:k==='snow'?9+Math.random()*9:k==='fireflies'?11+Math.random()*5:5.5+Math.random()*3,vy:k==='fireflies'?0:k==='snow'?16+Math.random()*16:22+Math.random()*22,vx:k==='snow'?-5+Math.random()*10:10+Math.random()*16,a:Math.random()*6.28,spin:(Math.random()-.5)*1.5,sway:12+Math.random()*16,p:Math.random()*6.28}));
 }
 function seasonFrame(t){
  seasonRun=0;const k=seasonKind;if(!k||document.hidden)return;
@@ -7458,16 +7566,19 @@ function seasonFrame(t){
   g.drawImage(img,(b.c%4)*cw,Math.floor(b.c/4)*ch,cw,ch,-b.s,-b.s*.75,b.s*2,b.s*1.5);g.restore();
  }
 }
+let seasonLeafCity=null;
 function seasonCheck(){
  if(reduced||!onboarded||onboarding){seasonKind=null;seasonCanvas.hidden=true;return;}
  let k=seasonNow(cityId());if(k==='fireflies'&&tod!=='night')k=null;
- if(k!==seasonKind){seasonKind=k;seasonCanvas.hidden=!k;if(k){const r=seasonCanvas.getBoundingClientRect();seasonSeed(k,r.width||390,r.height||844);}else seasonCanvas.getContext('2d').clearRect(0,0,seasonCanvas.width,seasonCanvas.height);}
+ // A painting in blossom does not get falling maple.
+ if(k==='leaves'){const im=backdrops[placeId],m=im?.naturalWidth?lightOf(im):null;if(m&&m.pink>=4)k=null;}
+ if(k!==seasonKind||k==='leaves'&&seasonLeafCity!==cityId()){seasonKind=k;seasonLeafCity=cityId();seasonCanvas.hidden=!k;if(k){const r=seasonCanvas.getBoundingClientRect();seasonSeed(k,r.width||390,r.height||844);}else seasonCanvas.getContext('2d').clearRect(0,0,seasonCanvas.width,seasonCanvas.height);}
  canvas.dataset.season=k||'';
  if(k&&!seasonRun&&!document.hidden){seasonLast=performance.now();seasonRun=requestAnimationFrame(seasonFrame);}
 }
 setInterval(seasonCheck,1500);
 // ---- A light touch on the hand for the moments that matter. The iPhone shell listens on roamHaptic; a browser just skips it. ----
-const hapticMoments={purchase:'success',complete:'success',arrive:'light',learn:'light',keep:'light'};
+const hapticMoments={purchase:'success',complete:'success',arrive:'light',learn:'light',keep:'light',clunk:'light',shutter:'light'};
 for(const [name,kind] of Object.entries(hapticMoments)){const was=sound[name];if(typeof was==='function')sound[name]=(...a)=>{try{window.webkit?.messageHandlers?.roamHaptic?.postMessage(kind);}catch(e){}return was.apply(sound,a);};}
 // Portrait of the traveller for the passport and the boarding pass. A painted face only when it matches the chosen look.
 const portraitArt={classic:'assets/hd/portrait-classic.webp',woman:'assets/hd/portrait-woman.webp',elder:'assets/hd/portrait-elder.webp',youth:'assets/hd/portrait-youth.webp',wheel:'assets/hd/portrait-wheel.webp',panama:'assets/hd/portrait-panama.webp',scarf:'assets/hd/portrait-scarf.webp'};
@@ -8002,7 +8113,7 @@ function findSpot(p,f,ok,keep){
 }
 // Everything a find keeps clear of in a place: where you start and arrive, the landmark, the exits, and stalls (given).
 function findKeep(id,extra=[]){
- const p=places[id],keep=[p.spawn,p.entry,...(p.edges||[]).flatMap(e=>[{x:e.x,y:e.y},e.arrival])].filter(Boolean).map(k=>({x:k.x,y:k.y,r:60}));
+ const p=places[id],keep=[p.spawn,p.entry,...(p.edges||[]).map(e=>({x:e.x,y:e.y}))].filter(Boolean).map(k=>({x:k.x,y:k.y,r:60}));
  for(const q of Object.values(places))for(const e of q.edges||[])if(e.to===id&&e.arrival)keep.push({x:e.arrival.x,y:e.arrival.y,r:60});
  return keep.concat(extra);
 }
@@ -8042,7 +8153,7 @@ function drawFind(a){
  a.screen=screen(a.x,a.y);
  if(a.x<camera.x-s||a.x>camera.x+vw+s||a.y<camera.y-s||a.y>camera.y+vh+s){a.onScreen=false;return;}
  a.onScreen=true;
- const look=tod,icon=findIcon(a.f,s*scale*dpr,look);
+ const look=tod,icon=findIcon(a.f,s*(height/1000)*1.15*dpr,look); // a fixed size, not the zoom of the moment: the icon cache would fill with every step of a camera move
  // Flat things lie on the ground at a slight angle (foreshortened); a few stand upright.
  const up=findUpright.has(a.f.kind),rot=up?0:(a.rot??=(seeded(a.f.id)()-.5)*.9);
  groundShadow(a.x,a.y+s*(up?.22:.08),s*(up?.3:.4),s*.1,up?.24:.16);
@@ -9195,12 +9306,13 @@ findSets.cartagena=[
 // Order: a walk under way, a request you took, the next unseen sight in tour order (never just the next plain street), then the next city.
 // The exit plate on the way is the only green one. Three short lines teach a first-time player by doing; each shows once, kept in reg.tips.
 const hudGame=root.querySelector('.rr-game'),hudDest=root.querySelector('.rr-destination'),hudHint=root.querySelector('.rr-tutorial-hint');
-const hudGoal=document.createElement('button');hudGoal.type='button';hudGoal.className='rr-goal cursor-interaction';hudGoal.hidden=true;hudGoal.innerHTML='<span></span>';hudDest.append(hudGoal);
+const hudGoal=document.createElement('button');hudGoal.type='button';hudGoal.className='rr-goal cursor-interaction';hudGoal.hidden=true;hudGoal.innerHTML='<span></span><small></small>';hudDest.append(hudGoal);
 const hudTray=document.createElement('div');hudTray.className='rr-tray';hudTray.setAttribute('aria-hidden','true');hudGame.insertBefore(hudTray,root.querySelector('.rr-journal-toggle'));
 const hudMark=document.createElement('i');hudMark.className='tod-mark';hudMark.setAttribute('aria-hidden','true');root.querySelector('.rr-city').append(hudMark);
 const hudBanner=document.createElement('div');hudBanner.className='rr-banner';hudBanner.hidden=true;hudBanner.setAttribute('role','status');hudBanner.innerHTML='<em></em><strong></strong><small></small>';hudGame.append(hudBanner);
 const hudFloat=document.createElement('div');hudFloat.className='rr-fstick';hudFloat.hidden=true;hudFloat.setAttribute('aria-hidden','true');hudFloat.innerHTML='<i></i>';hudGame.append(hudFloat);
 for(const [sel,label] of [['.rr-avatar-toggle',T('旅人','Traveller')],['.rk-camera-toggle',T('絵はがき','Postcard')],['.rr-journal-toggle',T('手帖','Journal')],['.rr-travel-toggle',T('地図','Map')]])root.querySelector(sel)?.setAttribute('data-label',label);
+root.querySelector('.rr-travel-toggle').setAttribute('aria-label',T('地図を開く','Open the map'));
 // Each city's own ink on the plate, the way-on sign and the camera button. All reach 4.5:1 with the cream text.
 const guideAccent={rome:'#8a3b1f',paris:'#2c4a6e',london:'#3f4a3a',tokyo:'#a3281c',seoul:'#3d5a80',bangkok:'#7d5a0c',dubai:'#85551b',newyork:'#2e3a4a',rio:'#0f6b5c',taiwan:'#2e6b5c',singapore:'#1f6b45',jaipur:'#a23f64',istanbul:'#0f5f73',cartagena:'#a84a12'};
 const guideName=id=>EN&&id==='toweroflondon'?'the '+places[id].name:places[id].name;
@@ -9239,13 +9351,15 @@ function plateUnderFeet(scale){
 let guideRoute=null,guideRouteKey='',guideHurry=false;
 function guideRouteFor(step){
  const key=placeId+'>'+(step.to||'');if(key===guideRouteKey)return;guideRouteKey=key;
- guideRoute=step.to&&step.to!==placeId?pathToPlace(placeId,step.to)[1]||null:null;
+ const way=step.to&&step.to!==placeId?pathToPlace(placeId,step.to):[];guideRoute=way[1]||null;
+ // How far: a street count on the button, so you know what the tap means.
+ const more=way.length-1;hudGoal.querySelector('small').textContent=more>1?T('あと{0}本','{0} streets to go',more):'';
 }
 hudGoal.addEventListener('click',()=>{
  // What the button says at the moment of the tap, not what may have changed a frame later.
  if(hudGoal.dataset.kind==='going'){if(journeyGoal)guideHurry=!guideHurry;return;}
  const s=guideStep();active=true;sound.page?.();if(s.kind==='sight')guideTip('next');regHide();
- if(s.kind==='city'){root.querySelector('.rr-travel-toggle').click();return;}
+ if(s.kind==='city'){openTransfer();return;}
  if(s.kind==='note'){root.querySelector('.rr-journal-toggle').click();root.querySelector('.rq-section')?.scrollIntoView({block:'start'});return;}
  if(s.kind==='here'){takeManualControl();stopWalking();route(scene().entry.x,scene().entry.y);return;}
  startJourney(s.to);
@@ -9257,7 +9371,8 @@ function guideCityCard(c){
  const grid=tkEl('rr-done-grid');for(const id of cities[c].tour){const img=document.createElement('img');img.alt='';img.src=thumbOf(places[id].photos[0]);grid.append(img);}
  const {got,all}=findsCount(c),list=keepTaste(c),tried=list.filter(s=>Object.hasOwn(stallTried,s.id)).length,note=tkEl('tk-gift-note','p');
  note.textContent=T('見つけもの {0} / {1} · 味とおみやげ {2} / {3}','Finds {0} of {1} · Tastes {2} of {3}',got,all,tried,list.length);
- box.append(who,h,grid,note,tkBtn('tk-primary',T('もう少し歩く','Keep walking'),tkClose),tkBtn('rr-done-next',T('次の街へ','On to the next city'),()=>{tkClose();root.querySelector('.rr-travel-toggle').click();}));
+ {const w=rmStreetCount(c);if(w.all>w.got)note.textContent+='\n'+T('まだ歩いていない通りが{0}本','{0} streets not walked yet',w.all-w.got);note.style.whiteSpace='pre-line';}
+ box.append(who,h,grid,note,tkBtn('tk-primary',T('もう少し歩く','Keep walking'),tkClose),tkBtn('rr-done-next',T('次の街へ','On to the next city'),()=>{tkClose();openTransfer();}));
  sound.stamp?.();tkOpen(box,tkClose);
 }
 function guideTip(key){(reg.tips||={});if(!reg.tips[key]){reg.tips[key]=1;persist();}}
@@ -9268,11 +9383,14 @@ function guideBanner(title,sub,hold=2300,kicker=''){
  clearTimeout(hudBannerTimer);hudBannerTimer=setTimeout(()=>{hudBanner.classList.add('is-out');hudBannerTimer=setTimeout(()=>hudBanner.hidden=true,reduced?0:320);},hold);
 }
 const guideAll={};
+// A moment on the place plate instead of a banner: a street walked for the first time.
+let plateNote='',plateUntil=0;
+function plateSay(text){plateNote=text;plateUntil=performance.now()+2600;guideBump('.rr-city');renderDirty=true;}
 let guideTipAt=0,guideStoryFor=null,guideSeenPlace=null,guideSeenCity=null,guideCount=-1,guideInk=null;
 function guideTick(){
- skipFlight.hidden=!(transferState?.stage==='route'&&!transferState.fromHome&&Object.keys(reg.first).length>=2);
- const open=!onboarded||!!onboarding||isTransferOpen()||isAvatarOpen()||!photo.hidden||!journal.hidden;
- root.classList.toggle('is-journey',!!journeyGoal);root.classList.toggle('is-first-run',guideFirstRun());
+ skipFlight.hidden=!(transferState?.stage==='route'&&!transferState.fromHome&&Object.keys(reg.first).length>=1);
+ const open=!onboarded||!!onboarding||isTransferOpen()||isAvatarOpen()||!photo.hidden||!journal.hidden||mapIsOpen();
+ root.classList.toggle('is-journey',!!journeyGoal);root.classList.toggle('is-first-run',guideFirstRun());root.classList.toggle('is-moving',isWalking&&!open&&!reduced);
  if(hudMark.dataset.t!==tod)hudMark.dataset.t=tod;
  if(guideInk!==cityId()){guideInk=cityId();root.style.setProperty('--city',guideAccent[guideInk]||'#2f4e3f');root.dataset.city=guideInk;}
  if(!journal.hidden){const n=guideSight();root.querySelectorAll('.rr-memory-row').forEach(r=>r.classList.toggle('is-next',r.querySelector('[data-go]')?.dataset.go===n));guideStrip();}
@@ -9301,15 +9419,16 @@ function guideTick(){
   }else if(!first&&city().tour.includes(placeId)&&!visited.has(placeId))guideBanner(scene().name,'');
  }
  // Three lines for a first-time player, each until it has been done.
- let tip='',at='';
+ let tip='',at='',tipKey='next';
  if(!changing&&!journeyGoal){
   if(guideFirstRun()){
    if(atSight){tip=T('着いた。写真を見よう','You’re here. See the photo');at='slot';}
    else if(!walkedOnce&&!isWalking&&!path.length&&hudBanner.hidden){tip=T('道をタップすると、そこまで歩く','Tap the road to walk there');at='road';}
   }else if(!reg.tips?.next&&visited.size>=1&&!hudGoal.hidden&&(s.kind==='sight')){tip=T('次の場所へは、ここをタップ','Tap here for the next place');at='slot';}
+  else if(reg.tips?.next&&!reg.tips?.map&&scene().quiet&&Object.keys(reg.walked||{}).length>=3){tip=T('歩いた通りは地図に残る','Streets you walk stay on your map');at='slot';tipKey='map';}
  }
  // A line that has been read does not wait for ever.
- if(at==='slot'&&!guideFirstRun()){guideTipAt||=performance.now();if(performance.now()-guideTipAt>11000){guideTip('next');tip='';}}
+ if(at==='slot'&&!guideFirstRun()){guideTipAt||=performance.now();if(performance.now()-guideTipAt>(tipKey==='map'?5000:11000)){guideTip(tipKey);guideTipAt=0;tip='';}}
  if(hudHint.textContent!==tip)hudHint.textContent=tip;hudHint.dataset.at=at;hudHint.hidden=!tip;
  root.classList.toggle('is-tip-next',!!tip&&at==='slot'&&!guideFirstRun());
 }
@@ -9337,7 +9456,7 @@ canvas.addEventListener('pointermove',e=>{
 // iOS's own back gesture: a swipe in from the left edge closes whatever is open.
 let edgeSwipe=null;
 document.addEventListener('touchstart',e=>{const t=e.touches[0];edgeSwipe=e.touches.length===1&&t.clientX<24?{x:t.clientX,y:t.clientY}:null;},{passive:true});
-document.addEventListener('touchmove',e=>{if(!edgeSwipe)return;const t=e.touches[0];if(t.clientX-edgeSwipe.x>72&&Math.abs(t.clientY-edgeSwipe.y)<56){edgeSwipe=null;const close=root.querySelector('.tk-layer:not([hidden]) .tk-shelf-close,.rsv-sheet:not([hidden]) .rsv-close,.rk-mode:not([hidden]) .rk-close');if(close)close.click();else document.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true}));}},{passive:true});
+document.addEventListener('touchmove',e=>{if(!edgeSwipe)return;const t=e.touches[0];if(t.clientX-edgeSwipe.x>72&&Math.abs(t.clientY-edgeSwipe.y)<56){edgeSwipe=null;const close=root.querySelector('.tk-layer:not([hidden]) .tk-shelf-close,.rsv-sheet:not([hidden]) .rsv-close,.rk-mode:not([hidden]) .rk-close,.rm:not([hidden]) .rm-close');if(close)close.click();else document.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape',bubbles:true}));}},{passive:true});
 // Sound, text size, purchases, privacy: a screen of their own, reached from the journal, not the bottom of the wardrobe.
 let settingsFromJournal=false;
 function openSettings(){
@@ -9359,8 +9478,8 @@ function hudCurtain(color){if(reduced)return;const c=document.createElement('div
 // After the first flight nobody has to ride the bus again: the route page offers the short way.
 const skipFlight=document.createElement('button');skipFlight.type='button';skipFlight.className='rt-skip cursor-interaction';skipFlight.hidden=true;skipFlight.textContent=T('そのまま飛ぶ','Fly straight there');root.querySelector('.rt-footer')?.prepend(skipFlight);
 skipFlight.addEventListener('click',()=>{if(transferState?.stage==='route'&&!transferState.fromHome){transferState.quick=true;setTransferStage('flight');}});
-// The place plate is a sign you can touch: it opens this city's page, and it never lets a tap through to the ground under it.
-root.querySelector('.rr-city').addEventListener('click',()=>{if(!changing&&!onboarding)root.querySelector('.rr-journal-toggle').click();});
+// The place plate is a sign you can touch: it opens the map of this city, and it never lets a tap through to the ground under it.
+root.querySelector('.rr-city').addEventListener('click',()=>{if(!changing&&!onboarding)openCityMap();});
 // The way through a city at a glance, on the first page of the journal: sights, the streets between them, and where you are.
 const hudStrip=document.createElement('div');hudStrip.className='rj-strip';hudStrip.setAttribute('role','img');
 let hudStripKey='';
@@ -9378,20 +9497,764 @@ function guideStrip(){
 // The page's own mark until it can paint: no black wait, then the first screen fades in under it.
 {const boot=document.getElementById('rome-boot'),gone=()=>{if(!boot)return;boot.style.opacity=0;setTimeout(()=>boot.remove(),reduced?0:380);};if(document.readyState==='complete')gone();else addEventListener('load',gone);}
 
- function getScale(){return height/1000;}
+// ---- Where things really are. Latitude and longitude of every sight, with the river, coast and parks of each city, for the map behind 地図.
+// Typed from memory of the real places, close enough for a hand-drawn map, not for navigation. The map spreads crowded sights apart (citymap.js), so distances are not to scale.
+//  at: sights. river: lines, [width, points]. sea: filled water. land: paper laid over water (islands). park: green washes.
+const cityGeo={
+ rome:{at:{colosseum:[41.8902,12.4922],forum:[41.8925,12.4853],venezia:[41.8958,12.4826],trevi:[41.9009,12.4833],spagna:[41.9058,12.4823],pantheon:[41.8986,12.4769],navona:[41.8992,12.4731],castello:[41.9031,12.4663],stpeter:[41.9022,12.4568],trastevere:[41.8893,12.4700]},
+  river:[[20,[[41.928,12.466],[41.914,12.470],[41.910,12.476],[41.906,12.475],[41.9035,12.471],[41.9015,12.4665],[41.8985,12.4635],[41.8945,12.4655],[41.8925,12.4705],[41.8905,12.4765],[41.886,12.4790],[41.880,12.4735],[41.868,12.470]]]],
+  park:[[[41.9165,12.478],[41.9165,12.495],[41.9085,12.495],[41.9100,12.479]],[[41.8945,12.452],[41.8945,12.463],[41.8835,12.466],[41.8835,12.452]],[[41.889,12.4865],[41.8895,12.4905],[41.886,12.4915],[41.886,12.486]]]},
+ paris:{at:{eiffel:[48.8584,2.2945],bridge:[48.8637,2.3135],arc:[48.8738,2.2950],louvre:[48.8606,2.3376],notredame:[48.8530,2.3499],montmartre:[48.8867,2.3431]},
+  river:[[20,[[48.820,2.392],[48.8395,2.3700],[48.8465,2.3610],[48.8520,2.3530],[48.8570,2.3410],[48.8607,2.3260],[48.8637,2.3135],[48.8640,2.3020],[48.8605,2.2900],[48.8530,2.2810],[48.8420,2.2700],[48.830,2.255]]]],
+  land:[[[48.8560,2.3420],[48.8545,2.3510],[48.8520,2.3525],[48.8535,2.3430]]],
+  park:[[[48.8650,2.3220],[48.8640,2.3300],[48.8620,2.3295],[48.8630,2.3215]],[[48.8580,2.2955],[48.8550,2.3015],[48.8535,2.2995],[48.8565,2.2935]],[[48.8485,2.3330],[48.8485,2.3390],[48.8445,2.3390],[48.8445,2.3330]],[[48.8820,2.3070],[48.8820,2.3120],[48.8790,2.3120],[48.8790,2.3070]]]},
+ london:{at:{westminster:[51.5007,-.1246],trafalgar:[51.5080,-.1281],buckingham:[51.5014,-.1419],stpauls:[51.5138,-.0984],toweroflondon:[51.5081,-.0759],towerbridge:[51.5055,-.0754]},
+  river:[[24,[[51.478,-.138],[51.4895,-.1260],[51.4955,-.1225],[51.5010,-.1222],[51.5065,-.1200],[51.5100,-.1150],[51.5103,-.1040],[51.5085,-.0930],[51.5075,-.0850],[51.5055,-.0754],[51.5040,-.0650],[51.5050,-.0480]]]],
+  park:[[[51.5045,-.1400],[51.5030,-.1300],[51.5015,-.1300],[51.5025,-.1400]],[[51.5075,-.1470],[51.5065,-.1400],[51.5025,-.1430],[51.5035,-.1490]],[[51.5120,-.1760],[51.5120,-.1520],[51.5030,-.1530],[51.5030,-.1760]]]},
+ tokyo:{at:{'asakusa-kaminarimon':[35.7111,139.7963],'asakusa-nakamise':[35.7128,139.7965],'asakusa-sensoji':[35.7148,139.7967],'asakusa-jinja':[35.7152,139.7978],'asakusa-denboin':[35.7123,139.7950],'asakusa-sumida':[35.7105,139.7994]},
+  river:[[26,[[35.7300,139.8045],[35.7200,139.8030],[35.7150,139.8012],[35.7105,139.7998],[35.7050,139.7985],[35.6950,139.7970]]]],
+  park:[[[35.7190,139.8000],[35.7135,139.7992],[35.7125,139.8000],[35.7185,139.8018]],[[35.7160,139.7955],[35.7160,139.7985],[35.7138,139.7985],[35.7138,139.7955]]]},
+ seoul:{at:{gyeongbokgung:[37.5796,126.9770],bukchon:[37.5826,126.9830],changdeokgung:[37.5794,126.9910],jongmyo:[37.5741,126.9940],deoksugung:[37.5658,126.9751],sungnyemun:[37.5600,126.9754]},
+  river:[[8,[[37.5697,126.9785],[37.5690,126.9900],[37.5703,127.0060]]]],
+  park:[[[37.5990,126.9600],[37.5990,127.0050],[37.5860,126.9950],[37.5850,126.9700]],[[37.5560,126.9800],[37.5560,127.0050],[37.5450,127.0050],[37.5450,126.9800]],[[37.5870,126.9900],[37.5870,126.9960],[37.5790,126.9960],[37.5790,126.9900]]]},
+ bangkok:{at:{watarun:[13.7437,100.4889],thatien:[13.7464,100.4909],watpho:[13.7465,100.4932],grandpalace:[13.7500,100.4913],goldenmount:[13.7539,100.5066],yaowarat:[13.7403,100.5090]},
+  river:[[24,[[13.7800,100.5000],[13.7640,100.4950],[13.7530,100.4890],[13.7450,100.4895],[13.7395,100.4970],[13.7340,100.5050],[13.7240,100.5140]]],[6,[[13.7590,100.4960],[13.7580,100.5040],[13.7520,100.5090],[13.7440,100.5080],[13.7400,100.5010]]]],
+  park:[[[13.7560,100.4915],[13.7560,100.4945],[13.7530,100.4945],[13.7530,100.4915]]]},
+ dubai:{at:{alfahidifort:[25.2633,55.2972],bastakiya:[25.2640,55.3005],shindagha:[25.2690,55.2895],dubaicreek:[25.2658,55.2962],spicesouk:[25.2688,55.3000],goldsouk:[25.2704,55.3030]},
+  river:[[26,[[25.2790,55.2800],[25.2730,55.2880],[25.2680,55.2950],[25.2640,55.3030],[25.2590,55.3110],[25.2500,55.3250]]]],
+  sea:[[[25.2400,55.2600],[25.2610,55.2740],[25.2715,55.2840],[25.2790,55.2900],[25.2950,55.3100],[25.33,55.31],[25.33,55.22],[25.24,55.22]]]},
+ newyork:{at:{brooklynbridge:[40.7061,-73.9969],trinitychurch:[40.7081,-74.0120],washingtonsquare:[40.7308,-73.9973],nypl:[40.7532,-73.9822],stpatricks:[40.7585,-73.9760],bethesda:[40.7740,-73.9708]},
+  sea:[[[40.60,-74.20],[40.60,-73.80],[40.86,-73.80],[40.86,-74.20]]],
+  land:[[[40.8300,-73.9550],[40.7990,-73.9770],[40.7820,-73.9880],[40.7610,-74.0020],[40.7420,-74.0100],[40.7240,-74.0120],[40.7100,-74.0170],[40.7010,-74.0170],[40.7005,-74.0110],[40.7060,-74.0000],[40.7100,-73.9800],[40.7270,-73.9720],[40.7480,-73.9700],[40.7600,-73.9600],[40.7730,-73.9440],[40.7950,-73.9290],[40.8300,-73.9320]],[[40.6800,-74.0200],[40.6950,-74.0000],[40.7020,-73.9900],[40.7060,-73.9750],[40.7250,-73.9600],[40.7450,-73.9580],[40.7600,-73.9450],[40.7800,-73.9200],[40.8300,-73.9000],[40.8300,-73.8000],[40.6000,-73.8000],[40.6000,-74.0200]],[[40.8600,-73.9600],[40.7800,-74.0100],[40.7500,-74.0220],[40.7200,-74.0340],[40.6900,-74.0420],[40.6600,-74.0620],[40.6000,-74.0800],[40.6000,-74.2000],[40.8600,-74.2000]]],
+  park:[[[40.7681,-73.9819],[40.8006,-73.9582],[40.7969,-73.9493],[40.7644,-73.9730]]]},
+ rio:{at:{copacabana:[-22.9711,-43.1822],selaron:[-22.9154,-43.1791],arcoslapa:[-22.9129,-43.1801],theatromunicipal:[-22.9090,-43.1765],pacoimperial:[-22.9033,-43.1737],candelaria:[-22.9009,-43.1778]},
+  sea:[[[-22.86,-43.19],[-22.8960,-43.1790],[-22.8985,-43.1740],[-22.9030,-43.1705],[-22.9100,-43.1620],[-22.9200,-43.1700],[-22.9330,-43.1720],[-22.9440,-43.1730],[-22.9450,-43.1600],[-22.9490,-43.1550],[-22.9630,-43.1650],[-22.9720,-43.1800],[-22.9890,-43.1920],[-22.9900,-43.2300],[-23.04,-43.23],[-23.04,-43.08],[-22.86,-43.08]]],
+  park:[[[-22.93,-43.25],[-22.93,-43.20],[-22.96,-43.20],[-22.97,-43.25]]]},
+ taiwan:{at:{'taiwan-jiufen':[25.1092,121.8445],'taiwan-dihua':[25.0559,121.5098],'taiwan-longshan':[25.0372,121.4999],'taiwan-tamsui':[25.1695,121.4408],'taiwan-bopiliao':[25.0369,121.5030],'taiwan-dadaocheng':[25.0566,121.5074]},
+  river:[[20,[[25.1900,121.3900],[25.1500,121.4500],[25.1000,121.4700],[25.0700,121.5050],[25.0400,121.4970],[25.0100,121.5050],[24.9600,121.5400]]],[10,[[25.0700,121.5050],[25.0800,121.5400],[25.0700,121.5900],[25.0600,121.6500],[25.0900,121.7000]]]],
+  sea:[[[25.19,121.39],[25.2950,121.5400],[25.2000,121.6800],[25.1500,121.7500],[25.1350,121.8000],[25.1250,121.8700],[25.0200,121.9900],[25.02,122.15],[25.42,122.15],[25.42,121.30],[25.19,121.30]]]},
+ singapore:{at:{'singapore-chinatown':[1.2836,103.8440],'singapore-kampongglam':[1.3022,103.8590],'singapore-clarkequay':[1.2868,103.8496],'singapore-fortcanning':[1.2950,103.8460],'singapore-littleindia':[1.3066,103.8518],'singapore-emeraldhill':[1.3029,103.8391]},
+  river:[[14,[[1.2930,103.8300],[1.2895,103.8420],[1.2880,103.8490],[1.2865,103.8530],[1.2835,103.8570]]]],
+  sea:[[[1.2600,103.8200],[1.2760,103.8470],[1.2820,103.8530],[1.2835,103.8570],[1.2905,103.8605],[1.2925,103.8650],[1.3000,103.8700],[1.3050,103.8820],[1.3100,103.9100],[1.2000,103.9100],[1.2000,103.7900],[1.2600,103.7900]]],
+  park:[[[1.2975,103.8435],[1.2975,103.8475],[1.2930,103.8480],[1.2930,103.8440]]]},
+ jaipur:{at:{'jaipur-hawamahal':[26.9239,75.8267],'jaipur-citypalace':[26.9258,75.8237],'jaipur-jantarmantar':[26.9247,75.8245],'jaipur-amberfort':[26.9855,75.8513],'jaipur-johari':[26.9190,75.8265],'jaipur-alberthall':[26.9116,75.8195]},
+  sea:[[[26.9600,75.8420],[26.9610,75.8490],[26.9500,75.8510],[26.9490,75.8440]],[[26.9845,75.8535],[26.9845,75.8560],[26.9825,75.8560],[26.9825,75.8535]]],
+  park:[[[26.9130,75.8170],[26.9130,75.8215],[26.9085,75.8215],[26.9085,75.8170]],[[27.0200,75.8200],[27.0200,75.9000],[26.9600,75.8800],[26.9650,75.8550],[26.9750,75.8350]]]},
+ istanbul:{at:{'istanbul-hagiasophia':[41.0086,28.9802],'istanbul-bluemosque':[41.0054,28.9768],'istanbul-grandbazaar':[41.0107,28.9680],'istanbul-spicebazaar':[41.0165,28.9706],'istanbul-galata':[41.0256,28.9741],'istanbul-balat':[41.0295,28.9490]},
+  river:[[22,[[41.0200,28.9850],[41.0195,28.9735],[41.0245,28.9625],[41.0330,28.9500],[41.0430,28.9420],[41.0520,28.9320]]]],
+  sea:[[[41.0165,28.9860],[41.0120,28.9860],[41.0040,28.9810],[41.0000,28.9680],[41.0040,28.9500],[41.0010,28.9250],[40.96,28.92],[40.96,29.08],[41.07,29.08],[41.0500,29.0120],[41.0340,28.9930],[41.0235,28.9815]]]},
+ cartagena:{at:{'cartagena-clocktower':[10.4227,-75.5497],'cartagena-santodomingo':[10.4245,-75.5516],'cartagena-sanpedro':[10.4217,-75.5510],'cartagena-sanfelipe':[10.4226,-75.5390],'cartagena-getsemani':[10.4203,-75.5460],'cartagena-murallas':[10.4282,-75.5480]},
+  sea:[[[10.4600,-75.5250],[10.4330,-75.5440],[10.4280,-75.5510],[10.4240,-75.5545],[10.4190,-75.5560],[10.4130,-75.5590],[10.3800,-75.5660],[10.3800,-75.6000],[10.4600,-75.6000]],[[10.4185,-75.5530],[10.4190,-75.5470],[10.4175,-75.5440],[10.4100,-75.5430],[10.3800,-75.5400],[10.3800,-75.5570],[10.4060,-75.5575]],[[10.4310,-75.5440],[10.4290,-75.5390],[10.4260,-75.5390],[10.4250,-75.5430]]]}
+};
+// A painted map for a city, once one exists (tools/import_citymaps.py writes it): drawn under the route in place of the inked water.
+const cityMapArt={};
+
+// ---- The city map behind 地図: the real shape of the place, the way through it, and you standing on it.
+// Sights sit where they really are (citymap-data.js), pushed apart a little so a thumb can tell them apart. The route, street dots and side streets come from the walking graph itself,
+// so what you tap is exactly what you can walk to. A street turns to ink once you have walked it, so wandering leaves a mark. The world map is one tap further: 世界地図.
+const rmRoot=document.createElement('section');rmRoot.className='rm';rmRoot.hidden=true;rmRoot.setAttribute('role','dialog');rmRoot.setAttribute('aria-modal','true');rmRoot.setAttribute('aria-labelledby','rm-title');
+rmRoot.innerHTML='<header class="rm-top"><div class="rm-head"><h2 id="rm-title"></h2><p class="rm-sub"></p></div><button class="rm-close cursor-interaction" type="button"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></header>'
+ +'<div class="rm-stage"><canvas class="rm-canvas" aria-hidden="true"></canvas><div class="rm-spots"></div><canvas class="rm-me" width="96" height="132" aria-hidden="true"></canvas></div>'
+ +'<footer class="rm-foot"><div class="rm-card"><span class="rm-thumb"><img alt=""></span><div class="rm-copy"><strong></strong><small></small></div><button class="rm-go cursor-interaction" type="button"></button></div><button class="rm-world cursor-interaction" type="button"></button></footer>';
+root.querySelector('.rr-app').append(rmRoot);
+const rmCanvas=rmRoot.querySelector('.rm-canvas'),rmStage=rmRoot.querySelector('.rm-stage'),rmSpots=rmRoot.querySelector('.rm-spots'),rmMe=rmRoot.querySelector('.rm-me'),rmCard=rmRoot.querySelector('.rm-card'),rmGo=rmRoot.querySelector('.rm-go');
+let rmLay=null,rmPick=null,rmBack=null;
+const mapIsOpen=()=>!rmRoot.hidden;
+// A street, side street or sight you have set foot in. Saves from before this kept only sights.
+const rmWalked=id=>visited.has(id)||!!reg.walked?.[id];
+// The resident cat of a side street, for a paw on the map until you have met it.
+const catIndexAt=id=>{if(!id.startsWith('zone-'))return -1;const c=places[id].cityId,n=cities[c].tour.indexOf(id.slice(5));return n<catCount(c)?n:-1;};
+const catNameAt=id=>catIndexAt(id)>=0,catMetAt=id=>Object.hasOwn(reg.cats,places[id].cityId+'-'+catIndexAt(id));
+// Every plain street of a city, in walking order: the streets between sights, then the side streets.
+function rmStreets(c){const tour=cities[c].tour;return [...(walkChains[c]||[]).flat().map(g=>g[0]),...tour.map(id=>'zone-'+id)].filter(id=>Object.hasOwn(places,id));}
+const rmStreetCount=c=>{const all=rmStreets(c);return {got:all.filter(rmWalked).length,all:all.length};};
+// Spread: a sight keeps its side of the city, but crowded neighbours move apart. A straight line through the sights' own coordinates, part real, part evenly spaced.
+function rmWarp(values,spread){
+ const s=[...new Set(values)].sort((a,b)=>a-b),n=s.length,a=s[0],b=s[n-1],t=s.map((v,i)=>n>1?v*(1-spread)+(a+(b-a)*i/(n-1))*spread:v);
+ return v=>{if(n<2)return v;if(v<=a)return t[0]+(v-a);if(v>=b)return t[n-1]+(v-b);let i=0;while(s[i+1]<v)i++;return t[i]+(t[i+1]-t[i])*(v-s[i])/(s[i+1]-s[i]);};
+}
+function rmProject(c,w,h,size){
+ const geo=cityGeo[c],pts=Object.values(geo.at),k=Math.cos(pts.reduce((a,p)=>a+p[0],0)/pts.length*Math.PI/180);
+ const X=p=>p[1]*k,Y=p=>-p[0],wx=rmWarp(pts.map(X),.72),wy=rmWarp(pts.map(Y),.72);
+ const xs=pts.map(p=>wx(X(p))),ys=pts.map(p=>wy(Y(p))),x0=Math.min(...xs),x1=Math.max(...xs),y0=Math.min(...ys),y1=Math.max(...ys);
+ const mx=size*.72+6,top=size*.62+12,bottom=size*.62+30;
+ return p=>[mx+(wx(X(p))-x0)/((x1-x0)||1)*(w-mx*2),top+(wy(Y(p))-y0)/((y1-y0)||1)*(h-top-bottom)];
+}
+function rmLayout(c,w,h){
+ const tour=cities[c].tour,many=tour.length>7,size=Math.round(Math.min(w<500?(many?50:62):(many?74:96),Math.min(w,h*.78)/(many?7.4:5.6))),pt=rmProject(c,w,h,size),spot={};
+ for(const id of tour)spot[id]=pt(cityGeo[c].at[id]);
+ // Near neighbours (the Tower and its bridge, Hagia Sophia and the Blue Mosque) step apart until a thumb can tell them, and stay on the sheet.
+ {const gap=size*2.05,left=size*.72+4,top=size*.62+10,right=w-left,bottom=h-size*.62-30;
+  for(let round=0;round<60;round++){let moved=false;for(let i=0;i<tour.length;i++)for(let j=i+1;j<tour.length;j++){const p=spot[tour[i]],q=spot[tour[j]],dx=q[0]-p[0],dy=q[1]-p[1],d=Math.hypot(dx,dy)||1;if(d<gap){const s=(gap-d)/2/d;p[0]-=dx*s;p[1]-=dy*s;q[0]+=dx*s;q[1]+=dy*s;moved=true;}}
+   for(const id of tour){const p=spot[id];p[0]=Math.max(left,Math.min(right,p[0]));p[1]=Math.max(top,Math.min(bottom,p[1]));}if(!moved)break;}}
+ const cx=tour.reduce((a,id)=>a+spot[id][0],0)/tour.length,cy=tour.reduce((a,id)=>a+spot[id][1],0)/tour.length,nodes=[],links=[],chains=walkChains[c]||[];
+ tour.forEach((id,i)=>{
+  const to=tour[(i+1)%tour.length],[ax,ay]=spot[id],[bx,by]=spot[to],mid=[(ax+bx)/2,(ay+by)/2],len=Math.hypot(bx-ax,by-ay)||1,nx=(by-ay)/len,ny=-(bx-ax)/len,out=(mid[0]-cx)*nx+(mid[1]-cy)*ny>=0?1:-1,bow=Math.min(46,len*.16)*out;
+  const cp=[mid[0]+nx*bow,mid[1]+ny*bow],at=t=>[(1-t)*(1-t)*ax+2*t*(1-t)*cp[0]+t*t*bx,(1-t)*(1-t)*ay+2*t*(1-t)*cp[1]+t*t*by],gap=(chains[i]||[]).map(g=>g[0]).filter(s=>Object.hasOwn(places,s)),chain=[id,...gap,to];
+  // Street dots share the open part of the line, clear of both stamps.
+  const edge=Math.min(.42,(size*.5+15)/len),tAt=k=>edge+(1-edge*2)*(k+1)/(gap.length+1);
+  gap.forEach((s,k)=>{const [x,y]=at(tAt(k));nodes.push({id:s,x,y,kind:'walk'});});
+  const stops=[0,...gap.map((s,k)=>tAt(k)),1];chain.slice(1).forEach((b,k)=>links.push({a:chain[k],b,from:stops[k],to:stops[k+1],at}));
+ });
+ for(const id of tour){
+  const z='zone-'+id;if(!Object.hasOwn(places,z))continue;const [x,y]=spot[id],base=Math.atan2(y-cy,x-cx);
+  const clash=(px,py)=>Math.min(...tour.filter(t=>t!==id).map(t=>Math.hypot(spot[t][0]-px,spot[t][1]-py)),...nodes.map(n=>Math.hypot(n.x-px,n.y-py)+18));
+  const reach=size*.82+24,best=[0,.7,-.7,1.3,-1.3,2,-2,3.1].map(d=>{const q=base+d,px=x+Math.cos(q)*reach,py=y+Math.sin(q)*reach;return {px,py,score:(px<20||px>w-20||py<16||py>h-44?-200:0)+Math.min(clash(px,py),120)-Math.abs(d)*14};}).sort((p,q)=>q.score-p.score)[0];
+  nodes.push({id:z,x:best.px,y:best.py,kind:'zone',from:id});
+ }
+ return {c,w,h,size,pt,spot,nodes,links,tour};
+}
+// ---- The sheet of paper. Drawn once per opening: water, parks, a faint fabric of streets, then the way through the city in ink. ----
+const rmPaper=new Image();rmPaper.src='assets/hd/ui-paper.webp';rmPaper.addEventListener('load',()=>{if(mapIsOpen())rmPaint();});
+const rmArtImages={},rmBaseOnly=new URLSearchParams(location.search).has('mapbase'); // ?mapbase=1: the bare sheet, the reference for the painted maps
+// Shores and park edges rounded as a hand would draw them: a curve through the midpoints of the outline.
+function rmPoly(g,pts,pt){const q=pts.map(pt),n=q.length,mid=(a,b)=>[(a[0]+b[0])/2,(a[1]+b[1])/2],s=mid(q[n-1],q[0]);g.moveTo(s[0],s[1]);for(let i=0;i<n;i++){const m=mid(q[i],q[(i+1)%n]);g.quadraticCurveTo(q[i][0],q[i][1],m[0],m[1]);}g.closePath();}
+// A line through points, rounded at the corners, as a pen would draw it.
+function rmSmooth(g,pts,pt){const q=pts.map(pt);g.moveTo(q[0][0],q[0][1]);for(let i=1;i<q.length-1;i++){const mx=(q[i][0]+q[i+1][0])/2,my=(q[i][1]+q[i+1][1])/2;g.quadraticCurveTo(q[i][0],q[i][1],mx,my);}const e=q[q.length-1];g.lineTo(e[0],e[1]);}
+function rmBase(g,c,w,h,L,painted){
+ const geo=cityGeo[c],rand=seeded('map'+c),ink=guideAccent[c]||'#2f4e3f',water='#a9cbd1',shore='#6f9aa3',land='#efe4cb',green='#c9d6a8';
+ g.fillStyle=land;g.fillRect(0,0,w,h);
+ if(rmPaper.complete&&rmPaper.naturalWidth){g.save();g.globalAlpha=.55;g.fillStyle=g.createPattern(rmPaper,'repeat');g.fillRect(0,0,w,h);g.restore();}
+ if(painted){g.drawImage(painted,0,0,w,h);return;}
+ // City fabric: small blocks along a slightly crooked grid, each city at its own angle; New York's is ruler-straight.
+ const grid=c==='newyork',turn=grid?-.51:rand()*1.2-.6,step=grid?15:17,long=grid?3.1:1.3;
+ g.save();g.translate(w/2,h/2);g.rotate(turn);
+ for(let a=-h*1.1;a<h*1.1;a+=step*(grid?1:1))for(let b=-h*1.1;b<h*1.1;){const l=step*long*(grid?1:.8+rand()*.8),gapW=rand()<.12?5:2.6,j=grid?0:(rand()-.5)*3.4,k=grid?0:(rand()-.5)*3.4;if(rand()>.1){g.fillStyle=rand()<.6?'#e6dabd':'#dfd0b0';g.globalAlpha=.34+rand()*.3;g.beginPath();g.roundRect(b+j,a+k,l-gapW,step-(grid?2.6:3.6),1.6);g.fill();}b+=l;}
+ g.restore();g.globalAlpha=1;
+ g.fillStyle=green;for(const p of geo.park||[]){g.beginPath();rmPoly(g,p,L.pt);g.fill();}
+ g.save();g.fillStyle='#8fa56f';for(const p of geo.park||[]){g.save();g.beginPath();rmPoly(g,p,L.pt);g.clip();for(let i=0;i<220;i++){const x=rand()*w,y=rand()*h;g.globalAlpha=.34;g.beginPath();g.arc(x,y,1+rand()*1.3,0,7);g.fill();}g.restore();}g.restore();
+ const wash=(paint)=>{g.save();g.fillStyle=water;g.strokeStyle=water;g.lineJoin='round';g.lineCap='round';paint();g.restore();};
+ const seas=geo.sea||[],lands=geo.land||[],rivers=geo.river||[],k=Math.min(1,w/390);
+ // Water, then a second pale line inside the shore, the way old maps hatch a coast.
+ wash(()=>{for(const p of seas){g.beginPath();rmPoly(g,p,L.pt);g.fill();}for(const [t,pts] of rivers){g.lineWidth=t*k;g.beginPath();rmSmooth(g,pts,L.pt);g.stroke();}});
+ g.save();g.strokeStyle=shore;g.lineJoin='round';g.lineCap='round';g.lineWidth=1.1;g.globalAlpha=.75;for(const p of seas){g.beginPath();rmPoly(g,p,L.pt);g.stroke();}
+ for(const [t,pts] of rivers){g.lineWidth=t*k+1.6;g.globalAlpha=.75;g.strokeStyle=shore;g.beginPath();rmSmooth(g,pts,L.pt);g.stroke();g.lineWidth=t*k;g.globalAlpha=1;g.strokeStyle=water;g.beginPath();rmSmooth(g,pts,L.pt);g.stroke();g.lineWidth=Math.max(.8,t*k*.22);g.strokeStyle='#d4e6e6';g.globalAlpha=.7;g.setLineDash([9,13]);g.beginPath();rmSmooth(g,pts,L.pt);g.stroke();g.setLineDash([]);}g.restore();
+ for(const p of lands){g.save();g.beginPath();rmPoly(g,p,L.pt);g.clip();g.fillStyle=land;g.fillRect(0,0,w,h);if(rmPaper.complete&&rmPaper.naturalWidth){g.globalAlpha=.55;g.fillStyle=g.createPattern(rmPaper,'repeat');g.fillRect(0,0,w,h);}g.restore();g.strokeStyle=shore;g.lineWidth=1.1;g.globalAlpha=.75;g.beginPath();rmPoly(g,p,L.pt);g.stroke();g.globalAlpha=1;}
+ // Land drawn over water hides the parks on it: wash them again.
+ if(lands.length){g.fillStyle=green;for(const p of geo.park||[]){g.beginPath();rmPoly(g,p,L.pt);g.fill();}}
+ // A worn edge.
+ const v=g.createRadialGradient(w/2,h/2,Math.min(w,h)*.5,w/2,h/2,Math.max(w,h)*.74);v.addColorStop(0,'rgba(120,90,50,0)');v.addColorStop(1,'rgba(120,90,50,.26)');g.fillStyle=v;g.fillRect(0,0,w,h);
+}
+function rmRoute(g,c,L){
+ const ink=guideAccent[c]||'#2f4e3f',curve=(l,n=14)=>{for(let i=0;i<=n;i++){const [x,y]=l.at(l.from+(l.to-l.from)*i/n);i?g.lineTo(x,y):g.moveTo(x,y);}};
+ g.lineCap='round';g.lineJoin='round';
+ // A paper halo under the route, so it reads across water and parks.
+ g.strokeStyle='#fbf5e6cc';g.lineWidth=5.5;g.setLineDash([]);g.beginPath();for(const l of L.links)curve(l);g.stroke();
+ for(const l of L.links){const done=rmWalked(l.a)&&rmWalked(l.b);g.strokeStyle=done?ink:'#5a4a33';g.globalAlpha=done?1:.62;g.lineWidth=done?3.2:2;g.setLineDash(done?[]:[.1,7]);g.beginPath();curve(l);g.stroke();}
+ g.setLineDash([]);g.globalAlpha=1;
+ for(const n of L.nodes)if(n.kind==='zone'){const [x,y]=L.spot[n.from],done=rmWalked(n.id);g.strokeStyle='#fbf5e6cc';g.lineWidth=4.5;g.beginPath();g.moveTo(x,y);g.lineTo(n.x,n.y);g.stroke();g.strokeStyle=done?ink:'#5a4a33';g.globalAlpha=done?1:.6;g.lineWidth=done?2.4:1.6;g.setLineDash(done?[]:[.1,5.5]);g.beginPath();g.moveTo(x,y);g.lineTo(n.x,n.y);g.stroke();g.setLineDash([]);g.globalAlpha=1;}
+ // The city's name, set like an old map's title, and a north mark.
+ g.save();g.fillStyle='#3a3226';g.globalAlpha=.8;g.font='italic 600 '+(L.w<360?20:23)+'px Georgia,"Hiragino Mincho ProN",serif';g.textBaseline='alphabetic';const name=(cities[c].title||'').toUpperCase().split('').join(' '),tw=g.measureText(name).width,marks=[...Object.values(L.spot).map(([x,y])=>[x,y,L.size*.75]),...L.nodes.map(n=>[n.x,n.y,6])],corners=[[12,L.h-14],[L.w-tw-12,L.h-14],[12,26],[L.w-tw-12,26]],room=([x,y])=>Math.min(...marks.map(([mx,my,r])=>Math.hypot(mx-Math.max(x,Math.min(x+tw,mx)),my-(y-8))-r)),[tx,ty]=corners.sort((p,q)=>room(q)-room(p))[0];g.fillText(name,tx,ty);
+ g.globalAlpha=.7;g.font='600 10px Georgia,serif';g.textAlign='center';const north=[[L.w-22,L.h-46],[22,L.h-46],[L.w-22,44],[22,44]].filter(([x,y])=>Math.abs(x-(tx+tw/2))>tw/2+24||Math.abs(y-ty)>44).sort((p,q)=>Math.min(...marks.map(m=>Math.hypot(q[0]-m[0],q[1]-m[1])))-Math.min(...marks.map(m=>Math.hypot(p[0]-m[0],p[1]-m[1]))))[0],nx=north[0],ny=north[1];g.fillText('N',nx,ny-11);g.strokeStyle='#3a3226';g.lineWidth=1.2;g.beginPath();g.moveTo(nx,ny-8);g.lineTo(nx,ny+15);g.moveTo(nx-3.6,ny-1);g.lineTo(nx,ny-8);g.lineTo(nx+3.6,ny-1);g.stroke();g.restore();
+}
+function rmPaint(){
+ if(!rmLay)return;const {c,w,h}=rmLay,dpr=Math.min(window.devicePixelRatio||1,2);rmCanvas.width=w*dpr;rmCanvas.height=h*dpr;const g=rmCanvas.getContext('2d');g.setTransform(dpr,0,0,dpr,0,0);
+ let art=null;if(cityMapArt[c]){art=rmArtImages[c];if(!art){art=rmArtImages[c]=new Image();art.addEventListener('load',()=>{if(mapIsOpen())rmPaint();});art.src=cityMapArt[c];}if(!(art.complete&&art.naturalWidth))art=null;}
+ rmBase(g,c,w,h,rmLay,art);if(!rmBaseOnly)rmRoute(g,c,rmLay);
+}
+// The painting's own landmark, cut square, for the round stamp on the map. The photo once you have seen it.
+function rmStamp(el,id){
+ const p=places[id],seen=visited.has(id)&&p.photos?.[0];el.style.backgroundImage=`url("${thumbOf(seen?p.photos[0]:p.background)}")`;el.style.backgroundPosition=seen?'50% 40%':`${Math.round(Math.max(0,Math.min(100,((p.focusX||500)-200)/6)))}% ${Math.round(Math.max(0,Math.min(100,(p.entry.y-330)/9)))}%`;el.classList.toggle('is-photo',!!seen);
+}
+const rmHere=()=>placeId;
+function rmSpots_(){
+ const L=rmLay,{c,tour,size,spot,nodes}=L,next=guideStep().to||guideSight(),act=reg.active?.[c],u=customOf(c);
+ const dots=nodes.map(n=>{
+  const b=document.createElement('button');b.type='button';b.className='rm-dot cursor-interaction'+(n.kind==='zone'?' is-zone':'')+(rmWalked(n.id)?' is-walked':'');b.dataset.go=n.id;b.style.left=n.x+'px';b.style.top=n.y+'px';b.setAttribute('aria-label',places[n.id].name);
+  if(n.kind==='zone'&&catNameAt(n.id)&&!catMetAt(n.id)){const m=document.createElement('i');m.className='rm-paw';b.append(m);}
+  return b;
+ });
+ const marks=tour.map(id=>{
+  const b=document.createElement('button');b.type='button';b.className='rm-spot cursor-interaction'+(visited.has(id)?' is-seen':'')+(id===next?' is-next':'');b.dataset.go=id;const [x,y]=spot[id];b.style.left=x+'px';b.style.top=y+'px';b.style.setProperty('--s',size+'px');b.setAttribute('aria-label',places[id].name);
+  const stamp=document.createElement('i');stamp.className='rm-stamp';rmStamp(stamp,id);const name=document.createElement('span');name.textContent=places[id].name;b.append(stamp,name);
+  // Why you might go: a letter for the request you took, a shine for today's custom.
+  const has=act&&(act.place===id||act.kind==='seek'&&'zone-'+id===act.place)?'letter':u?.place===id&&customDue(c)?'shine':'';if(has){const m=document.createElement('b');m.className='rm-mark is-'+has;b.append(m);}
+  return b;
+ });
+ rmSpots.replaceChildren(...dots,...marks);rmSpots.classList.toggle('is-tight',tour.length>7&&L.h<420);rmNames();
+}
+// Names go under a stamp unless that would run into something: then over it, or to a side.
+function rmNames(){
+ const box=rmSpots.getBoundingClientRect(),placed=[...rmSpots.querySelectorAll('.rm-spot .rm-stamp')].map(e=>e.getBoundingClientRect());
+ for(const s of rmSpots.querySelectorAll('.rm-spot')){
+  const label=s.querySelector('span');let best='b';
+  for(const side of ['b','t','r','l']){
+   s.dataset.name=side;const r=label.getBoundingClientRect();
+   if(r.left<box.left+2||r.right>box.right-2||r.top<box.top+2||r.bottom>box.bottom-2)continue;
+   if(placed.some(q=>r.left<q.right&&r.right>q.left&&r.top<q.bottom&&r.bottom>q.top))continue;
+   best=side;break;
+  }
+  s.dataset.name=best;
+  placed.push(label.getBoundingClientRect());
+ }
+}
+function rmDrawMe(){
+ const g=rmMe.getContext('2d'),sprite=getAvatarSprite(avatarAppearance),frame=framesFor(avatarAppearance)[5];g.clearRect(0,0,96,132);
+ if(!avatarSpriteReady(sprite)||!frame){setTimeout(()=>{if(mapIsOpen())rmDrawMe();},200);return;}
+ const [sx,sy,sw,sh]=frame,k=126/sh;g.drawImage(sprite,sx,sy,sw,sh,48-sw*k/2,2,sw*k,sh*k);
+}
+function rmNodeOf(id){const L=rmLay;if(L.spot[id])return {x:L.spot[id][0],y:L.spot[id][1],sight:true};return L.nodes.find(n=>n.id===id)||null;}
+function rmPlaceMe(){
+ const n=rmNodeOf(rmHere())||rmNodeOf(cities[rmLay.c].tour[0]),lift=n.sight?rmLay.size*.42:0;rmMe.style.transform=`translate(${Math.round(n.x-20+(n.sight?rmLay.size*.42:0))}px,${Math.round(n.y-52+lift)}px)`;
+}
+function rmSub(id){
+ const c=rmLay.c,here=id===placeId,steps=Math.max(0,pathToPlace(placeId,id).length-1),how=here?T('いまここ','You are here'):steps===1?T('ここから1本先','One street away'):T('ここから{0}本先','{0} streets away',steps);
+ if(id.startsWith('zone-')||places[id].walk){
+  const parts=[how,rmWalked(id)?T('歩いた','Walked'):T('まだ歩いていない','Not walked yet')];
+  if(catNameAt(id)&&!catMetAt(id))parts.push(T('猫がいるらしい','A cat lives here'));
+  return parts.join(' · ');
+ }
+ const list=findsIn(id),got=list.filter(f=>Object.hasOwn(findsGot,f.id)).length,parts=[how];
+ parts.push(visited.has(id)?T('見た','Seen'):T('まだ見ていない','Not seen yet'));
+ if(list.length)parts.push(T('見つけもの {0} / {1}','Finds {0} / {1}',got,list.length));
+ return parts.join(' · ');
+}
+function rmSelect(id){
+ rmPick=id;const p=places[id],img=rmCard.querySelector('img'),sight=!!rmLay.spot[id];
+ img.src=thumbOf(visited.has(id)&&p.photos?.[0]||p.background);rmCard.querySelector('strong').textContent=p.name;rmCard.querySelector('small').textContent=rmSub(id);
+ const here=id===placeId;rmGo.disabled=here;rmGo.textContent=here?T('いまここ','You’re here'):T('歩いて行く','Walk there');rmGo.setAttribute('aria-label',here?T('いまここ','You’re here'):T('{0}へ歩く','Walk to {0}',p.name));
+ rmSpots.querySelectorAll('[aria-pressed]').forEach(b=>b.removeAttribute('aria-pressed'));rmSpots.querySelector('[data-go="'+id+'"]')?.setAttribute('aria-pressed','true');
+ img.style.objectPosition=sight&&!visited.has(id)?'50% 22%':'50% 50%';
+}
+function rmUpdate(){
+ const c=cityId(),r=rmStage.getBoundingClientRect();if(!r.width||!r.height)return;
+ rmLay=rmLayout(c,Math.round(r.width),Math.round(r.height));
+ rmRoot.querySelector('h2').textContent=city().name;
+ const s=rmStreetCount(c);rmRoot.querySelector('.rm-sub').textContent=T('見た場所 {0} / {1}','Seen {0} / {1}',visitedCount(),placeCount())+' · '+T('歩いた通り {0} / {1}','Streets walked {0} / {1}',s.got,s.all)+(wanderCount(c)?' · '+T('道草 {0}','Off the path · {0}',wanderCount(c)):'');
+ rmPaint();rmSpots_();rmDrawMe();rmPlaceMe();
+ rmSelect(guideStep().to&&rmNodeOf(guideStep().to)?guideStep().to:guideSight()&&rmNodeOf(guideSight())?guideSight():placeId);
+}
+function openCityMap(){
+ if(changing||isAvatarOpen()||isTransferOpen()||!Object.hasOwn(cityGeo,cityId()))return openTransfer();
+ rmBack=document.activeElement;stopWalking();takeManualControl();photoTicket++;photo.hidden=true;journal.hidden=true;rmRoot.hidden=false;walkingUI.inert=true;sound.page?.();
+ rmUpdate();rmRoot.querySelector('.rm-close').focus({preventScroll:true});persist();
+}
+function closeCityMap(refocus=true){
+ if(rmRoot.hidden)return;rmRoot.hidden=true;walkingUI.inert=false;last=0;renderDirty=true;sound.page?.();if(refocus)(rmBack?.isConnected&&!rmBack.hidden?rmBack:travelToggle).focus({preventScroll:true});persist();
+}
+rmRoot.querySelector('.rm-close').addEventListener('click',()=>closeCityMap());
+rmRoot.querySelector('.rm-close').setAttribute('aria-label',T('地図を閉じる','Close the map'));
+{const w=rmRoot.querySelector('.rm-world');w.textContent=T('世界地図へ','World map');w.addEventListener('click',()=>{closeCityMap(false);openTransfer();});}
+rmSpots.addEventListener('click',e=>{const b=e.target.closest('[data-go]');if(!b)return;sound.tap?.();if(rmPick===b.dataset.go&&b.dataset.go!==placeId){rmGo.click();return;}rmSelect(b.dataset.go);});
+rmGo.addEventListener('click',()=>{if(!rmPick||rmPick===placeId)return;const to=rmPick;closeCityMap(false);takeManualControl();startJourney(to);});
+rmRoot.addEventListener('keydown',e=>{if(e.key==='Escape'){e.stopPropagation();closeCityMap();}else trapDialogFocus(e,rmRoot);});
+new ResizeObserver(()=>{if(mapIsOpen())rmUpdate();}).observe(rmStage);
+
+// ---- 道草: what a side street gives you for walking down it. Nothing here opens a screen or asks for a tap; you walk into it and the street answers.
+// Ten small things, two to a street, dealt so neighbouring streets differ: something to kick, chalk to hop, pawprints to a cat that walks with you, a smell, a sound,
+// a pool of light that takes your picture, a local who waves, teaches a word or hands you something, a heap to scatter, a manhole cover to collect.
+// The first time counts (reg.wander, 'city/place/kind'), writes one line in the notebook and inks the map. After that they are still there to play with.
+// All drawn in code from the street's own light, so nothing needs painting. A new city needs a row in wanderCity.
+const wanderCity={
+ tokyo:{toy:['can','空き缶','the empty can','#c8372e'],digits:'一二三四五六',cover:'東京',cat:'にゃあ',heap:['#c9a227','#b5532a','#8a6a2a','#d9b84a'],sense:[['smell','焼きだんごの匂い','Grilled dango on the air'],['sound','どこかで風鈴が鳴った','A wind chime, somewhere'],['smell','線香の匂いがする','A thread of incense'],['sound','三味線の稽古が聞こえる','Someone practising the shamisen']],gifts:[['おせんべい','a rice cracker','#c98f4a'],['みかん','a mandarin','#e8912d'],['飴玉','a boiled sweet','#d8475a']]},
+ rome:{toy:['ball','ボール','the football','#f4f1e6','soccer'],digits:'I,II,III,IV,V,VI',cover:'SPQR',cat:'miao',heap:['#a9782f','#7d8a3a','#c29a4a','#8a5a2a'],sense:[['smell','焙煎したてのコーヒー','Fresh-roasted coffee'],['sound','遠くで鐘が鳴っている','Bells, a long way off'],['smell','焼きたてのピッツァ','Pizza just out of the oven'],['sound','窓からオペラが聞こえる','Opera from an open window']],gifts:[['ビスコッティ','a biscotto','#c9a15a'],['オレンジ','an orange','#e8912d'],['アマレッティ','an amaretto biscuit','#b5793a']]},
+ paris:{toy:['boule','ペタンクの球','the pétanque ball'],digits:'123456',cover:'PARIS',cat:'miaou',heap:['#b9892b','#a65a2a','#7f6a2a','#d3ab46'],sense:[['smell','焼きたてのバゲット','Baguettes just baked'],['sound','アコーディオンが聞こえる','An accordion somewhere'],['smell','コーヒーとたばこの匂い','Coffee and a cigarette'],['sound','2階でピアノの練習','Piano practice upstairs']],gifts:[['マドレーヌ','a madeleine','#d5a24a'],['すみれの飴','a violet sweet','#7a5aa8'],['クロワッサンの端','the end of a croissant','#c98f3a']]},
+ london:{toy:['ball','テニスボール','the tennis ball','#d6d84a'],digits:'123456',cover:'LONDON',cat:'meow',heap:['#a5752a','#8a4a2a','#6f6a2a','#c29a3a'],sense:[['smell','フィッシュ&チップスの匂い','Fish and chips'],['sound','パブから笑い声','Laughter from a pub'],['smell','雨上がりの石畳の匂い','Wet stone after rain'],['sound','遠くで鐘が鳴った','A bell, far off']],gifts:[['ビスケット','a biscuit','#c9a15a'],['ミントキャンディ','a mint','#7fc4a8'],['紅茶のティーバッグ','a teabag','#b08a5a']]},
+ seoul:{toy:['ball','ゴムまり','the rubber ball','#d8475a'],digits:'일,이,삼,사,오,육',cover:'서울',cat:'야옹',heap:['#c9a227','#c0482a','#8a6a2a','#e0b83a'],sense:[['smell','トッポッキの甘辛い匂い','Sweet-spicy tteokbokki'],['sound','カササギが鳴いている','Magpies calling'],['smell','焼き栗の匂い','Roasting chestnuts'],['sound','路地の奥からパンソリ','Pansori down the alley']],gifts:[['焼き栗','a roasted chestnut','#7a4a2a'],['ホットク','a hotteok','#c98f4a'],['みかん','a mandarin','#e8912d']]},
+ bangkok:{toy:['takraw','タクローのボール','the takraw ball'],digits:'๑๒๓๔๕๖',cover:'กทม.',cat:'เหมียว',heap:['#f0e3c8','#e9c9b4','#7f9a4a','#f4dc8a'],sense:[['smell','ガパオを炒める匂い','Holy basil hitting a hot wok'],['sound','寺の鐘が小さく鳴った','A small temple bell'],['smell','ジャスミンの花輪','Jasmine garlands'],['sound','遠くでトゥクトゥクの音','A tuk-tuk, somewhere']],gifts:[['マンゴーのかけら','a piece of mango','#eeb33a'],['ジャスミンの花','a jasmine flower','#f4efe2'],['ココナッツの飴','a coconut sweet','#e7dcc4']]},
+ dubai:{toy:['ball','小さなボール','the little ball','#3f8fa8'],digits:'١,٢,٣,٤,٥,٦',cover:'دبي',cat:'مياو',heap:['#c9a86a','#b08a4a','#d8c08a','#9a7a4a'],sense:[['smell','カルダモンのコーヒー','Cardamom coffee'],['sound','遠くでアザーンが聞こえる','The call to prayer, far off'],['smell','乳香の煙','Frankincense smoke'],['sound','アブラのエンジン音','An abra’s engine']],gifts:[['ナツメヤシ','a date','#6a3a22'],['カルダモンの実','a cardamom pod','#8aa35a'],['ルカイマット','a luqaimat','#c98f3a']]},
+ newyork:{toy:['ball','ゴムボール','the rubber ball','#c9d04a'],digits:'123456',cover:'NYC SEWER',cat:'meow',heap:['#c07a2a','#a84a2a','#7f6a2a','#d9a83a'],sense:[['smell','焼きプレッツェルの匂い','Hot pretzels'],['sound','どこかでサックス','A saxophone, somewhere'],['smell','ピザのひと切れの匂い','A slice, just out'],['sound','地下鉄が足の下を通った','The subway under your feet']],gifts:[['プレッツェルの端','the end of a pretzel','#a8682a'],['ベーグルのかけら','a bit of bagel','#d5b47a'],['りんご','an apple','#c8372e']]},
+ rio:{toy:['ball','サッカーボール','the football','#f4f1e6','soccer'],digits:'123456',cover:'RIO',cat:'miau',heap:['#7fa84a','#d8a23a','#c0602a','#5a8a3a'],sense:[['smell','チーズパンの匂い','Cheese bread'],['sound','坂の上からサンバ','Samba from up the hill'],['smell','海の匂い','Salt on the wind'],['sound','路地でギターを弾いている','A guitar in the alley']],gifts:[['ブリガデイロ','a brigadeiro','#4a2a1a'],['マンゴー','a mango','#eeb33a'],['ココナッツ飴','a cocada','#e7dcc4']]},
+ taiwan:{toy:['can','空き缶','the empty can','#3f7fb5'],digits:'一二三四五六',cover:'臺北',cat:'喵',heap:['#7f9a4a','#c9a227','#5a7a3a','#a8c05a'],sense:[['smell','臭豆腐の匂い','Stinky tofu. Unmistakable'],['sound','廟からお経が聞こえる','Chanting from a temple'],['smell','八角と醤油の煮込み','Star anise and soy'],['sound','収集車の「エリーゼのために」','The rubbish truck, playing Für Elise']],gifts:[['パイナップルケーキ','a pineapple cake','#d5a24a'],['ウーロン茶をひと口','a sip of oolong','#b5892a'],['タロイモ団子','a taro ball','#a88ac0']]},
+ singapore:{toy:['ball','小さなボール','the little ball','#e0603a'],digits:'123456',cover:'SINGAPORE',cat:'meow',heap:['#7fa84a','#f0e3c8','#5a8a3a','#e8c04a'],sense:[['smell','カヤトーストの匂い','Kaya toast'],['sound','コーヒー店の食器の音','Cups in a kopitiam'],['smell','パンダンの甘い匂い','Sweet pandan'],['sound','寺の太鼓','A temple drum']],gifts:[['クエ','a kueh','#7fb86a'],['パイナップルタルト','a pineapple tart','#e0a83a'],['ココナッツ飴','a coconut candy','#e7dcc4']]},
+ jaipur:{toy:['marble','ビー玉','the marble'],digits:'१२३४५६',cover:'जयपुर',cat:'म्याऊँ',heap:['#e8912d','#e0b83a','#d8475a','#f0c84a'],sense:[['smell','チャイを煮る匂い','Chai on the boil'],['sound','寺の鐘','A temple bell'],['smell','マリーゴールドの匂い','Marigolds'],['sound','ハルモニウムが聞こえる','A harmonium']],gifts:[['ジャレビ','a jalebi','#e8912d'],['チャイをひと口','a sip of chai','#b5793a'],['ラドゥ','a laddu','#e0a83a']]},
+ istanbul:{toy:['ball','小さなボール','the little ball','#d8475a'],digits:'123456',cover:'İSTANBUL',cat:'miyav',heap:['#b9892b','#a65a2a','#7f6a2a','#d3ab46'],sense:[['smell','焼き栗の匂い','Roast chestnuts'],['sound','アザーンが丘をわたる','The call to prayer crosses the hill'],['smell','チャイとシミット','Tea and simit'],['sound','カモメが鳴いている','Gulls overhead']],gifts:[['ロクム','a piece of lokum','#e8a0b0'],['シミットのかけら','a bit of simit','#b5793a'],['チャイ','a tulip glass of tea','#a83a1a']]},
+ cartagena:{toy:['ball','ボール','the ball','#e0c03a'],digits:'123456',cover:'CARTAGENA',cat:'miau',heap:['#e0589a','#7fa84a','#e8c04a','#c0482a'],sense:[['smell','揚げたアレパの匂い','Arepas frying'],['sound','どこかでクンビア','Cumbia, somewhere'],['smell','海風の匂い','The sea wind'],['sound','果物売りの呼び声','A fruit seller calling']],gifts:[['ココナッツ菓子','a cocada','#e7dcc4'],['マンゴー','a slice of mango','#eeb33a'],['グアバ飴','a guava sweet','#d8475a']]}
+};
+// Painted things locals hand you, three to a sheet, once tools/import_pass2_art.py has run. Until then a sweet in the gift's colour.
+const wanderGiftArt={};const wanderGiftImages={};
+function wanderGiftImage(c){if(!wanderGiftArt[c])return null;if(!wanderGiftImages[c]){const i=new Image();i.decoding='async';i.src=wanderGiftArt[c];wanderGiftImages[c]=i;}return wanderGiftImages[c];}
+const wanderKinds=['toy','light','trail','cover','hop','sense','gift','heap','word','sense2'];
+const wFx=[];
+const wKey=(kind,id=placeId)=>cityId()+'/'+id+'/'+kind;
+const wDone=key=>Object.hasOwn(reg.wander||{},key);
+const wanderCount=c=>Object.keys(reg.wander||{}).filter(k=>k.startsWith(c+'/')).length;
+function wanderGot(kind,line,quiet){
+ const key=wKey(kind);if(wDone(key))return false;(reg.wander||={})[key]=[Date.now(),line];guideBump('.rr-travel-toggle');persist();
+ if(!quiet){notice=null;sayQuietly(line,2.7);}return true;
+}
+// Which two things a street holds: dealt round the city's streets from a shuffled deck, so the next street is always different, and the same street holds something else tomorrow.
+const wanderDayForce=new URLSearchParams(location.search).has('wanderday')?+new URLSearchParams(location.search).get('wanderday'):null;
+function wanderDeal(c,id){
+ const streets=rmStreets(c),i=streets.indexOf(id);if(i<0)return [];
+ const rand=seeded('deck'+c),deck=[...wanderKinds];for(let k=deck.length-1;k>0;k--){const j=Math.floor(rand()*(k+1));[deck[k],deck[j]]=[deck[j],deck[k]];}
+ const day=wanderDayForce??Math.floor(Date.now()/864e5);return [deck[(i*2+day)%deck.length],deck[(i*2+1+day)%deck.length]];
+}
+const wanderCovers=c=>rmStreets(c).length;
+// Open ground, clear of where you arrive and of the exits, away from anything else laid out here.
+function wSpot(rand,r,wall=false,y0=300,y1=1250){
+ const id=placeId,keep=[scene().spawn,scene().entry,...scene().edges.flatMap(e=>[{x:e.x,y:e.y},e.arrival]),...actors.filter(a=>a.kind==='stall'||a.kind==='find'||a.kind==='custom').map(a=>a.front||a)],things=actors.filter(a=>a.kind==='w'||a.kind==='stray');
+ for(let i=0;i<260;i++){
+  const x=60+rand()*880,y=y0+rand()*(y1-y0);if(!walkable(x,y)||!clearAround(id,x,y,r))continue;
+  if(!keep.every(k=>Math.hypot(k.x-x,k.y-y)>110)||!things.every(a=>Math.hypot(a.x-x,a.y-y)>150))continue;
+  if(wall&&walkable(x-r-44,y)&&walkable(x+r+44,y))continue;
+  return {x,y};
+ }
+ return null;
+}
+// A shop's board out on the street, in the city's own writing. Generic trades, nobody's name.
+const wanderBoards={tokyo:['そば','甘味','酒','茶','湯','米','団子','豆腐'],rome:['BAR','FORNO','VINI','PIZZA','GELATI','CAFFÈ','TABACCHI','TRATTORIA'],paris:['CAFÉ','BISTROT','TABAC','CRÊPES','FLEURS','FROMAGES','LIBRAIRIE','BOULANGERIE'],london:['PUB','ALE','BOOKS','BAKERY','FLOWERS','BARBER','TEA ROOM','FISH & CHIPS'],seoul:['식당','커피','떡집','약국','국수','서점','꽃집','만두'],bangkok:['ข้าวแกง','ชาเย็น','ผลไม้','ดอกไม้','กาแฟ','ก๋วยเตี๋ยว'],dubai:['قهوة','عطارة','مطعم','حلويات','تمور','ذهب'],newyork:['DELI','PIZZA','COFFEE','BOOKS','BAGELS','BARBER','DINER','LAUNDRY'],rio:['CAFÉ','BAR','SUCOS','AÇAÍ','PASTEL','FLORES','LIVROS','PADARIA'],taiwan:['茶','麵','豆花','雜貨','藥行','滷味','米','當舖'],singapore:['KOPI','MEE','茶','TOAST','KUEH','NASI','花','麵'],jaipur:['चाय','मिठाई','कपड़े','मसाले','भोजन','फूल'],istanbul:['ÇAY','FIRIN','KAHVE','BALIK','KİTAP','ÇİÇEK','BAKKAL','LOKANTA'],cartagena:['CAFÉ','BAR','JUGOS','FRITOS','FLORES','LIBROS','PANADERÍA','ARTESANÍAS']};
+const wMake={
+ board(rand){const list=wanderBoards[cityId()];if(!list)return;const p=wSpot(rand,12,true,260,1300);if(!p)return;const word=list[Math.floor(rand()*list.length)],tall=[...word].every(ch=>ch.charCodeAt(0)>0x2e80&&ch.charCodeAt(0)<0xac00)&&word.length<=3;actors.push({kind:'w',w:'board',solid:true,x:p.x,y:p.y,word,tall,tone:Math.floor(rand()*3)});},
+ toy(rand,d){const p=wSpot(rand,34);if(p)actors.push({kind:'w',w:'toy',flat:false,x:p.x,y:p.y,vx:0,vy:0,spin:rand()*6.28,hits:0,t0:0,d});},
+ hop(rand,d){
+  for(let i=0;i<40;i++){const p=wSpot(rand,34);if(!p)return;if([1,2,3,4,5].every(k=>walkable(p.x,p.y-k*36)&&clearAround(placeId,p.x,p.y-k*36,26))){actors.push({kind:'w',w:'hop',flat:true,x:p.x,y:p.y,at:0,lit:0,done:false,d,glyphs:d.digits.includes(',')?d.digits.split(','):[...d.digits]});return;}}
+ },
+ trail(rand){
+  const to=wSpot(rand,18,true);if(!to)return;const pts=[];
+  // Back from the cat towards the middle of the street.
+  for(let i=0;i<60&&pts.length<9;i++){const q=rand()*6.28,l=170+rand()*150,x=to.x+Math.cos(q)*l,y=to.y+Math.abs(Math.sin(q))*l*(rand()<.5?1:-1);if(walkable(x,y)&&clearLine(to,{x,y})){const n=Math.round(l/30);for(let k=1;k<=n;k++)pts.push({x:to.x+(x-to.x)*k/n+((k%2)?5:-5),y:to.y+(y-to.y)*k/n+((k%2)?-2:2),on:0});break;}}
+  if(pts.length<4)return;pts.reverse();
+  actors.push({kind:'w',w:'trail',flat:true,x:to.x,y:to.y,pts,cat:{x:to.x,y:to.y,state:'sit',t:0,row:1,col:0,walk:0,flip:!walkable(to.x+26,to.y),heart:0,say:0},lit:0,art:rand()<.5?'cat':'cat2'});
+ },
+ sense(rand,d,key='sense'){const p=wSpot(rand,14,true);if(!p)return;const all=d.sense,n=Math.floor(rand()*all.length),s=all[(n+(key==='sense2'?2:0))%all.length];actors.push({kind:'w',w:'sense',key,flat:false,x:p.x,y:p.y,mode:s[0],line:T(s[1],s[2]),puff:0});},
+ sense2(rand,d){wMake.sense(rand,d,'sense2');},
+ light(rand){const p=wSpot(rand,44);if(p)actors.push({kind:'w',w:'light',flat:true,x:p.x,y:p.y,r:52,stood:0});},
+ word(){const a=actors.filter(x=>x.kind==='local'&&!x.asks&&!x.seek&&!x.pair)[0];if(a)a.calls='word';},
+ gift(rand,d){const a=actors.filter(x=>x.kind==='local'&&!x.asks&&!x.seek&&!x.pair&&!x.calls)[0];if(a){a.calls='gift';a.gift=d.gifts[Math.floor(rand()*d.gifts.length)];}},
+ heap(rand,d){const p=wSpot(rand,30);if(!p)return;const bits=[];for(let i=0;i<34;i++){const q=rand()*6.28,r=Math.sqrt(rand())*30;bits.push({x:p.x+Math.cos(q)*r,y:p.y+Math.sin(q)*r*.42,c:d.heap[i%d.heap.length],a:rand()*6.28,s:3+rand()*2.8});}actors.push({kind:'w',w:'heap',flat:true,x:p.x,y:p.y,bits,burst:false});},
+ cover(rand,d){const p=wSpot(rand,30);if(p)actors.push({kind:'w',w:'cover',flat:true,x:p.x,y:p.y,d,ring:0});}
+};
+function wanderSpawn(){
+ const c=cityId();walkerSpawn();if(!wanderCity[c]||!Object.hasOwn(reg,'first'))return;
+ const d=wanderCity[c],rand=seeded(placeId+'wander');
+ wMake.board(rand);
+ if(!scene().quiet){wMake.board(rand);return;}
+ for(const kind of wanderDeal(c,placeId))wMake[kind]?.(rand,d);
+ canvas.dataset.wander=actors.filter(a=>a.kind==='w').map(a=>a.w+':'+Math.round(a.x)+','+Math.round(a.y)).join('|');
+}
+// ---- Each frame. ----
+const wFeet=(x,y)=>Math.hypot(x-pos.x,y-pos.y);
+function wanderUpdate(dt){
+ const c=cityId();
+ for(const a of [...actors]){
+  if(a.kind==='local'){
+   // Locals notice you: they turn, and now and then say hello. The one with something to say or give does.
+   const d=wFeet(a.x,a.y);
+   if(d<170&&!a.flipFixed){const want=a.wallFlip??(a.wallFlip=a.flip);a.flip=pos.x<a.x?true:pos.x>a.x?false:want;}
+   if(a.sayT>0)a.sayT-=dt;
+   if(d<118&&!a.hi&&!a.asks&&isWalking&&performance.now()>wanderHiAt){a.hi=true;wanderHiAt=performance.now()+5200;a.say=cityGreeting();a.sayT=2.2;a.nod=.5;}
+   if(a.nod>0)a.nod-=dt;
+   if(a.calls==='word'&&d<105){a.calls=null;a.say=cityGreeting();a.sayT=2.4;a.nod=.5;const key='word';if(!wDone(wKey(key))){root.dispatchEvent(new CustomEvent('roam:greet',{detail:{local:a}}));wanderGot(key,T('{0}で声をかけられた','Someone called out in {0}',scene().name),true);}}
+   if(a.calls==='gift'&&d<100){a.calls=null;const [ja,en,col]=a.gift;a.say=cityGreeting();a.sayT=2.2;a.nod=.5;wFx.push({k:'gift',x:a.x,y:a.y-60,col,t:0,to:true,cell:wanderCity[c].gifts.indexOf(a.gift),art:wanderGiftImage(c)});sound.keep?.();wanderGot('gift',T('{0}をもらった','You were given {0}',T(ja,en)));}
+   continue;
+  }
+  if(a.kind==='walker'){walkerStep(a,dt);continue;}
+  if(a.kind!=='w')continue;
+  const d=wFeet(a.x,a.y),w=a.w;
+  if(w==='toy'){
+   const moving=gait.speed>30||isWalking;
+   if(d<24&&moving&&(a.t0-=dt)<=0){
+    // A kick goes the way you are walking, with some of your speed.
+    const hx=gait.vx||0,hy=gait.vy||0,hs=Math.hypot(hx,hy)||1,ux=(a.x-pos.x)/(d||1),uy=(a.y-pos.y)/(d||1),nx=ux*.45+hx/hs*.55,ny=uy*.45+hy/hs*.55,n=Math.hypot(nx,ny)||1,power=170+Math.min(190,hs*.9)+Math.random()*40;
+    a.vx=nx/n*power;a.vy=ny/n*power;a.spinV=(a.vx>=0?1:-1)*power*.06;a.hits++;a.t0=.22;canvas.dataset.kicks=a.hits;sound.kick?.();if(a.hits>=6)wanderGot('toy',T('{0}を{1}回けった','Kicked {0} {1} times',T(a.d.toy[1],a.d.toy[2]),a.hits));
+   }
+   if(a.vx||a.vy){
+    let nx=a.x+a.vx*dt,ny=a.y+a.vy*dt;if(!walkable(nx,a.y)){a.vx*=-.62;nx=a.x;sound.kick?.(.4);}if(!walkable(a.x,ny)){a.vy*=-.62;ny=a.y;sound.kick?.(.4);}
+    a.x=nx;a.y=ny;a.spin+=(a.spinV||0)*dt;const f=Math.exp(-1.7*dt);a.vx*=f;a.vy*=f;if(Math.hypot(a.vx,a.vy)<7){a.vx=a.vy=0;}
+   }
+  }else if(w==='hop'){
+   const k=a.at,cx=a.x,cy=a.y-k*36;
+   if(k<6&&Math.abs(pos.x-cx)<30&&Math.abs(pos.y-cy)<19){a.at++;a.lit=1;sound.chalk?.(k);if(a.at===6){a.done=true;gait.hop=reduced?0:.42;for(let i=0;i<14;i++)wFx.push({k:'dust',x:cx+(Math.random()-.5)*40,y:cy,vx:(Math.random()-.5)*50,vy:-20-Math.random()*40,t:0,life:.8,col:'#f6f1e2'});wanderGot('hop',T('けんけんぱ！','Hopscotch, all the way'));}}
+   else if(k>0&&k<6&&(Math.abs(pos.x-cx)>90||Math.abs(pos.y-cy)>110))a.at=0;
+   a.lit=Math.max(0,a.lit-dt*2);
+  }else if(w==='trail'){
+   for(const p of a.pts)if(!p.on&&wFeet(p.x,p.y)<44){p.on=1;a.lit++;}
+   const cat=a.cat;cat.heart=Math.max(0,cat.heart-dt);cat.say=Math.max(0,cat.say-dt);
+   if(cat.state==='sit'&&wFeet(cat.x,cat.y)<72){cat.state='walk';cat.t=15;cat.heart=1.6;cat.say=1.8;sound.meow?.();wanderGot('trail',T('足あとの先に猫がいた','A cat at the end of the pawprints'));}
+   else if(cat.state==='walk'){
+    // It comes along for a while, a little behind you.
+    cat.t-=dt;const dx=pos.x-cat.x,dy=pos.y-cat.y,l=Math.hypot(dx,dy)||1,gap=l-64;
+    if(gap>4){const speed=Math.min(WALK*1.4,gap*3.4+36),step=speed*dt,nx=cat.x+dx/l*step,ny=cat.y+dy/l*step;if(walkable(nx,ny)||!walkable(cat.x,cat.y)){cat.x=nx;cat.y=ny;}else if(walkable(nx,cat.y))cat.x=nx;else if(walkable(cat.x,ny))cat.y=ny;cat.moving=true;cat.row=Math.abs(dx)>Math.abs(dy)*.8?2:dy<0?0:1;if(cat.row===2)cat.flip=dx<0;cat.walk+=step;cat.col=reduced?0:1+Math.floor(cat.walk/11)%4;}else cat.moving=false;
+    if(cat.t<=0){cat.state='rest';cat.moving=false;}
+   }
+  }else if(w==='sense'){
+   a.puff+=dt;
+   if(d<104&&!a.met){a.met=true;if(a.mode==='sound')sound.chime?.();wanderGot(a.key,a.line);if(!reduced&&!isWalking&&!gait.moment){gait.look=a.x<pos.x?'left':'right';gait.momentT=1.2;}}
+   if(a.mode==='sound'&&a.met&&a.puff>.34&&d<240){a.puff=0;wFx.push({k:'note',x:a.x+(Math.random()-.5)*16,y:a.y-46,t:0,life:1.7});}
+  }else if(w==='light'){
+   const inside=Math.hypot((pos.x-a.x)/a.r,(pos.y-a.y)/(a.r*.56))<1;
+   if(inside&&!a.told){a.told=true;sayQuietly(T('ここ、いい光','Good light here'),2);}
+   if(inside&&!isWalking&&!path.length&&!wDone(wKey('light'))){a.stood+=dt;if(a.stood>.7){a.stood=-9;wanderShot(T('{0}の光','Light on {0}',scene().name));wanderGot('light',T('一枚残した','One for the album'),true);}}else if(!inside)a.stood=0;
+  }else if(w==='heap'){
+   if(d<38&&!a.burst&&(isWalking||gait.speed>20)){
+    a.burst=true;sound.rustle?.();const hx=gait.vx||0,hy=gait.vy||0;
+    for(const b of a.bits){const q=Math.random()*6.28,v=40+Math.random()*90;wFx.push({k:'leaf',x:b.x,y:b.y,z:2,vx:Math.cos(q)*v+hx*.3,vy:Math.sin(q)*v*.45+hy*.3,vz:60+Math.random()*120,c:b.c,a:b.a,s:b.s,spin:(Math.random()-.5)*14,t:0,life:1.7+Math.random()*1.1});}
+    wanderGot('heap','',true);
+   }
+  }else if(w==='cover'){
+   a.ring=Math.max(0,a.ring-dt*1.4);
+   if(d<26&&!a.hit){a.hit=true;a.ring=1;sound.clunk?.();const n=Object.keys(reg.wander||{}).filter(k=>k.startsWith(c+'/')&&k.endsWith('/cover')).length+(wDone(wKey('cover'))?0:1);wanderGot('cover',T('マンホール {0} / {1}','Manhole covers {0} / {1}',n,wanderCovers(c)));}
+   else if(d>70)a.hit=false;
+  }
+ }
+ for(let i=wFx.length-1;i>=0;i--){
+  const f=wFx[i];f.t+=dt;
+  if(f.k==='leaf'){f.x+=f.vx*dt;f.y+=f.vy*dt;f.z+=f.vz*dt;f.vz-=260*dt;if(f.z<=0){f.z=0;f.vz=0;f.vx*=.8;f.vy*=.8;}f.a+=f.spin*dt*(f.z>0?1:.1);f.vx*=Math.exp(-1.4*dt);f.vy*=Math.exp(-1.4*dt);if(f.t>f.life)wFx.splice(i,1);}
+  else if(f.k==='dust'){f.x+=f.vx*dt;f.y+=f.vy*dt;f.vy+=30*dt;if(f.t>f.life)wFx.splice(i,1);}
+  else if(f.k==='note'){f.y-=30*dt;f.x+=Math.sin(f.t*3)*14*dt;if(f.t>f.life)wFx.splice(i,1);}
+  else if(f.k==='gift'){if(f.t>1.7)wFx.splice(i,1);}
+ }
+ if(wFx.length)renderDirty=true;
+}
+let wanderHiAt=0;
+// A little dust off the ground at a brisk pace, in the street's own colour.
+function wanderStep(){
+ if(reduced||gait.speed<WALK*1.14||tod==='night'&&false)return;const image=backdrops[placeId],m=image?.naturalWidth?lightOf(image):null,col=m?.tints[2].split('|')[1]||'#d8cdb4';
+ for(let i=0;i<3;i++)wFx.push({k:'dust',x:pos.x+(Math.random()-.5)*12,y:pos.y+2,vx:-(gait.vx||0)*.08+(Math.random()-.5)*22,vy:-(gait.vy||0)*.08-8-Math.random()*14,t:0,life:.42,col});
+}
+// A real postcard with you in it, the same print a local's photo makes.
+function wanderShot(note){
+ if(snapBusy())return;sound.shutter?.();gait.hop=0;
+ const card={id:'pc'+Date.now().toString(36),place:placeId,frame:'street',look:keepLooks(placeId).includes(tod)?tod:'day',pose:'front',at:Date.now(),x:Math.round(pos.x),y:Math.round(pos.y),ap:{...avatarAppearance},actors:keepSnapshot(),note,self:true};
+ wFx.push({k:'flash',t:0});facing='down';renderDirty=true;keepCards.unshift(card);persist();snapShow(card);
+}
+// ---- Drawing, in world coordinates. ----
+function wToy(a){
+ const t=a.d.toy[0],r=t==='marble'?6.5:t==='boule'?9:t==='takraw'?12:t==='can'?8:12;
+ // Until the first kick it catches the eye, the way a find does.
+ if(!a.hits){const k=reduced?.6:.5+.5*Math.sin(performance.now()/1000*2.6+a.x);ctx.save();ctx.globalCompositeOperation='lighter';ctx.globalAlpha=.3+k*.25;const g=ctx.createRadialGradient(a.x,a.y-r*.6,0,a.x,a.y-r*.6,r*2.6);g.addColorStop(0,'rgba(255,244,208,.7)');g.addColorStop(1,'rgba(255,244,208,0)');ctx.fillStyle=g;ctx.fillRect(a.x-r*3,a.y-r*3.6,r*6,r*6);ctx.restore();}
+ groundShadow(a.x,a.y+r*.5,r*.9,r*.34,.34);ctx.save();ctx.translate(a.x,a.y-r*.6);ctx.rotate(a.spin);
+ if(t==='can'){const col=a.d.toy[3],w=r*1.05,h=r*1.7,g=ctx.createLinearGradient(0,-h,0,h);g.addColorStop(0,findShade(col,.35));g.addColorStop(.55,col);g.addColorStop(1,findShade(col,-.4));ctx.fillStyle=g;ctx.beginPath();ctx.roundRect(-h,-w,h*2,w*2,1.6);ctx.fill();ctx.fillStyle='#d8d6cf';ctx.beginPath();ctx.ellipse(h,0,1.8,w,0,0,7);ctx.fill();ctx.strokeStyle='#8a8880';ctx.lineWidth=.7;ctx.stroke();ctx.fillStyle='#ffffff60';ctx.fillRect(-h+2,-w*.62,h*1.6,w*.32);}
+ else{
+  const col=t==='boule'?'#8d9196':t==='takraw'?'#c9a15a':t==='marble'?'#3f9fd0':a.d.toy[3]||'#d8475a',light=findShade(col,.5),dark=findShade(col,-.42),g=ctx.createRadialGradient(-r*.35,-r*.35,r*.1,0,0,r);g.addColorStop(0,light);g.addColorStop(.6,col);g.addColorStop(1,dark);
+  ctx.beginPath();ctx.arc(0,0,r,0,7);ctx.fillStyle=g;ctx.fill();ctx.strokeStyle=dark;ctx.lineWidth=.8;ctx.stroke();
+  ctx.strokeStyle=t==='takraw'?'#7a5a2a':t==='boule'?'#5a5e62':dark;ctx.lineWidth=t==='takraw'?1.3:.9;
+  if(t==='takraw')for(let i=0;i<3;i++){ctx.beginPath();ctx.ellipse(0,0,r,r*.42,i*1.05,0,7);ctx.stroke();}
+  else if(t==='boule')for(const y of [-.45,0,.45]){ctx.beginPath();ctx.moveTo(-r*.9,y*r);ctx.lineTo(r*.9,y*r);ctx.stroke();}
+  else if(a.d.toy[4]==='soccer'){ctx.fillStyle='#2a2a2a';for(let i=0;i<5;i++){const q=i*1.257;ctx.beginPath();ctx.arc(Math.cos(q)*r*.7,Math.sin(q)*r*.7,r*.2,0,7);ctx.fill();}ctx.beginPath();ctx.arc(0,0,r*.26,0,7);ctx.fill();}
+  else{ctx.beginPath();ctx.arc(0,0,r*.7,.4,2.4);ctx.stroke();}
+ }
+ ctx.restore();
+}
+function wHop(a){
+ const night=tod==='night',col=night?'rgba(230,232,240,.56)':'rgba(255,252,238,.8)';ctx.save();ctx.lineJoin='round';ctx.lineCap='round';ctx.textAlign='center';ctx.textBaseline='middle';
+ for(let k=0;k<6;k++){
+  const x=a.x,y=a.y-k*36,w=28,h=17,on=k<a.at;ctx.strokeStyle=col;ctx.lineWidth=2.1;ctx.beginPath();ctx.moveTo(x-w+(k%2?1.4:-.8),y-h);ctx.lineTo(x+w-(k%3?.6:-1),y-h+.9);ctx.lineTo(x+w+.7,y+h);ctx.lineTo(x-w,y+h-.8);ctx.closePath();
+  if(on){ctx.fillStyle=k===a.at-1?`rgba(255,226,140,${.4+a.lit*.4})`:'rgba(255,226,140,.3)';ctx.fill();}ctx.stroke();
+  ctx.fillStyle=col;ctx.font='600 19px "Hiragino Mincho ProN",Georgia,serif';ctx.save();ctx.translate(x,y+1);ctx.scale(1,.8);ctx.fillText(a.glyphs[k]||String(k+1),0,0);ctx.restore();
+ }
+ ctx.restore();
+}
+function wTrail(a){
+ ctx.save();ctx.fillStyle=tod==='night'?'#e8e4d8':'#3a2f22';
+ a.pts.forEach((p,i)=>{ctx.globalAlpha=(p.on?.5:.3)*(tod==='night'?.7:1);const r=(i%2?.4:-.4);ctx.save();ctx.translate(p.x,p.y);ctx.rotate(r);ctx.beginPath();ctx.ellipse(0,1.8,3.6,2.8,0,0,7);ctx.fill();for(const [x,y] of [[-3.8,-1.5],[-1.3,-3.6],[1.3,-3.6],[3.8,-1.5]]){ctx.beginPath();ctx.ellipse(x,y,1.2,1.5,0,0,7);ctx.fill();}ctx.restore();});
+ ctx.restore();
+}
+function wCat(a){
+ const c=a.cat,k=a.art,tall=figureTall(c.y)*(scene().figure||1)/89;
+ if(c.moving&&petData[k]){const im=petImage(k);if(im.complete&&im.naturalWidth){groundShadow(c.x,c.y,c.row===2?17:11,4,.24);drawSprite(im,petData[k].frames[c.row*5+(reduced?0:c.col)],c.x,c.y,(c.row===2?42:52)*tall,{flip:c.row===2&&c.flip});}}
+ else{const im=petSitImage(k);if(im.complete&&im.naturalWidth){groundShadow(c.x,c.y,17,4,.24);drawSprite(im,[0,0,im.naturalWidth,im.naturalHeight,im.naturalWidth/2],c.x,c.y,48*tall,{flip:!!c.flip});}}
+ if(c.heart>0){ctx.save();ctx.globalAlpha=Math.min(1,c.heart);ctx.fillStyle='#ffb3a7';ctx.font='600 16px sans-serif';ctx.textAlign='center';ctx.fillText('♥',c.x,c.y-52-(1.6-c.heart)*14);ctx.restore();}
+}
+function wSense(a){
+ if(a.mode!=='smell')return;const t=performance.now()/1000;ctx.save();
+ for(let i=0;i<7;i++){const p=((t*.28+i/7)%1),x=a.x+Math.sin(p*5+i)*(5+p*15),y=a.y-14-p*92,r=8+p*20,al=(1-p)*Math.min(1,p*5)*(reduced?.1:.2),g=ctx.createRadialGradient(x,y,0,x,y,r);g.addColorStop(0,`rgba(248,246,238,${al})`);g.addColorStop(1,'rgba(248,246,238,0)');ctx.fillStyle=g;ctx.fillRect(x-r,y-r,r*2,r*2);}
+ ctx.restore();
+}
+function wLight(a){
+ if(wDone(wKey('light')))return;const t=performance.now()/1000,s=reduced?.5:.5+.5*Math.sin(t*1.5),night=tod==='night',rx=a.r,ry=a.r*.56;
+ ctx.save();ctx.globalCompositeOperation='lighter';ctx.translate(a.x,a.y);ctx.scale(1,.56);const g=ctx.createRadialGradient(0,0,0,0,0,rx);g.addColorStop(0,night?`rgba(255,190,110,${.2+s*.07})`:`rgba(255,226,160,${.2+s*.08})`);g.addColorStop(.72,night?'rgba(255,180,100,.12)':'rgba(255,224,160,.12)');g.addColorStop(1,'rgba(255,220,150,0)');ctx.fillStyle=g;ctx.fillRect(-rx,-rx,rx*2,rx*2);ctx.restore();
+ ctx.save();ctx.strokeStyle='#fffbe8';ctx.lineWidth=1;ctx.lineCap='round';for(let i=0;i<3;i++){const k=reduced?.7:Math.max(0,Math.sin(t*2.1+i*2.1)),gx=a.x+[-22,20,2][i],gy=a.y+[-6,4,-14][i]-k*3,l=1.5+k*4.5;if(k<.05)continue;ctx.globalAlpha=k*.85;ctx.beginPath();ctx.moveTo(gx-l,gy);ctx.lineTo(gx+l,gy);ctx.moveTo(gx,gy-l);ctx.lineTo(gx,gy+l);ctx.stroke();}ctx.restore();
+}
+function wHeap(a){
+ if(a.burst)return;groundShadow(a.x,a.y,30,10,.16);ctx.save();
+ for(const b of a.bits){ctx.save();ctx.translate(b.x,b.y-2);ctx.rotate(b.a);ctx.fillStyle=b.c;ctx.beginPath();ctx.ellipse(0,0,b.s*1.4,b.s*.62,0,0,7);ctx.fill();ctx.restore();}
+ ctx.restore();
+}
+function wCover(a){
+ const dark=tod==='night'?.62:1,rim=shade('#5a5650',dark),plate=shade('#6f6a62',dark),pat=shade('#4a4640',dark),hi=shade('#a8a296',dark);
+ ctx.save();ctx.translate(a.x,a.y);ctx.scale(1,.56);ctx.beginPath();ctx.arc(0,1.4,27,0,7);ctx.fillStyle='rgba(20,18,14,.34)';ctx.fill();ctx.beginPath();ctx.arc(0,0,26,0,7);ctx.fillStyle=rim;ctx.fill();ctx.beginPath();ctx.arc(0,0,23,0,7);ctx.fillStyle=plate;ctx.fill();
+ ctx.strokeStyle=pat;ctx.lineWidth=1;ctx.beginPath();ctx.arc(0,0,22.5,0,7);ctx.stroke();ctx.lineWidth=1.3;ctx.save();ctx.beginPath();ctx.arc(0,0,22,0,7);ctx.clip();for(let i=-30;i<30;i+=7){ctx.globalAlpha=.55;ctx.beginPath();ctx.moveTo(i-30,-24);ctx.lineTo(i+30,24);ctx.stroke();ctx.beginPath();ctx.moveTo(i+30,-24);ctx.lineTo(i-30,24);ctx.stroke();}ctx.restore();
+ ctx.globalAlpha=1;ctx.fillStyle=plate;ctx.beginPath();ctx.roundRect(-19,-9,38,18,3);ctx.fill();const t=a.d.cover,px=t.length>6?7.5:t.length>4?9.5:14;ctx.font=`800 ${px}px Georgia,"Hiragino Mincho ProN",serif`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillStyle=pat;ctx.fillText(t,0,1);ctx.fillStyle=hi;ctx.globalAlpha=.6;ctx.fillText(t,-.5,.4);ctx.globalAlpha=1;
+ ctx.beginPath();ctx.arc(-14,-16,1.5,0,7);ctx.arc(14,-16,1.5,0,7);ctx.fillStyle=pat;ctx.fill();
+ if(a.ring>0){ctx.strokeStyle=`rgba(255,252,238,${a.ring*.7})`;ctx.lineWidth=2;ctx.beginPath();ctx.arc(0,0,28+(1-a.ring)*20,0,7);ctx.stroke();}
+ ctx.restore();
+}
+function wBoard(a){
+ const k=figureTall(a.y)/89,w=(a.tall?30:50)*k,h=(a.tall?62:44)*k,t=[['#3a2a1e','#f0e6d0','#2a2018'],['#20342c','#eef0e4','#16211b'],['#6a2a22','#f6ecd6','#2a1a14']][a.tone],dim=tod==='night'?.62:tod==='morning'?.92:1,c0=shade(t[0],dim),c1=shade(t[1],dim),c2=shade(t[2],dim);
+ groundShadow(a.x,a.y,w*.55,3.4,.3);
+ ctx.save();ctx.translate(a.x,a.y);ctx.fillStyle=c0;ctx.fillRect(-w/2,-h-5*k,3*k,h+5*k);ctx.fillRect(w/2-3*k,-h-5*k,3*k,h+5*k);ctx.beginPath();ctx.roundRect(-w/2-1.5*k,-h-6*k,w+3*k,h,2*k);ctx.fill();ctx.fillStyle=c1;ctx.fillRect(-w/2+1.4*k,-h-3.6*k,w-2.8*k,h-5*k);
+ const bx=w-6*k,by=h-9*k,top=-h-3.6*k+2*k;ctx.fillStyle=c2;ctx.textAlign='center';ctx.textBaseline='middle';
+ if(a.tall){const n=[...a.word].length,size=Math.min(bx,by/n*.96);ctx.font=`700 ${size}px "Hiragino Mincho ProN","Songti TC",serif`;[...a.word].forEach((ch,i)=>ctx.fillText(ch,0,top+by*(i+.5)/n));}
+ else{let size=by*.5;ctx.font=`800 ${size}px Georgia,"Hiragino Sans","Apple SD Gothic Neo",sans-serif`;const m=ctx.measureText(a.word).width;if(m>bx){size*=bx/m;ctx.font=`800 ${size}px Georgia,"Hiragino Sans","Apple SD Gothic Neo",sans-serif`;}ctx.fillText(a.word,0,top+by/2);}
+ ctx.restore();
+}
+const wDraw={board:wBoard,toy:wToy,hop:wHop,trail:wTrail,sense:wSense,light:wLight,heap:wHeap,cover:wCover};
+function wanderFlat(){for(const a of actors)if(a.kind==='w'&&a.flat)wDraw[a.w](a);}
+function wanderDraw(a){if(!a.flat)wDraw[a.w]?.(a);}
+// Over everything: speech, leaves in the air, a flash.
+function wanderOver(){
+ const s=getScale(),size=13.5/s;
+ for(const a of actors){
+  const say=a.kind==='local'&&a.sayT>0?[a.say,a.x,a.y-(figureTall(a.y)+2)*(scene().figure||1)-14,a.sayT]:a.kind==='w'&&a.w==='trail'&&a.cat.say>0?[a.d?.cat||wanderCity[cityId()]?.cat,a.cat.x,a.cat.y-58,a.cat.say]:(a.kind==='stray'||a.kind==='cat')&&a.say>0?[wanderCity[cityId()]?.cat,a.x,a.y-58,a.say]:null;
+  if(say?.[0])wanderBubble(say[0],say[1],say[2],Math.min(1,say[3]*2.5),size,s);
+ }
+ for(const f of wFx){
+  ctx.save();
+  if(f.k==='leaf'){ctx.translate(f.x,f.y-f.z);ctx.rotate(f.a);ctx.globalAlpha=Math.min(1,(f.life-f.t)*1.6);ctx.fillStyle=f.c;ctx.beginPath();ctx.ellipse(0,0,f.s*1.4,f.s*.62*(.45+.55*Math.abs(Math.cos(f.a*1.4))),0,0,7);ctx.fill();}
+  else if(f.k==='dust'){ctx.globalAlpha=(1-f.t/f.life)*.7;ctx.fillStyle=f.col;ctx.beginPath();ctx.arc(f.x,f.y,1.6+f.t*5,0,7);ctx.fill();}
+  else if(f.k==='note'){ctx.globalAlpha=(1-f.t/f.life)*.9;ctx.fillStyle='#fff8e4';ctx.strokeStyle='rgba(30,28,20,.5)';ctx.lineWidth=2.4;ctx.font='600 '+(17/s)+'px Georgia,serif';ctx.textAlign='center';ctx.strokeText('♪',f.x,f.y);ctx.fillText('♪',f.x,f.y);}
+  else if(f.k==='gift'){const p=Math.min(1,f.t/.55),e=p*p*(3-2*p),x=f.x+(pos.x-f.x)*e,y=f.y+(pos.y-96-f.y)*e-Math.sin(p*3.14)*34;ctx.globalAlpha=Math.min(1,(1.7-f.t)*2);if(f.art?.complete&&f.art.naturalWidth){const w=f.art.naturalWidth/3;ctx.drawImage(f.art,w*f.cell,0,w,f.art.naturalHeight,x-17,y-17,34,34);ctx.restore();continue;}ctx.fillStyle=f.col;ctx.strokeStyle=findShade(f.col,-.4);ctx.lineWidth=1;ctx.beginPath();ctx.arc(x,y,7.5,0,7);ctx.fill();ctx.stroke();ctx.fillStyle='#ffffff90';ctx.beginPath();ctx.arc(x-2.4,y-2.6,2,0,7);ctx.fill();}
+  else if(f.k==='flash'&&f.t<.22){ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=(.22-f.t)/.22*.8;ctx.fillStyle='#fff';ctx.fillRect(0,0,canvas.width,canvas.height);}
+  ctx.restore();
+ }
+ for(let i=wFx.length-1;i>=0;i--)if(wFx[i].k==='flash'){wFx[i].t+=.016;if(wFx[i].t>.3)wFx.splice(i,1);}
+}
+function wanderBubble(text,x,y,alpha,size,s){
+ ctx.save();ctx.font='600 '+size+'px -apple-system,BlinkMacSystemFont,"Hiragino Sans",sans-serif';const half=ctx.measureText(text).width/2+9/s,h=24/s,nx=Math.max(camera.x+half+4/s,Math.min(camera.x+width/s-half-4/s,x)),ny=Math.max(camera.y+120/s,y);
+ ctx.globalAlpha=alpha;ctx.fillStyle='#fbf5e6';ctx.strokeStyle='rgba(43,42,34,.55)';ctx.lineWidth=1/s;ctx.beginPath();ctx.roundRect(nx-half,ny-h,half*2,h,5/s);ctx.fill();ctx.stroke();ctx.beginPath();ctx.moveTo(x-4/s,ny-.5/s);ctx.lineTo(x,ny+5/s);ctx.lineTo(x+4/s,ny-.5/s);ctx.fill();
+ ctx.fillStyle='#1f2d26';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(text,nx,ny-h/2+.5/s);ctx.restore();
+}
+// The notebook: what the side streets gave you, newest first, the lines as they were written.
+const wanderShelf=document.createElement('section');wanderShelf.className='rw-page';wanderShelf.innerHTML='<h3></h3><ul></ul>';
+function wanderPage(){
+ const c=cityId(),rows=Object.entries(reg.wander||{}).filter(([k,v])=>k.startsWith(c+'/')&&v[1]).sort((a,b)=>b[1][0]-a[1][0]);
+ const home=root.querySelector('.rj-strip')?.parentElement||root.querySelector('.rr-memory-list');if(!home)return;if(wanderShelf.parentElement!==home)home.append(wanderShelf);
+ wanderShelf.hidden=!rows.length;if(!rows.length)return;wanderShelf.querySelector('h3').textContent=T('道草 {0}','Off the path · {0}',wanderCount(c));
+ wanderShelf.querySelector('ul').replaceChildren(...rows.slice(0,8).map(([k,v])=>{const li=document.createElement('li'),b=document.createElement('b'),s=document.createElement('span');b.textContent=places[k.split('/')[1]]?.name||'';s.textContent=v[1];li.append(b,s);return li;}));
+}
+// Tap a cat and it answers in its own language.
+canvas.addEventListener('pointerdown',e=>{
+ if(!photo.hidden||!journal.hidden||changing||isAvatarOpen()||isTransferOpen()||onboarding)return;
+ const r=canvas.getBoundingClientRect(),s=getScale(),wx=(e.clientX-r.left)/s+camera.x,wy=(e.clientY-r.top)/s+camera.y;
+ for(const a of actors){
+  const c=a.kind==='w'&&a.w==='trail'?a.cat:a.kind==='stray'||a.kind==='cat'?a:null;if(!c)continue;
+  if(Math.hypot(wx-c.x,wy-(c.y-16))<36){c.heart=1.6;c.say=1.8;sound.meow?.();renderDirty=true;canvas.dataset.catsay=wanderCity[cityId()]?.cat||'';}
+ }
+},true);
+// ---- Strangers walking through, painted by the same hand as you: the other travellers from the look screen, on their way somewhere else. ----
+function walkerRoute(a,b){
+ const key=(x,y)=>Math.floor(y/20)*50+Math.floor(x/20),from=key(a.x,a.y),to=key(b.x,b.y),prev=new Int32Array(3750).fill(-1),q=[from];prev[from]=from;
+ const open=n=>{const x=n%50*20+10,y=Math.floor(n/50)*20+10;return walkable(x,y);};
+ for(let i=0;i<q.length&&prev[to]<0;i++){const n=q[i],x=n%50;for(const m of [n-50,n+50,x>0?n-1:-1,x<49?n+1:-1])if(m>=0&&m<3750&&prev[m]<0&&(open(m)||m===to)){prev[m]=n;q.push(m);}}
+ if(prev[to]<0)return null;
+ const out=[];for(let n=to;n!==from;n=prev[n])out.push({x:n%50*20+10,y:Math.floor(n/50)*20+10});out.push({x:a.x,y:a.y});out.reverse();
+ const line=[out[0]];for(let i=0;i<out.length-1;){let j=out.length-1;for(;j>i+1;j--)if(clearLine(out[i],out[j]))break;line.push(out[j]);i=j;}
+ return line;
+}
+function walkerSpawn(){
+ if(actors.some(a=>a.kind==='walker')||tod==='night'&&!scene().quiet)return;
+ const bases=travellerBases().filter(b=>b!=='wheel'&&b!==avatarAppearance.base&&spriteData['atlas-'+b]&&motionFor(b));if(!bases.length)return;
+ const ends=[...scene().edges.map(e=>e.vertical?{x:e.x,y:e.y+(e.side==='up'?30:-30)}:{x:e.at+(e.side==='left'?10:-10),y:e.y})].filter(p=>walkable(p.x,p.y));if(ends.length<2)ends.push({...scene().entry});if(ends.length<2)return;
+ // A busy square has two, a side street one.
+ const rand=seeded(placeId+'stranger');
+ for(let n=scene().quiet?1:2;n>0&&bases.length;n--){
+  const base=bases.splice(Math.floor(rand()*bases.length),1)[0],a=ends[Math.floor(rand()*ends.length)],b=ends.filter(e=>e!==a).sort((p,q)=>Math.hypot(q.x-a.x,q.y-a.y)-Math.hypot(p.x-a.x,p.y-a.y))[0],line=walkerRoute(a,b);
+  if(line&&line.length>=2)actors.push({kind:'walker',base,line,i:0,x:line[0].x,y:line[0].y,wait:2+rand()*(n>1?4:9),phase:0,row:1,speed:70+rand()*22});
+ }
+}
+function walkerStep(a,dt){
+ if(a.wait>0){a.wait-=dt;if(a.wait<=0&&wFeet(a.x,a.y)<220)a.wait=1.5;return;}
+ const to=a.line[a.i+1];if(!to){a.line.reverse();a.i=0;a.wait=7+Math.random()*12;a.x=a.line[0].x;a.y=a.line[0].y;return;}
+ const dx=to.x-a.x,dy=to.y-a.y,l=Math.hypot(dx,dy),step=a.speed*dt;
+ if(l<=step){a.x=to.x;a.y=to.y;a.i++;return;}
+ a.x+=dx/l*step;a.y+=dy/l*step;a.row=Math.abs(dx)>Math.abs(dy)*.8?(dx<0?2:3):dy<0?0:1;
+ const m=motionFor(a.base),stride=(m?m.stride[a.row]*STRIDE_EASE:25)*figureTall(a.y)/FIGURE;a.phase=(a.phase+step/stride)%4;
+}
+function walkerDraw(a){
+ if(a.wait>0)return;const name='atlas-'+a.base,sheet=sheetFor(name),m=motionFor(a.base);if(!avatarSpriteReady(sheet)||!m)return;
+ const step=reduced?0:1+Math.floor(a.phase),[col,other]=step&&m.cycle?m.cycle[a.row][step-1]:[step,0],tall=figureTall(a.y)*(scene().figure||1),base=spriteData[name].frames;let image=sheet,frame=base[a.row*5+col];if(!frame)return;
+ if(other){const swap=legSwap(sheet,frame,m,a.row);if(swap){image=swap.image;frame=swap.frame;}}
+ const fade=Math.min(1,a.i===0?Math.hypot(a.x-a.line[0].x,a.y-a.line[0].y)/40:1,a.i>=a.line.length-2?Math.hypot(a.x-a.line.at(-1).x,a.y-a.line.at(-1).y)/40:1);
+ figureShadow(image,frame,a.x,a.y,tall,m.ref[a.row],fade);drawSprite(image,frame,a.x,a.y,tall,{ref:m.ref[a.row],alpha:fade});
+}
+
+// ---- Making figures belong to the paintings, without repainting anything. ----
+// Every painting here is lit from the right, so shadows fall to the left. Figures now cast theirs the same way, from their own outline, and take the light of the ground they stand on:
+// a figure walking under a painted tree goes dark, one in the sun goes warm, and the feet carry a little of the street's colour. All of it is cached per frame, as the tints were.
+const lightInfo=new WeakMap();
+function lightOf(image){
+ let m=lightInfo.get(image);if(m!==undefined)return m;m=null;
+ try{
+  const c=document.createElement('canvas');c.width=25;c.height=38;const g=c.getContext('2d',{willReadFrequently:true});g.drawImage(image,0,0,25,38);const d=g.getImageData(0,0,25,38).data,lum=new Float32Array(950);let sum=[0,0,0],n=0;const ground=[];
+  for(let i=0;i<950;i++){const r=d[i*4],gr=d[i*4+1],b=d[i*4+2];lum[i]=.2126*r+.7152*gr+.0722*b;const x=(i%25)*40+20,y=Math.floor(i/25)*40/1.013+20;if(inside(x,y)){ground.push(lum[i]);sum[0]+=r;sum[1]+=gr;sum[2]+=b;n++;}}
+  ground.sort((a,b)=>a-b);const sun=ground[Math.floor(ground.length*.7)]||128,foot=n?`rgb(${sum[0]/n|0},${sum[1]/n|0},${sum[2]/n|0})`:'';
+  // Four steps of light, kept few so the tinted cells stay cached. Each carries the street's colour up from the feet.
+  let mr=0,mg=0,mb=0;for(let i=0;i<950;i++){mr+=d[i*4];mg+=d[i*4+1];mb+=d[i*4+2];}mr=mr/950|0;mg=mg/950|0;mb=mb/950|0;
+  let pink=0;for(let i=0;i<950;i++){const r=d[i*4],gr=d[i*4+1],b=d[i*4+2];if(r>200&&gr>110&&gr<195&&b>135&&r-gr>42)pink++;}
+  m={lum,sun,pink,tints:[`rgba(24,28,46,.34)|${foot}`,`rgba(38,38,52,.17)|${foot}`,`rgba(${mr},${mg},${mb},.13)|${foot}`,`rgba(255,224,176,.09)|${foot}`]};
+ }catch(e){}
+ lightInfo.set(image,m);return m;
+}
+function lightAt(x,y){
+ const image=backdrops[placeId],m=image&&image.naturalWidth?lightOf(image):null;if(!m)return spriteTints[tod];
+ const i=Math.min(37,Math.max(0,Math.floor(y/H*38)))*25+Math.min(24,Math.max(0,Math.floor(x/W*25))),rel=m.lum[i]/m.sun;
+ return m.tints[rel<.66?0:rel<.86?1:rel<1.08?2:3];
+}
+// The outline of a frame, small: drawn large it is already soft, and that works where canvas filters do not (WebKit). It fades towards the head, as a long shadow does.
+const shadowCells=new Map(),shadowIds=new WeakMap();let shadowNext=1;
+function shadowCell(image,frame){
+ let id=shadowIds.get(image);if(!id){id=shadowNext++;shadowIds.set(image,id);}
+ const [sx,sy,sw,sh]=frame,key=id+'|'+sx+','+sy+','+sw+','+sh;let cell=shadowCells.get(key);if(cell)return cell;
+ cell=document.createElement('canvas');const k=.16;cell.width=Math.max(4,Math.ceil(sw*k));cell.height=Math.max(4,Math.ceil(sh*k));const g=cell.getContext('2d');
+ g.drawImage(image,sx,sy,sw,sh,0,0,cell.width,cell.height);g.globalCompositeOperation='source-in';const f=g.createLinearGradient(0,0,0,cell.height);f.addColorStop(0,'rgba(22,17,12,.45)');f.addColorStop(.7,'rgba(22,17,12,.92)');f.addColorStop(1,'rgba(22,17,12,1)');g.fillStyle=f;g.fillRect(0,0,cell.width,cell.height);
+ shadowCells.set(key,cell);if(shadowCells.size>120)shadowCells.delete(shadowCells.keys().next().value);return cell;
+}
+const shadowLight={day:[.66,.2,.27],morning:[1.05,.13,.2]};
+function figureShadow(image,frame,x,y,height,ref,alpha=1,flip=false){
+ const light=shadowLight[tod];if(!light||!frame||!avatarSpriteReady(image))return;
+ const [,,sw,sh,ax,gy=sh]=frame,r=height/(ref||sh),[lx,ly,dark]=light,cell=shadowCell(image,frame);
+ // Darker on bright ground; in shade it is lost in the painted shadow already.
+ const on=lightAt(x,y),m=backdrops[placeId]?lightOf(backdrops[placeId]):null,shade=m&&on===m.tints[0]?.25:m&&on===m.tints[1]?.6:1;
+ ctx.save();ctx.globalAlpha=dark*shade*alpha;ctx.translate(x,y+1);ctx.transform(1,0,lx,-ly,0,0);if(flip)ctx.scale(-1,1);ctx.drawImage(cell,-ax*r,-gy*r,sw*r,sh*r);ctx.restore();
+}
+// ---- One camera no more. The view pulls back on plain streets, closes in at a stall or a photo spot, and opens on a sight the first time you walk into it. ----
+let camZoom=1,camClock=0,camHold=0,camLift=0;const camSeen=new Set();let camPlace=null;
+function camTick(){
+ const now=performance.now(),dt=camClock?Math.min(.1,(now-camClock)/1000):0;camClock=now;
+ const base=height/1000||1,least=Math.max(width/1000,height/1500)/base;
+ if(reduced||!base){camZoom=Math.max(1,least);return;}
+ if(placeId!==camPlace){
+  camPlace=placeId;
+  // The first steps into a sight: the whole painting, then in to you.
+  if(onboarded&&!onboarding&&city().tour.includes(placeId)&&!visited.has(placeId)&&!camSeen.has(placeId)&&!revealCity){camSeen.add(placeId);camHold=1.1;camZoom=least;snapCamera=true;}
+ }
+ let want=scene().quiet?.9:1;
+ if(guideHurry&&journeyGoal)want-=.05;
+ if(near)want+=.07;else if(actors.some(a=>a.kind==='stall'&&Math.hypot(a.front.x-pos.x,a.front.y-pos.y)<120))want+=.1;
+ if(!isWalking&&gait.idle>4)want+=Math.min(.05,(gait.idle-4)*.012);
+ want=Math.max(want,least);
+ // At the photo spot the view lifts, so the sight fills the frame and you stand low in it.
+ {const lift=near?-84:0;if(Math.abs(lift-camLift)>.5){camLift+=(lift-camLift)*(1-Math.exp(-dt*2.4));renderDirty=true;}else camLift=lift;}
+ if(camHold>0){camHold-=dt;renderDirty=true;return;}
+ const next=camZoom+(want-camZoom)*(1-Math.exp(-dt*(want>camZoom+.12?1.25:2.2)));
+ if(Math.abs(want-next)>.002)renderDirty=true;camZoom=Math.abs(want-next)<.002?want:next;
+}
+// ---- Depth on a flat painting. ----
+// Cloud shadows drift across the street by day. What the painting shows just out of frame stands close to the lens, soft and quicker than the ground, so you look past something.
+const nearSmall=new WeakMap();
+function nearCopy(image){let c=nearSmall.get(image);if(c===undefined){c=null;try{c=document.createElement('canvas');c.width=160;c.height=240;const g=c.getContext('2d');g.imageSmoothingQuality='high';g.drawImage(image,0,0,160,240);}catch(e){c=null;}nearSmall.set(image,c);}return c;}
+function depthOver(scale){
+ if(reduced)return;const image=backdropFor(placeId);if(!image.complete||!image.naturalWidth)return;const t=performance.now()/1000;
+ if(tod==='day'){ctx.save();ctx.globalCompositeOperation='multiply';for(let i=0;i<2;i++){const x=((t*(5+i*2.4)+i*640)%2300)-650,y=[300,1050][i],w=[880,720][i],h=w*.56;ctx.globalAlpha=.3;ctx.drawImage(softDisc,x-w/2,y-h/2,w,h);}ctx.restore();}
+}
+function nearOver(scale){
+ if(reduced||!scene().quiet)return;const image=backdropFor(placeId);if(!image.complete||!image.naturalWidth)return;const small=nearCopy(image);if(!small)return;
+ const vw=width/scale,dark=tod==='night'?.56:tod==='morning'?.42:.34,strip=Math.min(38,width*.1),hgt=height;
+ ctx.save();ctx.setTransform(canvas.width/width,0,0,canvas.width/width,0,0);
+ // The two side strips: the ground runs by underneath, these go by half as fast again.
+ for(const side of [0,1]){
+  const world=side?camera.x+vw:camera.x-120,zoom=1.5,sw=(strip+24)/scale/zoom*.16,sh=hgt/scale/zoom*.16,sx=Math.max(0,Math.min(160-sw,(world+(camera.x-(W-vw)/2)*.5)*.16)),sy=Math.max(0,Math.min(240-sh,camera.y*.16*1.02)),x=side?width-strip:0;
+  nearMask(small,sx,sy,sw,sh,x,strip,hgt,side,dark);
+ }
+ ctx.restore();
+}
+const nearCanvas=document.createElement('canvas');
+function nearMask(small,sx,sy,sw,sh,x,w,h,side,dark){
+ const cw=Math.ceil(w/3),ch=Math.ceil(h/6);if(nearCanvas.width!==cw||nearCanvas.height!==ch){nearCanvas.width=cw;nearCanvas.height=ch;}
+ const g=nearCanvas.getContext('2d');g.globalCompositeOperation='source-over';g.globalAlpha=1;g.clearRect(0,0,cw,ch);g.drawImage(small,sx,sy,sw,sh,0,0,cw,ch);g.fillStyle=`rgba(14,16,20,${dark})`;g.fillRect(0,0,cw,ch);
+ const f=g.createLinearGradient(0,0,cw,0);f.addColorStop(side?0:1,'rgba(0,0,0,0)');f.addColorStop(side?.55:.45,'rgba(0,0,0,.62)');f.addColorStop(side?1:0,'rgba(0,0,0,.96)');g.globalCompositeOperation='destination-in';g.fillStyle=f;g.fillRect(0,0,cw,ch);
+ ctx.imageSmoothingEnabled=true;ctx.drawImage(nearCanvas,x,0,w,h);
+}
+// One sheet of print grain over painting and people alike: the last thing that ties them to the same surface, and it takes the digital sheen off the paint.
+const grainTile=(()=>{const c=document.createElement('canvas');c.width=c.height=192;const g=c.getContext('2d'),d=g.createImageData(192,192),rand=seeded('grain');for(let i=0;i<d.data.length;i+=4){const v=108+rand()*40;d.data[i]=d.data[i+1]=d.data[i+2]=v;d.data[i+3]=255;}g.putImageData(d,0,0);return c;})();
+let grainPattern=null;
+function grainOver(){
+ if(reduced)return;grainPattern||=ctx.createPattern(grainTile,'repeat');if(!grainPattern)return;
+ ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalCompositeOperation='overlay';ctx.globalAlpha=.34;ctx.fillStyle=grainPattern;ctx.fillRect(0,0,canvas.width,canvas.height);ctx.restore();
+}
+// ---- Strung across the street above your head. These hang between you and the ground, so they slide by faster than it and drop a thin shadow on it: paper lanterns in Asakusa, washing in Rome, festa flags in Rio. ----
+const overheadStyle={tokyo:'lantern',taiwan:'lantern',singapore:'lantern',seoul:'lotus',rome:'laundry',paris:'bulbs',london:'bunting',newyork:'bulbs',rio:'flags',cartagena:'flags',bangkok:'tung',dubai:'lamps',jaipur:'swag',istanbul:'lamps'};
+const overheadFor={};
+function overheadOf(id){
+ if(overheadFor[id]!==undefined)return overheadFor[id];
+ const p=places[id],out=[];
+ if(p.quiet&&overheadStyle[p.cityId]&&!frontLayers[id]){ // not across a gate or a monument
+  const rand=seeded(id+'overhead');
+  for(let y=240+rand()*180;y<1240;y+=300+rand()*340){
+   const run=groundRuns(id,Math.round(y/10)*10).filter(([a,b])=>b-a>=110).sort((r,q)=>(q[1]-q[0])-(r[1]-r[0]))[0];if(!run||rand()<.28)continue;
+   out.push({y,x0:run[0]-90,x1:run[1]+90,tilt:(rand()-.5)*56,lift:150+rand()*60,seed:rand()*6});
+  }
+ }
+ return overheadFor[id]=out;
+}
+function overheadShadow(){
+ if(tod==='night')return;ctx.save();ctx.strokeStyle='rgba(22,17,12,.17)';ctx.lineCap='round';
+ for(const s of overheadOf(placeId)){const sx=s.lift*.62,sy=s.lift*.2;ctx.lineWidth=2.4;ctx.beginPath();ctx.moveTo(s.x0-sx,s.y+sy-s.tilt/2);ctx.quadraticCurveTo((s.x0+s.x1)/2-sx,s.y+sy+22,s.x1-sx,s.y+sy+s.tilt/2);ctx.stroke();}
+ ctx.restore();
+}
+function overheadItem(style,x,y,i,k,t,glow){
+ const sway=reduced?0:Math.sin(t*1.15+i*.7)*1.5*k;ctx.save();ctx.translate(x,y);ctx.rotate(sway*.03);
+ if(style==='lantern'||style==='lotus'){
+  const c=style==='lotus'?['#e58aa6','#f0c3c9','#e5a55a'][i%3]:i%3===2?'#f3ece0':'#c9352b',w=9.5*k,h=12.5*k;
+  ctx.strokeStyle='#2b2520';ctx.lineWidth=.8*k;ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(0,4*k);ctx.stroke();
+  const g=ctx.createRadialGradient(-w*.3,4*k+h*.8,1,0,4*k+h,w*1.2);g.addColorStop(0,findShade(c,.32));g.addColorStop(1,findShade(c,-.28));ctx.fillStyle=g;ctx.beginPath();ctx.ellipse(0,4*k+h,w,h,0,0,7);ctx.fill();
+  ctx.fillStyle='#2b2520';ctx.fillRect(-w*.52,3.6*k,w*1.04,2.2*k);ctx.fillRect(-w*.46,4*k+h*2-2*k,w*.92,2.2*k);
+  ctx.strokeStyle=findShade(c,-.42);ctx.globalAlpha=.42;ctx.lineWidth=.6*k;for(const r of [.35,.7,1,1.3,1.65]){ctx.beginPath();ctx.ellipse(0,4*k+h*r,w*Math.sqrt(Math.max(.01,1-(r-1)*(r-1))),h*.12,0,0,7);ctx.stroke();}ctx.globalAlpha=1;
+  if(glow){ctx.globalCompositeOperation='lighter';const l=ctx.createRadialGradient(0,4*k+h,0,0,4*k+h,w*3.4);l.addColorStop(0,'rgba(255,170,90,.5)');l.addColorStop(1,'rgba(255,170,90,0)');ctx.fillStyle=l;ctx.fillRect(-w*3.4,4*k+h-w*3.4,w*6.8,w*6.8);}
+ }else if(style==='bulbs'){
+  const r=2.8*k;ctx.fillStyle=glow?'#ffe7b0':'#f6ead0';ctx.strokeStyle='#2b2520';ctx.lineWidth=.6*k;ctx.beginPath();ctx.arc(0,3.6*k,r,0,7);ctx.fill();ctx.stroke();
+  if(glow){ctx.globalCompositeOperation='lighter';const l=ctx.createRadialGradient(0,3.6*k,0,0,3.6*k,r*6);l.addColorStop(0,'rgba(255,214,140,.65)');l.addColorStop(1,'rgba(255,214,140,0)');ctx.fillStyle=l;ctx.fillRect(-r*6,3.6*k-r*6,r*12,r*12);}
+ }else if(style==='bunting'){
+  ctx.fillStyle=['#b3262a','#f3efe4','#1f3f7a'][i%3];ctx.beginPath();ctx.moveTo(-6*k,0);ctx.lineTo(6*k,0);ctx.lineTo(0,13*k);ctx.closePath();ctx.fill();
+ }else if(style==='flags'){
+  ctx.fillStyle=['#e0483a','#f0c23c','#2e7fb6','#3f9c62','#e0589a'][i%5];ctx.beginPath();ctx.moveTo(-6.5*k,0);ctx.lineTo(6.5*k,0);ctx.lineTo(6.5*k,12*k);ctx.lineTo(0,8.5*k);ctx.lineTo(-6.5*k,12*k);ctx.closePath();ctx.fill();
+ }else if(style==='tung'){
+  const h=20*k;ctx.fillStyle=['#d9a520','#c8352e','#2e7f5a','#7a4aa0'][i%4];ctx.fillRect(-3.6*k,0,7.2*k,h);ctx.fillStyle='#ffffff50';ctx.fillRect(-3.6*k,h*.3,7.2*k,1.4*k);ctx.fillRect(-3.6*k,h*.62,7.2*k,1.4*k);
+ }else if(style==='laundry'){
+  const c=['#f4f1e8','#7f9fc2','#d9c7a8','#e9e5da','#b5643c'][i%5],w=8.5*k,h=15*k;ctx.fillStyle=c;ctx.strokeStyle=findShade(c,-.3);ctx.lineWidth=.6*k;ctx.beginPath();if(i%3===1){ctx.moveTo(-5*k,0);ctx.lineTo(5*k,0);ctx.lineTo(6*k,h*1.1);ctx.lineTo(1*k,h*1.1);ctx.lineTo(0,5*k);ctx.lineTo(-1*k,h*1.1);ctx.lineTo(-6*k,h*1.1);}else{ctx.moveTo(-w*.62,0);ctx.lineTo(-w*1.2,4*k);ctx.lineTo(-w*.92,7*k);ctx.lineTo(-w*.62,5.4*k);ctx.lineTo(-w*.62,h);ctx.lineTo(w*.62,h);ctx.lineTo(w*.62,5.4*k);ctx.lineTo(w*.92,7*k);ctx.lineTo(w*1.2,4*k);ctx.lineTo(w*.62,0);}ctx.closePath();ctx.fill();ctx.stroke();
+ }else if(style==='lamps'){
+  const c=['#1f6f8a','#c8352e','#d9a520','#3f9c62'][i%4];ctx.strokeStyle='#3a2a18';ctx.lineWidth=.7*k;ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(0,5*k);ctx.stroke();ctx.fillStyle=glow?findShade(c,.3):c;ctx.beginPath();ctx.moveTo(-5*k,7*k);ctx.lineTo(5*k,7*k);ctx.lineTo(3*k,15*k);ctx.lineTo(0,18*k);ctx.lineTo(-3*k,15*k);ctx.closePath();ctx.fill();ctx.fillStyle='#b8933a';ctx.fillRect(-5.6*k,5.6*k,11.2*k,1.8*k);
+  if(glow){ctx.globalCompositeOperation='lighter';const l=ctx.createRadialGradient(0,11*k,0,0,11*k,20*k);l.addColorStop(0,'rgba(255,190,110,.55)');l.addColorStop(1,'rgba(255,190,110,0)');ctx.fillStyle=l;ctx.fillRect(-20*k,-9*k,40*k,40*k);}
+ }else if(style==='swag'){
+  ctx.fillStyle=i%2?'#ef9a2e':'#f4c430';for(let n=0;n<7;n++){const a=n/6*Math.PI,px=Math.cos(a)*11*k,py=Math.sin(a)*7*k;ctx.beginPath();ctx.arc(px,py,2.4*k,0,7);ctx.fill();}
+ }
+ ctx.restore();
+}
+function overheadOver(scale){
+ const strands=overheadOf(placeId);if(!strands.length)return;
+ const style=overheadStyle[cityId()],k=1.26,vw=width/scale,vh=height/scale,cx=camera.x+vw/2,cy=camera.y+vh/2,t=performance.now()/1000,s=scale*k,glow=tod==='night'||tod==='morning'&&style==='bulbs';
+ ctx.save();ctx.setTransform(canvas.width/width,0,0,canvas.width/width,0,0);ctx.lineCap='round';
+ for(const a of strands){
+  const y0=height/2+(a.y-cy)*s-a.lift*scale;if(y0<-120||y0>height+60)continue;
+  const X=x=>width/2+(x-cx)*s,x0=X(a.x0),x1=X(a.x1),ya=y0-a.tilt*scale/2,yb=y0+a.tilt*scale/2,sag=(x1-x0)*.075,mx=(x0+x1)/2,my=(ya+yb)/2+sag*2,pt=u=>[(1-u)*(1-u)*x0+2*u*(1-u)*mx+u*u*x1,(1-u)*(1-u)*ya+2*u*(1-u)*my+u*u*yb];
+  ctx.strokeStyle=tod==='night'?'#0e1118':'#2b2520';ctx.lineWidth=1.3*s;ctx.globalAlpha=.86;ctx.beginPath();ctx.moveTo(x0,ya);ctx.quadraticCurveTo(mx,my,x1,yb);ctx.stroke();ctx.globalAlpha=1;
+  const gap={lantern:62,lotus:54,bulbs:34,bunting:26,flags:24,tung:30,laundry:40,lamps:50,swag:38}[style]*s,n=Math.max(3,Math.floor((x1-x0)/gap));
+  for(let i=1;i<n;i++){const [x,y]=pt(i/n);if(x<-40||x>width+40)continue;overheadItem(style,x,y,i+Math.round(a.seed*3),s*1.15,t+a.seed,glow);}
+ }
+ ctx.restore();
+}
+// ---- Lettering on what the painter left blank, in ink, so it follows every light and season. Generic goods, no shop's name. World coordinates, 1000x1500. ----
+const paintedSigns={
+ 'asakusa-nakamise':[[0,557,105,617,'人形焼',.84],[157,372,247,415,'雷おこし',.84],[262,267,322,297,'煎餅',.8],[327,202,372,229,'扇子',.74],[357,172,387,192,'飴',.7],[940,555,1000,612,'手ぬぐい',.84],[812,372,899,415,'きびだんご',.84],[737,267,795,297,'和菓子',.8],[685,202,727,229,'あられ',.74],[670,172,692,192,'傘',.7]],
+ // The first two streets anyone walks: a sushi street whose curtains say so.
+ 'walk-tokyo-01':[[206,962,246,1026,'茶',.84],[806,746,838,848,'甘酒',.8,1,1],[826,980,876,1076,'だんご',.8,1,1]],
+ 'walk-tokyo-02':[[240,440,282,520,'寿司',.84,1,1],[294,852,326,958,'天ぷら',.8,1,1]]
+};
+function inkFor(g,x0,y0,x1,y1,text,alpha,tall,white){
+ const w=x1-x0,h=y1-y0;g.save();g.globalCompositeOperation=white?'source-over':'multiply';g.globalAlpha=white?alpha*(tod==='night'?.6:tod==='morning'?.88:1):alpha;g.fillStyle=white?'#f4efe2':'#1b1712';g.textAlign='center';g.textBaseline='middle';
+ if(tall){const ch=[...text],n=ch.length,size=Math.min(w*.8,h/n*.92);g.font=`700 ${size}px "Hiragino Mincho ProN","Songti TC","Yu Mincho",serif`;ch.forEach((c,i)=>g.fillText(c,(x0+x1)/2,y0+h*(i+.5)/n));g.restore();return;}
+ let size=h*.78;g.font=`700 ${size}px "Hiragino Mincho ProN","Songti TC","Yu Mincho",serif`;const m=g.measureText(text).width;if(m>w*.84){size*=w*.84/m;g.font=`700 ${size}px "Hiragino Mincho ProN","Songti TC","Yu Mincho",serif`;}
+ g.fillText(text,(x0+x1)/2,(y0+y1)/2+size*.04);g.restore();
+}
+// The great lantern of Kaminarimon, its two characters bent round the paper.
+const lanternInk=document.createElement('canvas');let lanternReady=false;
+function lanternMake(){
+ lanternReady=true;const cw=300,ch=292;lanternInk.width=cw;lanternInk.height=ch;const flat=document.createElement('canvas');flat.width=cw;flat.height=ch;const f=flat.getContext('2d');
+ f.fillStyle='#120e0a';f.textAlign='center';f.textBaseline='middle';f.font='800 136px "Hiragino Mincho ProN","Yu Mincho","Songti TC",serif';f.fillText('雷',cw/2,74);f.fillText('門',cw/2,214);
+ const g=lanternInk.getContext('2d');for(let x=0;x<cw;x++){const u=(x+.5)/cw*2-1,a=Math.asin(Math.max(-1,Math.min(1,u*.9))),src=(a/1.12+1)/2*cw;g.drawImage(flat,src,0,1.4,ch,x,0,1,ch);}
+}
+function lanternDraw(g){if(!lanternReady)lanternMake();g.save();g.globalCompositeOperation='multiply';g.globalAlpha=.9;g.drawImage(lanternInk,457,256,88,86);g.restore();}
+function paintSigns(g,id){
+ const list=paintedSigns[id];if(list)for(const [x0,y0,x1,y1,text,a,tall,white] of list)inkFor(g,x0,y0,x1,y1,text,a,tall,white);
+ if(id==='asakusa-kaminarimon')lanternDraw(g);
+}
+
+ function getScale(){return height/1000*camZoom;}
  const softDisc=(()=>{const c=document.createElement('canvas');c.width=c.height=64;const g=c.getContext('2d'),r=g.createRadialGradient(32,32,1,32,32,32);r.addColorStop(0,'rgba(34,27,20,.72)');r.addColorStop(.5,'rgba(34,27,20,.42)');r.addColorStop(1,'rgba(34,27,20,0)');g.fillStyle=r;g.fillRect(0,0,64,64);return c;})();
  function softShadow(x,y,rx,ry,alpha){ctx.save();ctx.globalAlpha=alpha;ctx.drawImage(softDisc,x-rx,y-ry,rx*2,ry*2);ctx.restore();}
  function ellipse(x,y,rx,ry,color){ctx.fillStyle=color;ctx.beginPath();ctx.ellipse(x,y,rx,ry,0,0,Math.PI*2);ctx.fill();}
  // Frame boxes in the 2x traveller atlas: x, y, width, height, foot anchor.
  const atlasFrames=[[60,14,130,300,63.6],[272,14,136,300,64.62],[480,14,132,298,66.22],[682,18,142,296,69.84],[898,16,136,300,66.02],[52,332,138,274,65.62],[268,330,144,294,65.28],[480,330,136,296,63.22],[694,332,138,290,60.1],[900,330,138,294,66.42],[68,642,118,318,49.26],[242,642,184,318,88.74],[490,642,124,318,51.98],[668,644,184,316,86.96],[852,644,188,316,115.64],[54,960,120,276,68.6],[252,960,174,248,89.8],[426,960,180,260,126.5],[670,960,182,256,92.84],[852,960,194,264,126.22]];
  function draw(){
-  warmBackdrops();
+  warmBackdrops();camTick();
   const scale=getScale(),backdrop=backdropFor(placeId);
   const visibleWidth=width/scale,visibleHeight=height/scale;
   // The camera follows the traveller: the landmark fills the view near the square,
   // and the side streets come into frame further down.
   const bounded=x=>Math.max(0,Math.min(W-visibleWidth,x));
-  const targetY=Math.max(0,Math.min(H-visibleHeight,pos.y-visibleHeight*.62+lookY)),depth=H>visibleHeight?targetY/(H-visibleHeight):1;
+  const targetY=Math.max(0,Math.min(H-visibleHeight,pos.y-visibleHeight*.62+lookY+camLift)),depth=H>visibleHeight?targetY/(H-visibleHeight):1;
   const squareX=bounded((scene().focusX||550)-visibleWidth/2);
   let streetX;
   {
@@ -9422,7 +10285,7 @@ function guideStrip(){
   if(Math.abs(targetX-camera.x)>.4||Math.abs(targetY-camera.y)>.4)renderDirty=true;else{camera.x=targetX;camera.y=targetY;revealCity=false;}
   ctx.clearRect(0,0,width,height);ctx.save();ctx.scale(scale,scale);ctx.translate(-camera.x,-camera.y);
   ctx.imageSmoothingQuality='high';
-  if(backdrop.complete&&backdrop.naturalWidth)ctx.drawImage(backdrop,0,0,W,H);
+  if(backdrop.complete&&backdrop.naturalWidth){ctx.drawImage(backdrop,0,0,W,H);paintSigns(ctx,placeId);overheadShadow();}
   else{ctx.fillStyle='#d1c5a9';ctx.fillRect(0,0,W,H);}
   if(path.length){ctx.save();ctx.lineCap='round';ctx.setLineDash([.1,17]);ctx.lineDashOffset=reduced?0:-(performance.now()/34%17);ctx.beginPath();ctx.moveTo(pos.x,pos.y);path.forEach(p=>ctx.lineTo(p.x,p.y));ctx.strokeStyle='rgba(30,28,20,.62)';ctx.lineWidth=10;ctx.stroke();ctx.strokeStyle='#fff6dc';ctx.lineWidth=6.5;ctx.stroke();ctx.restore();}
   if(target){ctx.beginPath();ctx.ellipse(target.x,target.y,15,6.5,0,0,Math.PI*2);ctx.strokeStyle='rgba(30,28,20,.62)';ctx.lineWidth=5.5;ctx.stroke();ctx.strokeStyle='#fff6dc';ctx.lineWidth=3;ctx.stroke();}
@@ -9431,7 +10294,7 @@ function guideStrip(){
   const turning=gait.turnT>0&&gait.turn,idlePose=['map','wipe','rub'].includes(gait.moment);
   const shown=turning?gait.turn:gait.pose?'up':gait.look||facing,row={up:0,down:1,left:2,right:3}[shown];
   const step=reduced?0:gait.col;
-  if(step!==lastStep){if(step===1||step===3)sound.step();lastStep=step;}
+  if(step!==lastStep){if(step===1||step===3){sound.step();wanderStep();}lastStep=step;}
   spawnLife();
   drawLife(()=>{
    // Frames stand on their measured ground point at one scale per facing, so strides never swell the figure.
@@ -9462,13 +10325,16 @@ function guideStrip(){
    }
    // The very first seconds: a ring on the ground says which of these people is you.
    if(root.classList.contains('is-first-run')&&!walkedOnce){const k=1+.07*Math.sin(performance.now()/380);ctx.beginPath();ctx.ellipse(pos.x,pos.y+1,27*depth*k,10*depth*k,0,0,Math.PI*2);ctx.strokeStyle='rgba(20,18,12,.55)';ctx.lineWidth=5;ctx.stroke();ctx.strokeStyle='#fff6dc';ctx.lineWidth=2.6;ctx.stroke();}
-   ctx.save();ctx.translate(pos.x+9*depth,pos.y+5*depth);ctx.rotate(.35);ctx.filter='blur(3px)';ellipse(0,0,18*depth,6*depth,tod==='night'?'#382f2430':'#382f2445');ctx.restore();
-   softShadow(pos.x,pos.y+1,15*depth,5.2*depth,tod==='night'?.62:.82);
+   figureShadow(sprite,frame,pos.x,pos.y,tall,motion?.ref[row]);
+   softShadow(pos.x,pos.y+1,14*depth,4.6*depth,tod==='night'?.62:.86);
    const fade=posedFrame?Math.max(0,Math.min(1,(1.5-gait.momentT)/.22,gait.momentT/.22)):0;
    const blend=fade*fade*(3-2*fade);
-   drawSprite(sprite,frame,pos.x+ox,pos.y+oy,tall,{ref:motion?.ref[row],squash,stretch,alpha:1-blend});
+   // The body leans into a brisk walk, and a little into a turn.
+   const lean=reduced?0:Math.max(-.075,Math.min(.075,(gait.vx||0)/WALK*.052));
+   drawSprite(sprite,frame,pos.x+ox,pos.y+oy,tall,{ref:motion?.ref[row],squash,stretch,alpha:1-blend,lean});
    if(posedFrame)drawSprite(posedSprite,posedFrame,pos.x+ox,pos.y+oy,tall,{ref:motion?.ref[0],squash,stretch,alpha:blend});
   });
+  depthOver(scale);
   if(notice){
    // Faint, short-lived text in screen pixels, kept clear of the frame edges.
    const size=15/scale;ctx.save();ctx.font='500 '+size+'px -apple-system,BlinkMacSystemFont,"Hiragino Sans",sans-serif';
@@ -9479,9 +10345,10 @@ function guideStrip(){
    ctx.globalAlpha=notice.alpha;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillStyle='#fffaf0';
    ctx.fillText(notice.text,nx,ny);ctx.restore();
   }
-  const state={tod,life:actors.map(a=>a.kind[0]).join(''),backdrop:(backdrop.currentSrc||backdrop.src||'').split('/').pop(),notice:notice&&notice.alpha>.3?notice.text:'',feet:Math.round((pos.x-camera.x)*getScale())+','+Math.round((pos.y-camera.y)*getScale()),place:placeId,panel,destination:journeyGoal||departing||placeId,facing,motion:isWalking?'walking':'idle',step:String(step),worldX:pos.x.toFixed(1),worldY:pos.y.toFixed(1)};
+  const state={tod,life:actors.map(a=>a.kind[0]).join(''),backdrop:(backdrop.currentSrc||backdrop.src||'').split('/').pop(),notice:notice&&notice.alpha>.3?notice.text:'',feet:Math.round((pos.x-camera.x)*getScale())+','+Math.round((pos.y-camera.y)*getScale()),zoom:getScale().toFixed(3),place:placeId,panel,destination:journeyGoal||departing||placeId,facing,motion:isWalking?'walking':'idle',step:String(step),worldX:pos.x.toFixed(1),worldY:pos.y.toFixed(1)};
   for(const [key,value] of Object.entries(state))if(canvas.dataset[key]!==value)canvas.dataset[key]=value;
   ctx.restore();
+  overheadOver(scale);nearOver(scale);grainOver();
   updateChrome();
   const entry=scene().entry;
   const px=(entry.x-camera.x)*scale;let py=(entry.y-(near&&!departing?160:45)-camera.y)*scale;
@@ -9497,7 +10364,7 @@ function guideStrip(){
    button.classList.toggle('is-route',!!edge&&edge.to===guideRoute);
    if(edge?.vertical){
     // The way down to the quiet street (or back up) shows once the end of the street is near, at the street itself.
-    const top=(edge.side==='down'?root.querySelector('.rr-destination').getBoundingClientRect().top-canvas.getBoundingClientRect().top-(button.offsetHeight||44)-10:Math.max(root.querySelector('.rr-city').getBoundingClientRect().bottom-canvas.getBoundingClientRect().top+10,(edge.y-camera.y)*scale+20));
+    const top=(edge.side==='down'?root.querySelector('.rr-destination').getBoundingClientRect().top-canvas.getBoundingClientRect().top-(button.offsetHeight||44)-10:Math.max(root.querySelector('.rr-city').getBoundingClientRect().bottom-canvas.getBoundingClientRect().top+10,((edge.plateY||edge.y)-camera.y)*scale+20));
     button.hidden=Math.abs(pos.y-edge.y)>(edge.side==='down'?320:420)||top<60;if(button.hidden)return;
     button.dataset.to=edge.to;button.style.top=top+'px';{const half=(button.offsetWidth||120)/2,stick=root.querySelector('.rr-stick').getBoundingClientRect();let left=Math.max(edge.side==='down'?stick.right-canvas.getBoundingClientRect().left+half+8:70,Math.min(width-half-6,(edge.x-camera.x)*scale));
      // Beside the traveller, never on top of them.
@@ -9520,7 +10387,7 @@ function guideStrip(){
 
  function frame(t){
   const dt=last?Math.min((t-last)/1000,.04):0;last=t;
-  if(photo.hidden&&journal.hidden&&keepMode.hidden&&!changing&&!isTransferOpen()&&!isAvatarOpen()&&!onboarding){
+  if(photo.hidden&&journal.hidden&&keepMode.hidden&&rmRoot.hidden&&!changing&&!isTransferOpen()&&!isAvatarOpen()&&!onboarding){
    const previous={...pos},wasWalking=isWalking;let finished=false,intended=0,want=null;
    // Held input sets a wanted velocity (a half-tilted stick walks at half pace); the body eases toward it.
    if(stickState.pointerId!==null){const tilt=Math.hypot(stickState.x,stickState.y);gait.push=tilt>.82?(gait.push||0)+dt:0;const pace=WALK*(1+.62*Math.min(1,Math.max(0,((gait.push||0)-.7)/.5)));want={x:stickState.x*pace,y:stickState.y*pace};}
@@ -9533,7 +10400,7 @@ function guideStrip(){
    if(!want&&path.length){
     // A tapped route: speed up along the straight legs, brake into the last point. The legs were checked walkable.
     let remain=0,px=pos.x,py=pos.y;for(const p of path){remain+=Math.hypot(p.x-px,p.y-py);px=p.x;py=p.y;}
-    const goal=Math.min(PATH_WALK*(!journeyGoal?1:guideHurry?3:scene().quiet?2:1.3),Math.sqrt(1800*remain)+8);
+    const goal=Math.min(PATH_WALK*(!journeyGoal?1:guideHurry?3:scene().quiet?(reg.walked?.[placeId]===2?2.8:2):1.3),Math.sqrt(1800*remain)+8);
     gait.speed=reduced?goal:gait.speed+Math.max(-1700*dt,Math.min(1100*dt,goal-gait.speed));
     for(let budget=gait.speed*dt;budget>0&&path.length;){const p=path[0],d=Math.hypot(p.x-pos.x,p.y-pos.y);if(d<=budget){pos={...p};budget-=d;path.shift();}else{pos.x+=(p.x-pos.x)/d*budget;pos.y+=(p.y-pos.y)/d*budget;budget=0;}}
     if(!path.length){target=null;finished=true;gait.speed=0;}
@@ -9590,7 +10457,7 @@ firstCard.querySelector('img').src=firstPlace.background;
 firstCard.querySelector('small').textContent=EN?cities[firstCity].countryEn:cities[firstCity].countryJa;
 firstCard.querySelector('strong').textContent=cities[firstCity].name;
 firstCard.querySelector('em').textContent=T('{0}から歩く・{1}か所','Start at {0} · {1} places',firstPlace.name,cities[firstCity].tour.length);
-onboardRoot.querySelector('.ob-city-title').textContent=homeCityIsLocal?T('最初の街','Your first city'):T('最初の街','Your first city');
+onboardRoot.querySelector('.ob-city-title').textContent=homeCityIsLocal?T('まずは近所から','Start close to home'):T('最初の街','Your first city');
 onboardRoot.querySelector('.ob-gift').hidden=true;
 onboardRoot.querySelector('.ob-depart-label').textContent=T('{0}からはじめる','Start in {0}',cities[firstCity].name);
 function showOnboard(step,save=true){
